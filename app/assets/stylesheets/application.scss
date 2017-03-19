@@ -1,0 +1,88 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ */
+
+@import 'blacklight';
+@import 'curation_concerns';
+@import 'tufts';
+@import 'catalog';
+@import 'advanced_search';
+/* @import 'blacklight_advanced_search'; */
+
+@import 'curation_concerns/colors';
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+
+@import 'curation_concerns/curation_concerns';
+
+
+.bar {
+    height: 18px;
+    background: green;
+}
+.file {
+    display:none;
+}
+
+.pill {
+  font-weight: normal;
+  color: #777777;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+/* overrides */
+.main-header, .page-actions {
+  margin-bottom: 0px;
+  margin-top: 0px;
+  padding-bottom: 0px;
+}
+
+h2 {
+  color: #DE6020;
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 3px;
+}
+
+h1 {
+  font-size: 24px;
+  line-height: 30px;
+  color: #404040;
+}
+
+.navbar {
+  background-color: #ffffff;
+}
+
+.blueline {
+  height: 25px;
+}
+
+#main, #main-container {
+  margin-top: 140px;
+}
+
+#tufts-searchbar {
+  background-color: #eeeeee;
+  height: 45px;
+}
+
+@media (min-width: 768px) {
+  .navbar-form {
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    clear: both;
+    width: 500px;
+    padding-top: 5px;
+  }
+}

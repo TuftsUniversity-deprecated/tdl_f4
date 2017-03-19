@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  mount TuftsModelsNg::Engine => "/"
+  mount TuftsModelsNg::Engine => "/", as: "tufts_models_engine"
  mount UserImpersonate::Engine => "/impersonate", as: "impersonate_engine"
   mount Blacklight::Engine => '/'
   
