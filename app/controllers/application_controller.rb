@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   include CurationConcerns::ThemedLayoutController
 
   layout 'blacklight'
-
+  include CurationConcerns::ThemedLayoutController
 #  before_action :authenticate_user!
 
   # Catch permission errors
