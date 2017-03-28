@@ -25,6 +25,7 @@ jetty
 
 # Don't send system specific config files
 config/application.yml
+config/blacklight.yml
 config/database.yml
 config/devise.yml
 config/fedora.yml
