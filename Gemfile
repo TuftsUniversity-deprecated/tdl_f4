@@ -13,8 +13,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-gem 'tufts_models_ng', :git => 'https://github.com/TuftsUniversity/tufts_concerns', :tag => '0.0.1'
-#, :path => '/Users/mkorcy01/Documents/workspace/2016/tufts_models_ng'
+gem 'tufts_models_ng', :git => 'https://github.com/TuftsUniversity/tufts_concerns', :tag => '0.0.2'
+# :path => '/Users/mkorcy01/Documents/workspace/2016/tufts_models_ng'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
