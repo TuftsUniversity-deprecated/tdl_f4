@@ -13,7 +13,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-gem 'tufts_models_ng', :git => 'https://github.com/TuftsUniversity/tufts_concerns', :tag => '0.0.2'
+gem 'tufts_models_ng', :git => 'https://github.com/TuftsUniversity/tufts_concerns', :tag => '0.0.3'
 # :path => '/Users/mkorcy01/Documents/workspace/2016/tufts_models_ng'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

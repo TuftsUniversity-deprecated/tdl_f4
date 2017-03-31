@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/TuftsUniversity/tufts_concerns
-  revision: cd11fc8e155d209cd01c72b97fae4318d34e503f
-  tag: 0.0.2
+  revision: 4b86e58580cb120988fca21d6f9f9e728b9cbd36
+  tag: 0.0.3
   specs:
     tufts_models_ng (0.0.1)
       blacklight (~> 6.7.3)
@@ -83,7 +83,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    addressable (2.5.0)
+    addressable (2.5.1)
       public_suffix (~> 2.0, >= 2.0.2)
     almond-rails (0.0.3)
       rails (>= 4.2, < 6)
@@ -92,13 +92,13 @@ GEM
       execjs
     awesome_nested_set (3.1.1)
       activerecord (>= 4.0.0, < 5.1)
-    aws-sdk (2.8.14)
-      aws-sdk-resources (= 2.8.14)
-    aws-sdk-core (2.8.14)
+    aws-sdk (2.9.1)
+      aws-sdk-resources (= 2.9.1)
+    aws-sdk-core (2.9.1)
       aws-sigv4 (~> 1.0)
       jmespath (~> 1.0)
-    aws-sdk-resources (2.8.14)
-      aws-sdk-core (= 2.8.14)
+    aws-sdk-resources (2.9.1)
+      aws-sdk-core (= 2.9.1)
     aws-sigv4 (1.0.0)
     babel-source (5.8.35)
     babel-transpiler (0.7.0)
