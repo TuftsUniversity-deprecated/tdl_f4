@@ -13,8 +13,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-gem 'tufts_models_ng', :git => 'https://github.com/TuftsUniversity/tufts_concerns', :tag => '0.0.3'
-# :path => '/Users/mkorcy01/Documents/workspace/2016/tufts_models_ng'
+gem 'tufts_models_ng', git: 'https://github.com/TuftsUniversity/tufts_concerns', tag: '0.0.3'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -24,6 +23,7 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+gem 'riiif'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
