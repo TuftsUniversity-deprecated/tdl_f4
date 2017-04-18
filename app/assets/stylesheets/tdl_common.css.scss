@@ -49,3 +49,15 @@ h1 {
 .tdl-content {
   min-height: 400px;
 }
+
+.well .dl-horizontal {
+  dt {
+    text-align: left;
+    width: 60px;
+  }
+
+  dd {
+    margin-left: 15px;
+  }
+}
+
