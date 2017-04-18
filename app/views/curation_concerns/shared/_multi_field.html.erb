@@ -1,0 +1,5 @@
+<% # This file takes a tag and a solr_document field and spits out multiple fields. %>
+
+<% @presenter.solr_document.public_send(field_name).each do |value| %>
+  <%= content_tag(tag_name, value) %>
+<% end unless(@presenter.solr_document.public_send(field_name).nil?) %>
