@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   mount TuftsModelsNg::Engine => "/", as: "tufts_models_engine"
  mount UserImpersonate::Engine => "/impersonate", as: "impersonate_engine"
+  mount Riiif::Engine => '/image-service', as: 'riiif'
+
   mount Blacklight::Engine => '/'
   
     concern :searchable, Blacklight::Routes::Searchable.new
