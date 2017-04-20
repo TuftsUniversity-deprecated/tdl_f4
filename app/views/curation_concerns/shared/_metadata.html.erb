@@ -1,0 +1,28 @@
+<% sd = @presenter.solr_document %>
+<% unless(sd.description.nil?) %>
+  <p><%= sd.description.first %></p>
+<% end %>
+<dl class="metadatapane">
+  <dt>This object appears in collection:</dt>
+  <dd></dd>
+  <%= @presenter.attribute_to_html(:subject, { render_as: :description_attribute, linked: true }) %>
+  <dt>Permanent URL</dt>
+  <dd><%= sd._source[:purl_tesim].first %></dd>
+</dl>
+<div class="well ">
+  <dl class="dl-horizontal">
+    <dt>ID: </dt>
+    <dd><%= @presenter.id %></dd>
+    <dt>To Cite:</dt>
+    <dd><%= link_to(
+      "DCA Citation Guide",
+      "http://sites.tufts.edu/dca/about-us/research-help/reproductions-and-use/",
+      target: "_blank") %></dd>
+    <dt>Usage:</dt>
+    <dd><%= link_to(
+      "Detailed Rights",
+      sd._source[:rights_statement_tesim].first,
+      target: "_blank") %></dd>
+  </dl>
+  <p>To request a high-resolution image, choose Add to List.</p>
+</div>

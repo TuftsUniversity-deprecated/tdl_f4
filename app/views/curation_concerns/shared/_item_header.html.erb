@@ -1,0 +1,6 @@
+<% provide :page_title, @presenter.page_title %>
+<% provide :page_header do %>
+  <h2> <%= @presenter %> </h2>
+  <%= render partial: "curation_concerns/shared/multi_field", locals: {tag_name: :p, field_name: :creator} %>
+  <%= render partial: "curation_concerns/shared/multi_field", locals: {tag_name: :p, field_name: :date_created} %>
+<% end %>

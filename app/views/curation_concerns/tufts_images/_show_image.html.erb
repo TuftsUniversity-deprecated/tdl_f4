@@ -1,9 +1,5 @@
-<% provide :page_title, @presenter.page_title %>
-<% provide :page_header do %>
-  <h2> <%= @presenter %> </h2>
-  <%= render partial: "curation_concerns/shared/multi_field", locals: {tag_name: :p, field_name: :creator} %>
-  <%= render partial: "curation_concerns/shared/multi_field", locals: {tag_name: :p, field_name: :date_created} %>
-<% end %>
+<pre><%= @presenter.solr_document.inspect %></pre>
+<%= render "curation_concerns/shared/item_header" %>
 <% collector = can?(:collect, @presenter.id) %>
 <% editor = can?(:edit, @presenter.id) %>
 <div class="row tdl-content">
@@ -11,22 +7,6 @@
     <div><%= image_tag('elections/elections.png', alt: 'elections splash image', class: 'election-splash') %></div>
   </div>
   <div class="col-md-6">
-    <div class="tooltip-demo well ">
-      <dl class="dl-horizontal">
-        <dt>ID: </dt>
-        <dd><%= @presenter.id %></dd>
-        <dt>To Cite:</dt>
-        <dd><%= link_to(
-          "DCA Citation Guide",
-          "http://sites.tufts.edu/dca/about-us/research-help/reproductions-and-use/",
-          target: "_blank") %></dd>
-        <dt>Usage:</dt>
-        <dd><%= link_to(
-          "Detailed Rights",
-          "http://dca.tufts.edu/ua/access/rights.html",
-          target: "_blank") %></dd>
-      </dl>
-      <p>To request a high-resolution image, choose Add to List.</p>
-    </div>
+    <%= render "curation_concerns/shared/metadata" %>
   </div>
 </div>
