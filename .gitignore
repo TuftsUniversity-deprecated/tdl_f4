@@ -42,6 +42,7 @@ config/fedora3.yml
 
 #
 spec/fixtures/local_object_store
+coverage
 
 # Ignore ctags files
 tags

@@ -2,6 +2,8 @@
   <%= render 'show_voting_record', presenter: @presenter %>
 <% elsif @presenter.solr_document['has_model_ssim'].include? 'TuftsImage' %>
   <%= render 'show_image', presenter: @presenter %>
+<% elsif @presenter.solr_document['has_model_ssim'].include? 'TuftsEad' %>
+  <%= render 'show_ead', presenter: @presenter %>
 <% else %>
   <%= render 'show_curation_concern', presenter: @presenter %>
 <% end %>

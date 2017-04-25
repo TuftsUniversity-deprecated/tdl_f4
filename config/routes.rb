@@ -32,4 +32,13 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'finding_aids/:id/:item_id' => 'catalog#fa_series', as: :fa_series
+  get 'finding_aids/:id' => 'catalog#fa_overview', as: :fa_overview
+
+#   get 'products/:id' => 'catalog#view'
+#   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
+
+# match '/catalog/ead/:id/:item_id', :to => 'catalog#eadinternal', :constraints => {:id => /.*/, :item_id => /.*/}, :as =>'eadinternal'
+# match '/catalog/ead/:id', :to => 'catalog#eadoverview', :constraints => {:id => /.*/}, :as =>'eadoverview'
+
 end

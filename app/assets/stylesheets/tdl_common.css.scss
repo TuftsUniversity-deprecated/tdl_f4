@@ -61,3 +61,40 @@ h1 {
   }
 }
 
+/*  Not sure yet where the styles below this comment should go.  Still need to figure that out...  */
+
+/*  This came from bootstrap.css.  */
+[class^="icon-"], [class*=" icon-"] {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  line-height: 14px;
+  vertical-align: text-top;
+  background-image: url("../img/glyphicons-halflings.png");
+  background-position: 14px 14px;
+  background-repeat: no-repeat;
+  *margin-right: .3em;
+}
+
+/*  This came from bootstrap.css.  */
+[class^="icon-"]:last-child, [class*=" icon-"]:last-child {
+  *margin-left: 0;
+}
+
+/*  This came from bootstrap.css.  */
+.icon-arrow-right {
+  background-position: -264px -96px;
+}
+
+/*  This came from tdl-bootstrap-overrides.css.  */
+.margintoparrow {
+  margin-top: 2px;
+}
+
+/*  This came from tdl-bootstrap-overrides.css.  */
+/*  I changed it from url(/assets/glyphicons-halflings.png) to url("img/glyphicons-halflings.png") to make it work.  */
+/*  That works in the development environment (ie localhost) - not proven yet that it works in tdldev or prod  */
+/*  environments where assets are compiled.  */
+[class^="icon-"], [class*=" icon-"] {
+  background-image: url("img/glyphicons-halflings.png");
+}

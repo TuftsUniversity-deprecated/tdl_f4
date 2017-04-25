@@ -13,7 +13,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-gem 'tufts_models_ng', git: 'https://github.com/TuftsUniversity/tufts_concerns', tag: '0.0.3'
+gem 'tufts_models_ng', git: 'https://github.com/TuftsUniversity/tufts_concerns', tag: '0.0.5'
+# gem 'tufts_models_ng', :path => '../tufts_concerns'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -36,6 +37,21 @@ gem 'riiif'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+end
+
+group :test do
+  gem 'solr_wrapper'
+  gem 'fcrepo_wrapper'
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'simplecov'
+  gem 'simplecov-rcov'
+  gem 'poltergeist'
+  gem 'ladle'
+  gem 'fedora-migrate', github: 'mkorcy/fedora-migrate'
+  gem 'factory_girl_rails', '~> 4.0'
+  gem 'database_cleaner', '~> 1.3'
+  gem 'rubocop'
 end
 
 group :development do

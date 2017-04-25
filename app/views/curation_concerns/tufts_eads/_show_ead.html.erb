@@ -1,0 +1,25 @@
+<% provide :page_title, @presenter.page_title %>
+<% provide :page_header do %>
+    <h2><%= @presenter %> </h2>
+<% end %>
+<% collector = can?(:collect, @presenter.id) %>
+<% editor = can?(:edit, @presenter.id) %>
+<div class="row tdl-content">
+  <div class="col-md-6">
+    <h4>This collection has:</h4>
+    <p><%= raw physdesc_split(@document_ead) %></p>
+    <p><%= raw abstract(@document_ead) %></p>
+  </div>
+  <div class="col-md-6">
+    <div class="spacer"></div>
+    <div class="tooltip-demo well ">
+      <% if collection_has_online_content(params[:id]) %>
+      <h5><a href="/catalog?f[collection_id_sim][]=<%= params[:id] %>">View Online Materials</a> <i class="icon-arrow-right margintoparrow"> </i></h5>
+      <p>Some of the materials from this collection are available online. Not all materials have necessarily been digitized. <a href="<%= show_finding_aid_link(params[:id]) %>">View the finding aid</a> or <a href="/contact">contact DCA</a> for more information.</p>
+      <br>
+      <% end %>
+      <h5><a href="<%= show_finding_aid_link(params[:id]) %>">View Finding Aid</a> <i class="icon-arrow-right margintoparrow"> </i></h5>
+      <p>A finding aid is a description of a collection of archival material, which will help you discover what records are available for research. It provides information about a collection, the collection's creators, and an outline of the collection's contents. <a href="/about/finding_aids">Learn more about finding aids</a>.</p>
+    </div>
+  </div>
+</div>
