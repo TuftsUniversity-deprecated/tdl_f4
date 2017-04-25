@@ -1,0 +1,36 @@
+language: ruby
+jdk:
+  - oraclejdk8
+rvm:
+  - 2.2.3
+sudo: false
+cache: bundler
+
+notifications:
+  email:
+    - tdl-commiters@googlegroups.com
+env:
+  global:
+    - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+services:
+  - redis-server
+  - mysql
+before_script:
+  - jdk_switcher use oraclejdk8
+  - mkdir -p tmp/solr-test
+  - cp config/database.yml.sample config/database.yml
+  - cp config/fedora.yml.sample config/fedora.yml
+  - cp config/redis.yml.sample config/redis.yml
+  - cp config/solr.yml.sample config/solr.yml
+  - cp config/blacklight.yml.sample config/blacklight.yml
+  - cp config/secrets.yml.sample config/secrets.yml
+  - mysql -e 'create database tdl_test'
+  - bundle exec rake db:migrate
+  - mkdir -p tmp && export TMPDIR=tmp
+before_install:
+  - wget http://projects.iq.harvard.edu/files/fits/files/fits-0.8.5.zip
+  - unzip fits-0.8.5.zip
+  - chmod +x ./fits-0.8.5/fits.sh
+  - ln -s ./fits-0.8.5/fits.sh ./fits-0.8.5/fits
+  - rm fits-0.8.5.zip
+  - export PATH="$PATH:$(pwd)/fits-0.8.5"
