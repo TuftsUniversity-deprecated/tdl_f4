@@ -6,6 +6,9 @@ require 'rspec/core/rake_task'
 require 'solr_wrapper'
 require 'fcrepo_wrapper'
 require 'active_fedora/rake_support'
+require File.expand_path('../config/application', __FILE__)
+
+Rails.application.load_tasks
 
 desc 'Run style checker'
 RuboCop::RakeTask.new(:rubocop) do |task|
