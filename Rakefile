@@ -30,4 +30,5 @@ task :ci do
   puts 'running continuous integration'
   Rake::Task['spec_with_app_load'].invoke
 end
+task :default => []; Rake::Task[:default].clear
 task :default => [:ci]
