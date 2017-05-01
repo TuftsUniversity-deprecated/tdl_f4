@@ -1,6 +1,13 @@
 <% #@file Takes a tag and solr_document field and renders multiple fields. %>
 
 <% sd = @presenter.solr_document %>
-<% sd.public_send(field_name).each do |value| %>
-  <%= content_tag(tag_name, value) %>
-<% end unless(sd.public_send(field_name).nil?) %>
+<% values = sd.public_send(field_name) %>
+<% unless(sd.public_send(field_name).nil?) %>
+  <% if(values.is_a?(Array)) %>
+    <% values.each do |value| %>
+      <%= content_tag(tag_name, value) %>
+    <% end  %>
+  <% else %>
+    <%= content_tag(tag_name, values) %>
+  <% end #End if value is array %>
+<% end #End unless field_name is nil %>
