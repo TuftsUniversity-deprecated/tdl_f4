@@ -1,9 +1,10 @@
+<% file_set = @presenter.solr_document._source["hasRelatedImage_ssim"] %>
 <%= render "curation_concerns/shared/item_header" %>
 <% collector = can?(:collect, @presenter.id) %>
 <% editor = can?(:edit, @presenter.id) %>
-<div class="row tdl-content">
-  <div class="col-md-6">
-    <div><%= image_tag('elections/elections.png', alt: 'elections splash image', class: 'election-splash') %></div>
+<div class="col-md-12 tdl-content tdl-show-image">
+  <div class="row col-md-6">
+    <%= image_tag(Riiif::Engine.routes.url_helpers.image_path(file_set, "400,")) %>
   </div>
   <div class="col-md-6">
     <%= render "curation_concerns/shared/metadata" %>
