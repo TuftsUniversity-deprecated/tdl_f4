@@ -1,4 +1,3 @@
-<pre><%= @presenter.solr_document.inspect %></pre>
 <%= render "curation_concerns/shared/item_header" %>
 <% collector = can?(:collect, @presenter.id) %>
 <% editor = can?(:edit, @presenter.id) %>

@@ -50,16 +50,29 @@ h1 {
   min-height: 400px;
 }
 
-.well .dl-horizontal {
-  dt {
-    text-align: left;
-    width: 60px;
+
+/** Travis's stuff - Metadata on show views **/
+
+.metadatapane {
+  dt, p {
+    margin-top: 12px;
   }
 
   dd {
     margin-left: 15px;
   }
+
+  .dl-horizontal dt {
+    text-align: left;
+    width: 60px;
+    margin-top: 0;
+  }
+
+  .well {
+    margin-top: 21px;
+  }
 }
+
 
 /*  Not sure yet where the styles below this comment should go.  Still need to figure that out...  */
 
