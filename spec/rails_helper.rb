@@ -18,12 +18,8 @@ Capybara.javascript_driver = :poltergeist
 # Capybara.javascript_driver = :chrome                        #
 ###############################################################
 
-###############################################################
-#   Stuff in old spec helper, not sure if we need it - Trav   #
-#                                                             #
-# SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter   #
-# SimpleCov.start                                             #
-###############################################################
+SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
+SimpleCov.start
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
