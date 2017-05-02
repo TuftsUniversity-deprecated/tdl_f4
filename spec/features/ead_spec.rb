@@ -1,18 +1,8 @@
-require "spec_helper"
-require "ldap_helpers"
-
-include LdapHelpers
+require 'rails_helper'
+i_need_ldap
 
 feature 'EAD' do
   include TestHelpers
-
-  before(:all) do
-    start_ldap_server
-  end
-
-  after(:all) do
-    stop_ldap_server
-  end
 
   before do
  #   @ead1 = TuftsEad.find('tufts:UA069.001.DO.UA015')  # ACCION International records
