@@ -16,10 +16,6 @@ h1 {
   background-color: #ffffff;
 }
 
-.blueline {
-  height: 25px;
-}
-
 #main, #main-container {
   margin-top: 140px;
 }
@@ -49,7 +45,6 @@ h1 {
 .tdl-content {
   min-height: 400px;
 }
-
 
 /** Travis's stuff - Metadata on show views **/
 
@@ -81,6 +76,18 @@ h1 {
   }
 }
 
+/** Header stuff - Travis **/
+
+.util-links-login {
+  float: right;
+  margin-right: 7px;
+
+  a {
+    color: #FFF;
+    font-size: 12px;
+    padding-right: 14px;
+  }
+}
 
 /*  Not sure yet where the styles below this comment should go.  Still need to figure that out...  */
 
