@@ -13,8 +13,11 @@
   <div class="col-md-6">
     <div class="spacer"></div>
     <div class="tooltip-demo well ">
-      <% if collection_has_online_content(params[:id]) %>
-      <h5><a href="/catalog?f[collection_id_sim][]=<%= params[:id] %>">View Online Materials</a> <i class="icon-arrow-right margintoparrow"> </i></h5>
+      <%
+        unitid = unitid(@document_ead)
+        if collection_has_online_content(unitid)
+      %>
+      <h5><a href="/catalog?catalog?utf8=✓&search_field=source&q=<%= unitid %>">View Online Materials</a> <i class="icon-arrow-right margintoparrow"> </i></h5>
       <p>Some of the materials from this collection are available online. Not all materials have necessarily been digitized. <a href="<%= show_finding_aid_link(params[:id]) %>">View the finding aid</a> or <a href="/contact">contact DCA</a> for more information.</p>
       <br>
       <% end %>
