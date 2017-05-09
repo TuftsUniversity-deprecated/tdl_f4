@@ -13,7 +13,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-gem 'tufts_models_ng', git: 'https://github.com/TuftsUniversity/tufts_concerns', tag: '0.0.5'
+gem 'tufts_models_ng', git: 'https://github.com/TuftsUniversity/tufts_concerns', tag: '0.0.6'
 # gem 'tufts_models_ng', :path => '../tufts_concerns'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -40,18 +40,18 @@ group :development, :test do
 end
 
 group :test do
-  gem 'solr_wrapper'
-  gem 'fcrepo_wrapper'
-  gem 'rspec-rails'
   gem 'capybara'
-  gem 'simplecov'
-  gem 'simplecov-rcov'
-  gem 'poltergeist'
-  gem 'ladle'
-  gem 'fedora-migrate', github: 'mkorcy/fedora-migrate'
-  gem 'factory_girl_rails', '~> 4.0'
   gem 'database_cleaner', '~> 1.3'
+  gem 'factory_girl_rails', '~> 4.0'
+  gem 'fcrepo_wrapper'
+  gem 'fedora-migrate', github: 'mkorcy/fedora-migrate'
+  gem 'ladle'
+  gem 'poltergeist'
+  gem 'rspec-rails'
   gem 'rubocop'
+  gem 'simplecov-rcov'
+  gem 'simplecov'
+  gem 'solr_wrapper'
 end
 
 group :development do
