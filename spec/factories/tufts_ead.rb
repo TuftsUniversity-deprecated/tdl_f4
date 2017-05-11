@@ -3,8 +3,8 @@ FactoryGirl.define do
     transient do
       user { FactoryGirl.create(:user) }  # find_or_create ???
     end
-    id {'ks65hc20t'}
-    title {["Lorem Ipsum papers"] }
+    id { 'ks65hc20t' }
+    title { ["Lorem Ipsum papers"] }
     displays_in { ['dl'] }
     visibility { Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC }
     before(:create) do |work, evaluator|
@@ -24,8 +24,8 @@ FactoryGirl.define do
     transient do
       user { FactoryGirl.create(:user) }  # find_or_create ???
     end
-    id {'p2676v52c'}
-    title {['Rubin "Hurricane" Carter papers'] }
+    id { 'p2676v52c' }
+    title { ['Rubin "Hurricane" Carter papers'] }
     displays_in { ['dl'] }
     visibility { Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC }
     before(:create) do |work, evaluator|
