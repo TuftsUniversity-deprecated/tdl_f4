@@ -54,9 +54,6 @@ h1 {
     border: 1px solid black;
   }
 }
-.tdl-search-widgets {
-  margin-top: 10px;
-}
 .metadatapane {
   dt, p {
     margin-top: 12px;
@@ -94,6 +91,19 @@ h1 {
   .glyphicon-shopping-cart {
     color: #FFF;
     padding-left: 3px;
+  }
+}
+.tdl-search-widgets {
+  margin-top: 11px;
+}
+.download-links {
+  ul {
+    list-style-type: none;
+  }
+
+  li {
+    float: right;
+    margin-left: 14px;
   }
 }
 

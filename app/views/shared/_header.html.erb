@@ -16,6 +16,7 @@
   <div id="tufts-searchbar">
   <% if(controller.action_name == "show") %>
     <div class="container">
+      <%= render 'shared/download_options' %>
       <%= render 'shared/back_to_search' %>
     </div>
   <% else %>
