@@ -1,10 +1,20 @@
-<% if has_user_authentication_provider? %>
-    <div class="util-links-login">
+<ul class="util-nav">
+  <li>
+    <a id="my_list_button" href="#cart_modal" data-toggle="modal">
+      My List (
+        <span id="list_num">0</span>
+      )
+      <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+    </a>
+  </li>
+  <li>
+    <% if has_user_authentication_provider? %>
       <% if current_user %>
-          <%= link_to t('blacklight.header_links.logout'), main_app.destroy_user_session_path %> <%= "[#{ current_user.to_s }]".html_safe unless current_user.to_s.blank? %>
+        <%= link_to t('blacklight.header_links.logout'), main_app.destroy_user_session_path %> <%= "[#{ current_user.to_s }]".html_safe unless current_user.to_s.blank? %>
       <% else %>
-          <%= link_to t('blacklight.header_links.login'), main_app.new_user_session_path %>
+        <%= link_to t('blacklight.header_links.login'), main_app.new_user_session_path %>
       <% end %>
-    </div>
-<% end %>
+    <% end %>
+  </li>
+</ul>
 

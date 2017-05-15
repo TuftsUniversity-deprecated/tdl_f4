@@ -2,25 +2,31 @@
   <div class="blueline">
     <%= render '/user_util_links' %>
   </div>
-    <div class="container">
-      <div class="navbar-header">
 
-        <%= link_to application_name, tufts_models_engine.root_path , class: "navbar-brand" %>
-      </div>
-      <div class="navbar-right">
-        <div class="nav navbar-nav">
-        </div>
-      </div>
-
+  <div class="container">
+    <div class="navbar-header">
+      <%= link_to application_name, tufts_models_engine.root_path , class: "navbar-brand" %>
     </div>
-  <div id="tufts-searchbar">
-    <div class="navbar-center">
-    <% unless controller_name.in?(['contribute', 'templates', 'records', 'sessions']) %>
-        <%= render_search_bar %>
-        <div id='search_link'>
-          &nbsp; <%# TODO = link_to 'Advanced Search', advanced_search_path %>
-        </div>
-    <% end %>
+    <div class="navbar-right">
+      <div class="nav navbar-nav">
       </div>
+    </div>
   </div>
+
+  <div id="tufts-searchbar">
+  <% if(controller.action_name == "show") %>
+    <div class="container">
+      <%= render 'shared/back_to_search' %>
+    </div>
+  <% else %>
+    <div class="navbar-center">
+      <% unless(controller_name.in?(['contribute', 'templates', 'records', 'sessions'])) %>
+        <%= render_search_bar %>
+          <div id='search_link'>
+            &nbsp; <%# TODO = link_to 'Advanced Search', advanced_search_path %>
+          </div>
+      <% end %>
+    </div> <!-- End navbar-center -->
+  <% end %>
+  </div> <!-- End tufts-searchbar -->
 </div>

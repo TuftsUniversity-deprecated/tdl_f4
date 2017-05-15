@@ -46,8 +46,7 @@ h1 {
   min-height: 400px;
 }
 
-/** Travis's stuff - Metadata on show views **/
-
+/** Metadata Pane -  Travis **/
 .tdl-show-image {
   margin-top: 14px;
 
@@ -55,7 +54,9 @@ h1 {
     border: 1px solid black;
   }
 }
-
+.tdl-search-widgets {
+  margin-top: 10px;
+}
 .metadatapane {
   dt, p {
     margin-top: 12px;
@@ -77,17 +78,39 @@ h1 {
 }
 
 /** Header stuff - Travis **/
+.util-nav {
+  list-style-type: none;
+  margin: 0;
 
-.util-links-login {
-  float: right;
-  margin-right: 7px;
+  li {
+    margin-right: 21px;
+    float: right;
 
-  a {
+    a {
+      color: #FFF;
+      font-size: 12px;
+  } }
+
+  .glyphicon-shopping-cart {
     color: #FFF;
-    font-size: 12px;
-    padding-right: 14px;
+    padding-left: 3px;
   }
 }
+
+/**
+ The correct alignment of #main to #tufts-searchbar is dependent on the top margin
+ of the search form, so when you take the form away, the alignment is off.
+ This swaps the margin from the form to #main, so it always aligns.
+ **/
+.search-query-form {
+  margin-top: 0;
+}
+#main {
+  margin-top: 132px;
+}
+
+
+
 
 /*  Not sure yet where the styles below this comment should go.  Still need to figure that out...  */
 
