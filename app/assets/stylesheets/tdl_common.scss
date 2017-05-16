@@ -16,10 +16,6 @@ h1 {
   background-color: #ffffff;
 }
 
-#main, #main-container {
-  margin-top: 140px;
-}
-
 #tufts-searchbar {
   background-color: #eeeeee;
   height: 45px;
@@ -77,6 +73,12 @@ h1 {
 }
 
 /** Header stuff - Travis **/
+#header-navbar {
+  .container {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
 .util-nav {
   list-style-type: none;
   margin: 0;
