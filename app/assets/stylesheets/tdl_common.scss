@@ -23,6 +23,8 @@ h1 {
 #tufts-searchbar {
   background-color: #eeeeee;
   height: 45px;
+  /** The searchbar is off-center by 40px for some reason. **/
+  padding-left: 40px;
 }
 
 @media (min-width: 768px) {
@@ -80,13 +82,14 @@ h1 {
   margin: 0;
 
   li {
-    margin-right: 21px;
+    margin-left: 21px;
     float: right;
 
     a {
       color: #FFF;
       font-size: 12px;
-  } }
+    }
+  }
 
   .glyphicon-shopping-cart {
     color: #FFF;
