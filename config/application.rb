@@ -22,5 +22,9 @@ module TdlNg
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # Used in eads_helper.rb to add a link to <userestrict> elements.
+    config.use_restrict_text_match = 'Reproductions and Use'
+    config.use_restrict_text_replace = '<a href="https://sites.tufts.edu/dca/about-us/research-help/reproductions-and-use/">Reproductions and Use</a>'
   end
 end

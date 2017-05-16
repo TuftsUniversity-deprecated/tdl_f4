@@ -32,8 +32,8 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'finding_aids/:id/:item_id' => 'catalog#fa_series', as: :fa_series
-  get 'finding_aids/:id' => 'catalog#fa_overview', as: :fa_overview
+  get 'finding_aids/:id/:item_id' => 'catalog#fa_series', :constraints => {:id => /.*/, :item_id => /.*/}, as: :fa_series
+  get 'finding_aids/:id' => 'catalog#fa_overview', :constraints => {:id => /.*/}, as: :fa_overview
 
 #   get 'products/:id' => 'catalog#view'
 #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase

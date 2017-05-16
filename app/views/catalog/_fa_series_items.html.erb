@@ -1,0 +1,109 @@
+<%
+    eadid, url = eadid(@document_ead)
+    unitid = unitid(@document_ead)
+    author = author(@document_ead)
+    ead_title = title(@document_ead, true).first
+    stripped_eadid = strip_tags(eadid)
+    stripped_url = strip_tags(url)
+    stripped_unitid = strip_tags(unitid)
+    stripped_author = strip_tags(author)
+    stripped_ead_title = strip_tags(ead_title)
+
+    series_items.each do |series_item|
+      this_row_s = @row_count.to_s
+      @row_count += 1
+
+      item_date, creator, physloc, access_restrict, item_id, item_title, item_paragraphs, item_labels, item_values, page, thumbnail, available_online, next_level_items = get_series_item_info(series_item, @id)
+#     item_title = "-" + indentation_level.to_s + "-" + (@row_count - 1).to_s + "- " + item_title # to show indentation level and row number for debugging
+      is_top_level = indentation_level == 0
+      is_folder = !next_level_items.empty?
+      # The classes .ead_folder_title and .ead_item_title exist so that styles could be added for them if it becomes necessary in the future.
+      row_class = " class=\"" + (is_folder ? "ead_folder_title" : "ead_item_title") + " ead_indent" + indentation_level.to_s + "\""
+
+      if is_folder
+        next_row = @row_count
+        next_level_items_rows = render(:partial => 'fa_series_items', :locals => {:series_restrict => series_restrict, :series_items => next_level_items, :indentation_level => indentation_level + 1})
+        last_row = @row_count - 1 # After the recursive invocation of this view partial, @row_count points at the next row to be output;  we want to toggle the expand/close state up through one row less than that.
+        child_count = @row_count - next_row # total number of children/grandchildren/etc of this folder
+        toggle_action = raw("javascript:toggleDisplay('#img" + this_row_s + "', " + next_row.to_s + ", " + last_row.to_s + ");")
+        expand_collapse = "<img class=\"folderRowToggler\" onclick=\"" + toggle_action + "\" id=\"img" + this_row_s + "\" data-child-count=\"" + child_count.to_s + "\" src=\"/assets/img/button_collapse.png\" width=\"11\" height=\"11\" alt=\"collapse\" role=\"button\" tabindex=\"" + this_row_s + "\" onkeydown=\"if (event.keyCode==13 || event.keyCode==32) " + toggle_action + "\">"
+        # As of TDLR-667 the title is a link and shouldn't toggle folder
+#       item_title = "<span onclick=\"" + toggle_action + "\">" + item_title + "</span>"
+      else
+        expand_collapse = "&nbsp;"
+      end
+%>
+      <tr<%= raw(is_top_level ? " class=\"topLevelRow\"" : "") %>>
+        <td class="collapse_td"><%= raw(expand_collapse) %></td>
+        <td<%= raw(row_class) %>><%= raw(item_title) %>
+        <span class="smalltext">
+        <br>
+<%
+        item_paragraphs.each do |item_paragraph|
+%>
+          <br><%= raw(item_paragraph) %>
+<%
+        end
+        if is_folder
+%>
+          <br><span class="smalltext">There might be additional items in this folder.</span>
+<%
+        end
+%>
+        </span>
+        </td>
+        <td class="smalltext locator_td"><%= raw(item_labels) %></td>
+        <td class="smalltext id_td" align="left"><%= raw(item_values) %></td>
+
+<%
+      unless available_online
+        access_restrict = series_restrict if access_restrict.empty?
+        access_restrict = access_restrict.strip unless access_restrict.empty?
+
+%>
+        <td class="availableonline_td" align="center">
+          <a class="list-add" data-pid="<%= j @id %>"
+                              data-identifier="<%= j item_id.gsub(/[^0-9a-z ]/i, '') %>"
+                              data-itemtitle="<%=stripped_ead_title %>"
+                              data-site="DCA"
+                              data-itemsubtitle="<%= strip_tags(item_title) %>"
+                              data-itemnumber="<%= strip_tags(physloc) %>"
+                              data-iteminfo1="<%= strip_tags(access_restrict) %>"
+                              data-itemauthor="<%= stripped_author %>"
+                              data-iteminfo2="<%= strip_tags(creator) %>"
+                              data-iteminfo3="<%= stripped_url %>"
+                              data-itemdate="<%=strip_tags(item_date) %>"
+                              data-referencenumber="<%= stripped_eadid %>"
+                              data-callnumber="<%= stripped_unitid %>"
+                              data-itemvolume="<%= strip_tags(item_id) %>" href="#">
+            <i class="icon-plus-sign"/></i>&nbsp;Add to List</a>
+        </td>
+<%
+      else
+        if thumbnail.empty?
+%>
+        <td class="availableonline_td" align="center"><i class="icon-ok"></i></td>
+<%
+        else
+%>
+        <td class="thumbnail_td" align="center">
+          <ul class="thumbnails">
+            <li class="nothumbnailmargin">
+              <a href="/catalog/<%= raw(page) %>" class="thumbnail"><img class="thumbnailwidth" src="/file_assets/thumb/<%= raw(thumbnail) %>"></a>
+            </li>
+          </ul>
+        </td>
+<%
+        end
+      end
+%>
+      </tr>
+
+<%
+      if is_folder
+%>
+<%= raw(next_level_items_rows) %>
+<%
+      end
+    end
+%>
