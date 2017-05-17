@@ -1,8 +1,8 @@
 <% if @downloadable %>
   <% file_set = @presenter.solr_document._source["hasRelatedImage_ssim"] %>
   <% img = Riiif::Engine.routes.url_helpers.image_path(file_set, "full") %>
-  <div class="tdl-search-widgets download-links">
-    <ul>
+  <div class="tdl-search-widgets">
+    <ul class="tdl-right-nav">
       <li>
         <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
         <a href="">Add to List</a>

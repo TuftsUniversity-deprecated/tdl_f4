@@ -10,10 +10,19 @@
       <%= link_to application_name, tufts_models_engine.root_path , class: "navbar-brand" %>
     </div>
     <div class="navbar-right">
-      <div class="nav navbar-nav">
-      </div>
-    </div>
-  </div>
+      <ul class="tdl-right-nav">
+        <li><a href="">Contact</a></li>
+        <li><a href="">About</a></li>
+        <li><a href="">Search</a></li>
+      </ul>
+      <% if(controller.action_name == "show") %>
+        <button type="button" id="comment-button" class="btn">
+          Comments about this page?
+          <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+        </button>
+      <% end %>
+    </div> <!-- End navbar-right -->
+  </div> <!-- End container -->
 
   <div id="tufts-searchbar">
   <% if(controller.action_name == "show") %>
