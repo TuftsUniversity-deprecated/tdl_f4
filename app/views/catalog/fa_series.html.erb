@@ -1,8 +1,281 @@
+<%
+   # retrieve items that can not be cached
+   series, series_level = get_series(@document_ead, @item_id)
+   series_title, title_only, inclusive_date, bulk_date, creator, series_physdesc, series_langmaterial, series_scopecontents, series_arrangement,
+     series_access_restrict, series_use_restrict, series_phystech, series_prefercite,
+     series_processinfo, series_acquisition_info, series_custodhist, series_accruals, series_appraisal, series_separated_material, 
+     series_names_and_subjects, series_related_material, series_alt_formats, series_originals_loc, series_other_finding_aids,
+     series_items, unitid = get_series_info(series)
+   # @collection_title and @series_full_title are also used in the _subnav.html.erb partial
+   @collection_title = title(@document_ead).first
+   @series_full_title = "Series " + series_level + ": " + series_title
+   @page_title = @series_full_title + " - " + application_name
+%>
+<%# javascript_includes << "ead.js" %>
+<%# stylesheet_links << "ead/ead.css" %>
+<%# cache (@id + @item_id + @document_fedora.edited_at.to_s).strip do %>
+
+
+    <%
+
+       item_default_access_restrict = series_access_restrict.join("  ")  # expecting a string, not an array of paragraphs
+       metadata = nil; # get_metadata(@document_fedora)
+
+    %>
+
+
     <div class="row">
-      <div class="span12">
-        <h2>Your Finding Aid series should be right here.</h2>
+      <div class="col-md-12">
+        <h2><%= series_title %></h2>
       </div>
     </div>
 
     <hr>
-    
+
+    <div class="row" id="outermost">
+      <div class="col-md-3" id="floating_table_of_contents_column">
+        <div class="EAD_TOC" id="floating_table_of_contents">
+          <h6>On this page:</h6>
+          <ul class="nav nav-tabs nav-stacked" style="margin: 0px;">
+            <li><a href="#series_overview">Series Overview</a></li>
+            <% unless series_scopecontents.empty? %>
+                <li><a href="#contents">Description</a></li>
+            <% end %>
+            <% unless series_access_restrict.empty? && series_use_restrict.empty? && series_phystech.empty? && series_prefercite.empty? %>
+                <li><a href="#access_and_use">Access and Use</a></li>
+            <% end %>
+            <% unless series_processinfo.empty? && series_acquisition_info.empty? && series_custodhist.empty? && series_accruals.empty? && series_appraisal.empty? && series_separated_material.empty? %>
+                <li><a href="#collection_history">Collection History</a></li>
+            <% end %>
+            <% unless series_names_and_subjects.empty? && series_related_material.empty? && series_alt_formats.empty? && series_originals_loc.empty? && series_other_finding_aids.empty? %>
+                <li><a href="#related_resources">Related Resources</a></li>
+            <% end %>
+            <% unless series_items.empty? %>
+                <li><a href="#detailed_contents_list">Detailed Contents List</a></li>
+            <% end %>
+          </ul>
+        </div>
+        <div>  <!-- placeholder div to maintain containing column width when TOC becomes fixed -->
+          &nbsp;
+        </div>
+      </div>
+
+      <div class="col-md-9">
+        <div class="row" id="overview_and_tooltip">
+          <div class="col-md-6" id="series_overview">
+            <p>
+              This series is part of
+              <a href="<%= collection_url(@document_fedora) %>"><%= @collection_title %></a>
+            </p>
+
+            <h4 id="series_overview" class="EAD_H4">Series Overview</h4>
+            <p>
+              <% unless title_only.empty? %>
+                <span class="EAD_LABEL">Title:</span> <%= title_only %>
+                <br>
+              <% end %>
+              <% unless inclusive_date.empty? %>
+                <span class="EAD_LABEL">Dates:</span> <%= inclusive_date %>
+                <br>
+              <% end %>
+              <% unless bulk_date.empty? %>
+                <span class="EAD_LABEL">Bulk Dates:</span> <%= bulk_date %>
+                <br>
+              <% end %>
+              <% unless creator.empty? %>
+                <span class="EAD_LABEL">Creator:</span> <%= creator %>
+                <br>
+              <% end %>
+              <% unless unitid.empty? %>
+                <span class="EAD_LABEL">Call Number:</span> <%= unitid %>
+                <br>
+              <% end %>
+              <% unless series_physdesc.empty? %>
+                <span class="EAD_LABEL">Size:</span> <%= series_physdesc %>
+                <br>
+              <% end %>
+              <% unless series_langmaterial.empty? %>
+                <span class="EAD_LABEL">Language(s):</span>
+                <% series_langmaterial.each do |language| %>
+                  <%= raw language %>&nbsp;&nbsp;
+                <% end %>
+                <br>
+              <% end %>
+            </p>
+
+            <% unless series_scopecontents.empty? %>
+              <h4 id="contents" class="EAD_H4">Description</h4>
+              <% series_scopecontents.each do |paragraph| %>
+                  <p><%= raw paragraph %></p>
+              <% end %>
+            <% end %>
+
+            <% unless series_arrangement.empty? %>
+              <h5 class="EAD_H5">Arrangement</h5>
+              <% series_arrangement.each do |paragraph| %>
+                  <p><%= raw paragraph %></p>
+              <% end %>
+            <% end %>
+
+            <% unless series_access_restrict.empty? && series_use_restrict.empty? && series_phystech.empty? && series_prefercite.empty? %>
+                <h4 id="access_and_use" class="EAD_H4">Access and Use</h4>
+                <% unless series_access_restrict.empty? %>
+                    <h5 class="EAD_H5">Access Restrictions</h5>
+                    <% series_access_restrict.each do |paragraph| %>
+                        <p><%= raw paragraph %></p>
+                    <% end %>
+                <% end %>
+                <% unless series_use_restrict.empty? %>
+                    <h5 class="EAD_H5">Use Restrictions</h5>
+                    <% series_use_restrict.each do |paragraph| %>
+                        <p><%= raw paragraph %></p>
+                    <% end %>
+                <% end %>
+                <% unless series_phystech.empty? %>
+                    <h5 class="EAD_H5">Technical Requirements</h5>
+                    <% series_phystech.each do |paragraph| %>
+                        <p><%= raw paragraph %></p>
+                    <% end %>
+                <% end %>
+                <% unless series_prefercite.empty? %>
+                    <h5 class="EAD_H5">Preferred Citation</h5>
+                    <% series_prefercite.each do |paragraph| %>
+                        <p><%= raw paragraph %></p>
+                    <% end %>
+                <% end %>
+            <% end %>
+
+            <% unless series_processinfo.empty? && series_acquisition_info.empty? && series_custodhist.empty? && series_accruals.empty? && series_appraisal.empty? && series_separated_material.empty? %>
+                <h4 id="collection_history" class="EAD_H4">Collection History</h4>
+                <% unless series_processinfo.empty? %>
+                    <h5 class="EAD_H5">Processing Notes</h5>
+                      <% series_processinfo.each do |paragraph| %>
+                          <p><%= raw paragraph %></p>
+                      <% end %>
+                <% end %>
+                <% unless series_acquisition_info.empty? %>
+                    <h5 class="EAD_H5">Aquisition</h5>
+                      <% series_acquisition_info.each do |paragraph| %>
+                          <p><%= raw paragraph %></p>
+                      <% end %>
+                <% end %>
+                <% unless series_custodhist.empty? %>
+                    <h5 class="EAD_H5">Custodial History</h5>
+                      <% series_custodhist.each do |paragraph| %>
+                          <p><%= raw paragraph %></p>
+                      <% end %>
+                <% end %>
+                <% unless series_accruals.empty? %>
+                    <h5 class="EAD_H5">Accruals</h5>
+                      <% series_accruals.each do |paragraph| %>
+                          <p><%= raw paragraph %></p>
+                      <% end %>
+                <% end %>
+                <% unless series_appraisal.empty? %>
+                    <h5 class="EAD_H5">Appraisal</h5>
+                      <% series_appraisal.each do |paragraph| %>
+                          <p><%= raw paragraph %></p>
+                      <% end %>
+                <% end %>
+                <% unless series_separated_material.empty? %>
+                    <h5 class="EAD_H5">Separated Material</h5>
+                      <% series_separated_material.each do |paragraph| %>
+                          <p><%= raw paragraph %></p>
+                      <% end %>
+                <% end %>
+            <% end %>
+
+            <% unless series_names_and_subjects.empty? && series_related_material.empty? && series_alt_formats.empty? && series_originals_loc.empty? && series_other_finding_aids.empty? %>
+                <h4 id="related_resources" class="EAD_H4">Related Resources</h4>
+                <% unless series_names_and_subjects.empty? %>
+                    <h5 class="EAD_H5">Subjects and Genre Terms</h5>
+                    <ul>
+                      <% series_names_and_subjects.each do |list_item| %>
+                          <li><%= raw list_item %></li>
+                      <% end %>
+                    </ul>
+                <% end %>
+                <% unless series_related_material.empty? %>
+                    <h5 class="EAD_H5">Related Material</h5>
+                    <ul>
+                      <% series_related_material.each do |list_item| %>
+                          <li><%= raw list_item %></li>
+                      <% end %>
+                    </ul>
+                <% end %>
+                <% unless series_alt_formats.empty? %>
+                    <h5 class="EAD_H5">Alternate Formats</h5>
+                      <% series_alt_formats.each do |paragraph| %>
+                          <p><%= raw paragraph %></p>
+                      <% end %>
+                <% end %>
+                <% unless series_originals_loc.empty? %>
+                    <h5 class="EAD_H5">Location of Originals</h5>
+                      <% series_originals_loc.each do |paragraph| %>
+                          <p><%= raw paragraph %></p>
+                      <% end %>
+                <% end %>
+                <% unless series_other_finding_aids.empty? %>
+                    <h5 class="EAD_H5">Other Finding Aids</h5>
+                      <% series_other_finding_aids.each do |paragraph| %>
+                          <p><%= raw paragraph %></p>
+                      <% end %>
+                <% end %>
+            <% end %>
+
+          </div>
+
+          <div class="col-md-3 ">
+            <% if series_items.empty? %>
+                <div class="tooltip-demo well">
+                  <%#= render :partial => 'shared/add_to_list', :locals => {:metadata => metadata, :series_title => series_title, :unitid => unitid, :series_id => params[:item_id]} %>
+                  <p>Contact DCA to request Materials by adding to your list..</p>
+                </div>
+            <% end %>
+            <% if collection_has_online_content(params[:id]) %>
+            <div class="tooltip-demo well">
+              <a href="/catalog?f[collection_id_sim][]=<%= params[:id] %>">
+                <h5>View Online Materials <span class="glyphicon glyphicon-arrow-right"></span></h5></a>
+
+              <p>Use <strong>My List</strong> to request materials that are not online.</p>
+            </div>
+            <% end %>
+          </div>
+        </div>
+
+        <% unless series_items.empty? %>
+        <h4 id="detailed_contents_list" class="EAD_H4">Detailed Contents List</h4>
+        <br>
+        <table id="theTable" cellpadding="0" cellspacing="0" class="table" width="679px" style="border:0">
+          <thead>
+          <tr class="table_options">
+            <td colspan="5">
+              <div class="left" style="margin-bottom: 2px">
+                <button class="btn btn-mini" onclick="displayAll(true)" tabindex="0">expand all folders</button>
+                <button class="btn btn-mini" onclick="displayAll(false)" tabindex="1">close all folders</button>
+              </div>
+            </td>
+          </tr>
+
+          <tr class="table_header">
+            <td class="collapse_td">&nbsp;</td>
+            <td class="active" valign="bottom"><b>Title</b></td>
+            <td class="locator_td" valign="bottom">&nbsp;</td>
+            <td class="id_td" align="left" valign="bottom">&nbsp;</td>
+            <td class="availableonline_td" align="center" valign="bottom"><b>Request Materials</b></td>
+          </tr>
+          </thead>
+
+          <% @row_count = 2
+             indentation_level = 0
+          %>
+
+          <%= render :partial => 'fa_series_items', :locals => {:series_restrict => item_default_access_restrict, :metadata => metadata, :series_items => series_items, :indentation_level => indentation_level} %>
+
+        </table>
+        <% end %>
+      </div>
+
+    </div> <!-- outermost -->
+
+<%# end %> <!-- cache do -->

@@ -17,11 +17,11 @@
         unitid = unitid(@document_ead)
         if collection_has_online_content(unitid)
       %>
-      <h5><a href="/catalog?catalog?utf8=✓&search_field=source&q=<%= unitid %>">View Online Materials</a> <i class="icon-arrow-right margintoparrow"> </i></h5>
+      <h5><a href="/catalog?catalog?utf8=✓&search_field=source&q=<%= unitid %>">View Online Materials</a> <span class="glyphicon glyphicon-arrow-right"></span></h5>
       <p>Some of the materials from this collection are available online. Not all materials have necessarily been digitized. <a href="<%= show_finding_aid_link(params[:id]) %>">View the finding aid</a> or <a href="/contact">contact DCA</a> for more information.</p>
       <br>
       <% end %>
-      <h5><a href="<%= show_finding_aid_link(params[:id]) %>">View Finding Aid</a> <i class="icon-arrow-right margintoparrow"> </i></h5>
+      <h5><a href="<%= show_finding_aid_link(params[:id]) %>">View Finding Aid</a> <span class="glyphicon glyphicon-arrow-right"></span></h5>
       <p>A finding aid is a description of a collection of archival material, which will help you discover what records are available for research. It provides information about a collection, the collection's creators, and an outline of the collection's contents. <a href="/about/finding_aids">Learn more about finding aids</a>.</p>
     </div>
   </div>

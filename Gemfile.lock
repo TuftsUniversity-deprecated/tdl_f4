@@ -8,8 +8,8 @@ GIT
 
 GIT
   remote: https://github.com/TuftsUniversity/tufts_concerns
-  revision: bcb9647323b1a690cbc07a229c931ac588c236d1
-  tag: 0.0.6
+  revision: d2f2b8e17e6318f287f52e8f22b71e023c29448f
+  tag: 0.0.7
   specs:
     tufts_models_ng (0.0.1)
       blacklight (~> 6.7.3)
@@ -83,7 +83,7 @@ GEM
       activemodel (= 4.2.7.1)
       activesupport (= 4.2.7.1)
       arel (~> 6.0)
-    activerecord-import (0.18.2)
+    activerecord-import (0.18.3)
       activerecord (>= 3.2)
     activesupport (4.2.7.1)
       i18n (~> 0.7)
@@ -97,17 +97,17 @@ GEM
       rails (>= 4.2, < 6)
     arel (6.0.4)
     ast (2.3.0)
-    autoprefixer-rails (7.0.1)
+    autoprefixer-rails (7.1.0)
       execjs
     awesome_nested_set (3.1.3)
       activerecord (>= 4.0.0, < 5.2)
-    aws-sdk (2.9.15)
-      aws-sdk-resources (= 2.9.15)
-    aws-sdk-core (2.9.15)
+    aws-sdk (2.9.18)
+      aws-sdk-resources (= 2.9.18)
+    aws-sdk-core (2.9.18)
       aws-sigv4 (~> 1.0)
       jmespath (~> 1.0)
-    aws-sdk-resources (2.9.15)
-      aws-sdk-core (= 2.9.15)
+    aws-sdk-resources (2.9.18)
+      aws-sdk-core (= 2.9.18)
     aws-sigv4 (1.0.0)
     babel-source (5.8.35)
     babel-transpiler (0.7.0)
@@ -134,7 +134,7 @@ GEM
       sass (>= 3.3.4)
     bootstrap_form (2.7.0)
     breadcrumbs_on_rails (3.0.1)
-    browse-everything (0.13.0)
+    browse-everything (0.13.1)
       addressable (~> 2.5)
       aws-sdk
       bootstrap-sass
@@ -208,10 +208,10 @@ GEM
     declarative-option (0.1.0)
     deprecation (1.0.0)
       activesupport
-    devise (4.2.1)
+    devise (4.3.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
-      railties (>= 4.1.0, < 5.1)
+      railties (>= 4.1.0, < 5.2)
       responders
       warden (~> 1.2.3)
     devise-guests (0.6.0)
@@ -251,7 +251,7 @@ GEM
       dry-equalizer (~> 0.2)
       dry-logic (~> 0.4, >= 0.4.0)
       inflecto (~> 0.0.0, >= 0.0.2)
-    dry-validation (0.10.6)
+    dry-validation (0.10.7)
       concurrent-ruby (~> 1.0)
       dry-configurable (~> 0.1, >= 0.1.3)
       dry-core (~> 0.2, >= 0.2.1)
@@ -311,7 +311,7 @@ GEM
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     http_logger (0.5.1)
-    httparty (0.14.0)
+    httparty (0.15.3)
       multi_xml (>= 0.5.2)
     httpclient (2.8.3)
     hydra-access-controls (10.4.0)

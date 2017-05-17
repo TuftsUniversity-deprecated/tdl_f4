@@ -1,9 +1,373 @@
+<%
+   # retrieve items that can not be cached
+   title, title_only, inclusive_date, bulk_date = title(@document_ead)
+   @page_title = title + " - " + application_name
+%>
+<% #javascript_includes << "ead.js" %>
+<% #stylesheet_links << "ead.css" %>
+<% #cache (@id + @document_fedora.edited_at.to_s).strip do %>
+
+    <%
+       creator = creator(@document_ead)
+       unitid = unitid(@document_ead)
+       physdesc = physdesc(@document_ead)
+       langmaterial = langmaterial(@document_ead)
+       location = location(@document_ead)
+       eadid, handle = eadid(@document_ead)
+       contents = get_contents(@document_ead)
+       arrangement = get_arrangement(@document_ead)
+       bioghist = get_bioghist(@document_ead)
+       read_more_about = read_more_about(@document_ead)
+       access_restrictions = get_access_restrictions(@document_ead)
+       use_restrictions = get_use_restrictions(@document_ead)
+       phystech = get_phystech(@document_ead)
+       preferred_citation = get_preferred_citation(@document_ead)
+       processing_notes = get_processing_notes(@document_ead)
+       acquisition_info = get_acquisition_info(@document_ead)
+       custodial_history = get_custodial_history(@document_ead)
+       accruals = get_accruals(@document_ead)
+       appraisal = get_appraisal(@document_ead)
+       separated_material = get_separated_material(@document_ead)
+       sponsor = get_sponsor(@document_ead)
+       names_and_subjects = get_names_and_subjects(@document_ead)
+       related_material = get_related_material(@document_ead)
+       altformavail = get_altformavail(@document_ead)
+       originalsloc = get_originalsloc(@document_ead)
+       otherfindaid = get_otherfindaid(@document_ead)
+       serieses = get_serieses(@document_ead)
+       metadata = nil; #get_metadata(@document_fedora)
+    %>
+
     <div class="row">
-      <div class="span12">
-        <h2>Your Finding Aid overview should be right here.</h2>
+      <div class="col-md-12">
+        <h2><%= title %></h2>
       </div>
     </div>
 
     <hr>
-    
-    Here's a link to a <a href="<%= show_finding_aid_link(@id + "/" + "foobar") %>">series page</a>.
+
+    <div class="row" id="outermost">
+      <div class="col-md-3" id="floating_table_of_contents_column">
+        <div class="EAD_TOC" id="floating_table_of_contents">
+          <h6>On this page:</h6>
+          <ul class="nav nav-tabs nav-stacked" style="margin: 0;">
+            <li><a href="#overview">Overview</a></li>
+            <% unless contents.empty? %>
+                <li><a href="#contents">Description</a></li>
+            <% end %>
+            <% unless bioghist.empty? %>
+                <li><a href="#bioghist">Biography/History</a></li>
+            <% end %>
+            <% unless access_restrictions.empty? && use_restrictions.empty? && phystech.empty? && preferred_citation.empty? %>
+                <li><a href="#access_and_use">Access and Use</a></li>
+            <% end %>
+            <% unless processing_notes.empty? && acquisition_info.empty? && custodial_history.empty? && accruals.empty? && appraisal.empty? && separated_material.empty? && sponsor.empty?%>
+                <li><a href="#collection_history">Collection History</a></li>
+            <% end %>
+            <% unless names_and_subjects.empty? && related_material.empty? && altformavail.empty? && originalsloc.empty? && otherfindaid.empty? %>
+                <li><a href="#related_resources">Related Resources</a></li>
+            <% end %>
+            <% unless serieses.empty? %>
+                <li><a href="#series_descriptions">Series Description</a></li>
+            <% end %>
+          </ul>
+        </div>
+        <div>  <!-- placeholder div to maintain containing column width when TOC becomes fixed -->
+          &nbsp;
+        </div>
+      </div>
+
+      <div class="col-md-6" id="overview">
+        <h4 class="EAD_H4">Overview</h4>
+        <p>
+          <% unless title_only.empty? %>
+            <span class="EAD_LABEL">Title:</span> <%= raw title_only %>
+            <br>
+          <% end %>
+          <% unless inclusive_date.empty? %>
+            <span class="EAD_LABEL">Dates:</span> <%= raw inclusive_date %>
+            <br>
+          <% end %>
+          <% unless bulk_date.empty? %>
+            <span class="EAD_LABEL">Bulk Dates:</span> <%= raw bulk_date %>
+            <br>
+          <% end %>
+          <% unless creator.empty? %>
+            <span class="EAD_LABEL">Creator:</span> <%= raw creator %>
+            <br>
+          <% end %>
+          <% unless unitid.empty? %>
+            <span class="EAD_LABEL">Call Number:</span> <%= raw unitid %>
+            <br>
+          <% end %>
+          <% unless physdesc.empty? %>
+            <span class="EAD_LABEL">Size:</span> <%= raw physdesc %>
+            <br>
+          <% end %>
+          <% unless langmaterial.empty? %>
+            <span class="EAD_LABEL">Language(s):</span>
+            <% langmaterial.each do |language| %>
+              <%= raw language %>&nbsp;&nbsp;
+            <% end %>
+            <br>
+          <% end %>
+          <% unless handle.empty? %>
+            <span class="EAD_LABEL">Permanent URL:</span> <%= raw handle %>
+            <br>
+          <% end %>
+          <% unless location.empty? %>
+          <span class="EAD_LABEL">Location:</span>
+            <% location.each do |addressline| %>
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;<%= raw addressline %>
+            <% end %>
+          <% end %>
+        </p>
+
+        <% unless contents.empty? %>
+            <h4 id="contents" class="EAD_H4">Description</h4>
+            <% contents.each do |paragraph| %>
+                <p><%= raw paragraph %></p>
+            <%
+               end
+           end
+        %>
+
+        <% unless arrangement.empty? %>
+            <h5 class="EAD_H5">Arrangement</h5>
+            <% arrangement.each do |paragraph| %>
+                <p><%= raw paragraph %></p>
+            <%
+               end
+           end
+        %>
+
+        <% unless bioghist.empty? %>
+            <h4 id="bioghist" class="EAD_H4">Biography/History</h4>
+            <% bioghist.each do |paragraph| %>
+                <p><%= raw paragraph %></p>
+            <%
+               end
+           end
+        %>
+
+        <% unless read_more_about.empty? %>
+            <p>Read more about <%= raw read_more_about %></p>
+        <% end %>
+
+        <% unless access_restrictions.empty? && use_restrictions.empty? && phystech.empty? && preferred_citation.empty? %>
+            <h4 id="access_and_use" class="EAD_H4">Access and Use</h4>
+            <% unless access_restrictions.empty? %>
+                <h5 class="EAD_H5">Access Restrictions</h5>
+                <% access_restrictions.each do |paragraph| %>
+                    <p><%= raw paragraph %></p>
+                <%
+                   end
+               end
+            %>
+            <% unless use_restrictions.empty? %>
+                <h5 class="EAD_H5">Use Restrictions</h5>
+                <% use_restrictions.each do |paragraph| %>
+                    <p><%= raw paragraph %></p>
+                <%
+                   end
+               end
+            %>
+            <% unless phystech.empty? %>
+                <h5 class="EAD_H5">Technical Requirements</h5>
+                <% phystech.each do |paragraph| %>
+                    <p><%= raw paragraph %></p>
+                <%
+                   end
+               end
+            %>
+            <% unless preferred_citation.empty? %>
+                <h5 class="EAD_H5">Preferred Citation</h5>
+                <% preferred_citation.each do |paragraph| %>
+                    <p><%= raw paragraph %></p>
+                <%
+                   end
+               end
+           end
+        %>
+
+        <% unless (processing_notes.empty? && acquisition_info.empty? && custodial_history.empty? && accruals.empty? && appraisal.empty? && separated_material.empty? && sponsor.empty?) %>
+            <h4 id="collection_history" class="EAD_H4">Collection History</h4>
+            <% unless processing_notes.empty? %>
+                <h5 class="EAD_H5">Processing Notes</h5>
+                <% processing_notes.each do |paragraph| %>
+                    <p><%= raw paragraph %></p>
+                <%
+                   end
+               end
+            %>
+            <% unless acquisition_info.empty? %>
+                <h5 class="EAD_H5">Acquisition</h5>
+                <% acquisition_info.each do |paragraph| %>
+                    <p><%= raw paragraph %></p>
+                <%
+                   end
+               end
+            %>
+            <% unless custodial_history.empty? %>
+                <h5 class="EAD_H5">Custodial History</h5>
+                <% custodial_history.each do |paragraph| %>
+                    <p><%= raw paragraph %></p>
+                <%
+                   end
+               end
+            %>
+            <% unless accruals.empty? %>
+                <h5 class="EAD_H5">Accruals</h5>
+                <% accruals.each do |paragraph| %>
+                    <p><%= raw paragraph %></p>
+                <%
+                   end
+               end
+            %>
+            <% unless appraisal.empty? %>
+                <h5 class="EAD_H5">Appraisal</h5>
+                <% appraisal.each do |paragraph| %>
+                    <p><%= raw paragraph %></p>
+                <%
+                   end
+               end
+            %>
+
+            <% unless separated_material.empty? %>
+                <h5 class="EAD_H5">Separated Material</h5>
+                <% separated_material.each do |paragraph| %>
+                    <p><%= raw paragraph %></p>
+                <%
+                   end
+               end
+            %>
+
+            <% unless sponsor.empty? %>
+                <h5 class="EAD_H5">Sponsorship</h5>
+                    <p><%= raw sponsor %></p>
+            <% end %>
+        <% end %>
+
+        <% unless (names_and_subjects.empty? && related_material.empty? && altformavail.empty? && originalsloc.empty? && otherfindaid.empty?) %>
+            <h4  id="related_resources" class="EAD_H4">Related Resources</h4>
+            <% unless names_and_subjects.empty? %>
+            <h5 class="EAD_H5">Subjects and Genre Terms</h5>
+            <ul>
+              <% names_and_subjects.each do |list_item| %>
+                  <li><%= raw list_item %></li>
+              <% end %>
+            </ul>
+            <% end %>
+
+            <% unless related_material.empty? %>
+            <h5 class="EAD_H5">Related Material</h5>
+            <ul>
+              <% related_material.each do |list_item| %>
+                  <li><%= raw list_item %></li>
+              <% end %>
+            </ul>
+            <% end %>
+
+            <% unless altformavail.empty? %>
+            <h5 class="EAD_H5">Alternate Formats</h5>
+              <% altformavail.each do |paragraph| %>
+                <p><%= raw paragraph %></p>
+              <% end %>
+            <% end %>
+
+            <% unless originalsloc.empty? %>
+            <h5 class="EAD_H5">Location of Originals</h5>
+              <% originalsloc.each do |paragraph| %>
+                <p><%= raw paragraph %></p>
+              <% end %>
+            <% end %>
+
+            <% unless otherfindaid.empty? %>
+            <h5 class="EAD_H5">Other Finding Aids</h5>
+              <% otherfindaid.each do |paragraph| %>
+                <p><%= raw paragraph %></p>
+              <% end %>
+            <% end %>
+        <% end %>
+
+        <% unless serieses.empty? %>
+            <h4 id="series_descriptions" class="EAD_H4">Series Description</h4>
+            <ol>
+              <%
+                 ead_id = @document_fedora.id
+                 series_count = serieses.size
+                 series_index = 0
+                 while series_index < series_count
+                   series_level = (series_index + 1).to_s
+                   series_id, did, scopecontent, c02s, is_series = get_series_elements(serieses[series_index])
+                   title = get_series_title(did, ead_id, series_id, "", is_series)
+                   paragraphs = get_scopecontent_paragraphs(scopecontent)
+              %>
+                  <li>
+                    <h5 class="EAD_H5"><%= raw title %></h5>
+                    <% paragraphs.each do |paragraph| %>
+                        <p><%= raw paragraph %></p>
+                    <%
+                       end
+                       subseries_count = c02s.size
+                       if subseries_count > 0
+                    %>
+                        <ol style="list-style-type: none;">
+                          <%
+                             subseries_index = 0
+                             while subseries_index < subseries_count
+                               subseries_level = (subseries_index + 1).to_s
+                               # note: ignore 4th return value from get_series_elements because it will always be empty (c02s don't have sub-c02s).
+                               # New ASpace EADs might have <c> elements but this overview page only shows one level deep of subserieses.
+                               subseries_id, did, scopecontent = get_series_elements(c02s[subseries_index])
+                               title = get_series_title(did, ead_id, subseries_id, series_level + "." + subseries_level, true)
+                               paragraphs = get_scopecontent_paragraphs(scopecontent)
+                          %>
+                              <li>
+                                <h6 class="EAD_H6"><%= raw title %></h6>
+                                <% paragraphs.each do |paragraph| %>
+                                    <p><%= raw paragraph %></p>
+                                <%
+                                   end
+                                   subseries_index += 1
+                                %>
+                              </li>
+                          <% end %>
+                        </ol>
+                    <%
+                       end
+                       series_index += 1
+                    %>
+                  </li>
+              <% end %>
+            </ol>
+        <% end %>
+
+        <br>
+        <br>
+      </div>
+
+      <div class="col-md-3">
+        <%
+          unitid = unitid(@document_ead)
+          if collection_has_online_content(unitid)
+        %>
+            <div class="tooltip-demo well">
+              <a href="/catalog?f[collection_id_sim][]=<%= params[:id] %>">
+                <h5>View Online Materials <span class="glyphicon glyphicon-arrow-right"></span></h5></a>
+
+              <p>Some of the materials from this collection are available online. Not all materials have necessarily
+                been digitized.</p>
+            </div>
+        <% end %>
+        <% if serieses.empty? %>
+            <div class="tooltip-demo well">
+              <%= render :partial => 'shared/add_to_list', :locals => {:metadata => metadata, :unitid => unitid} %>
+              <p>Contact DCA to request Materials by adding to your list..</p>
+            </div>
+        <% end %>
+      </div>
+
+    </div>  <!-- outermost -->
+
+<%# end %> <!-- cache do -->
