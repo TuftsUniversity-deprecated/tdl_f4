@@ -5,20 +5,22 @@
     </div>
   </div>
 
-  <div class="container">
-    <div class="navbar-header">
+  <div class="main-nav-content container">
+    <div class="logo">
       <%= link_to application_name, tufts_models_engine.root_path , class: "navbar-brand" %>
     </div>
-    <div class="navbar-right">
-      <ul class="tdl-right-nav">
-        <li><a href="">Contact</a></li>
-        <li><a href="">About</a></li>
-        <li><a href="">Search</a></li>
-      </ul>
+    <div class="right-nav">
+      <div id="main_nav">
+        <ul class="tdl-right-nav">
+          <li><a href="">Contact</a></li>
+          <li><a href="">About</a></li>
+          <li><a href="">Search</a></li>
+        </ul>
+      </div>
       <% if(controller.action_name == "show") %>
         <button type="button" id="comment-button" class="btn">
           Comments about this page?
-          <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-comment glyph-right" aria-hidden="true"></span>
         </button>
       <% end %>
     </div> <!-- End navbar-right -->
