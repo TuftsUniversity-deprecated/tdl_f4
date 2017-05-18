@@ -11,18 +11,18 @@
  *= require_self
  */
 
-@import 'blacklight';
-@import 'curation_concerns';
-@import 'tufts';
-@import 'catalog';
-@import 'advanced_search';
-/* @import 'blacklight_advanced_search'; */
-
-@import 'curation_concerns/colors';
+@import 'settings';
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
 
-@import 'curation_concerns/curation_concerns';
-@import 'elections';
+@import 'blacklight';
+@import 'curation_concerns';
+
+/* @import 'blacklight_advanced_search'; */
+/* @import 'advanced_search'; */
+
 @import 'tdl_common';
+@import 'catalog';
+@import 'voting_record';
 @import 'ead';
+@import 'image';
