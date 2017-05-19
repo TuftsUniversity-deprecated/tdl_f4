@@ -1,7 +1,7 @@
 <% sd = @presenter.solr_document %>
 <dl class="metadatapane">
   <% unless(sd.description.nil?) %>
-    <p><%= sd.description.first %></p>
+    <p class="descrip-field"><%= sd.description.first %></p>
   <% end %>
   <!--
   <dt>This object appears in collection:</dt>
