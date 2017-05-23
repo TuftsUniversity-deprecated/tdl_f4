@@ -1,5 +1,6 @@
 class CatalogController < ApplicationController
   include CurationConcerns::CatalogController
+  include WithEads
   configure_blacklight do |config|
     # config.search_builder_class = ::SearchBuilder
     ## Default parameters to send to solr for all search-like requests. See also SolrHelper#solr_search_params
@@ -242,24 +243,14 @@ class CatalogController < ApplicationController
     config.spell_max = 5
   end
 
-# THIS IS DUPLICATED IN tufts_eads_controller.rb because I haven't been able to get the fa_overview and fa_series routes to go through there instead of here...
-  def load_fedora_document
-    @document_fedora = ActiveFedora::Base.find(params[:id])
-
-    return unless @document_fedora.class.instance_of?(TuftsEad.class)
-
-    @document_ead = Datastreams::Ead.from_xml(@document_fedora.file_sets.first.original_file.content)
-    @document_ead.ng_xml.remove_namespaces! unless @document_ead.nil?
-  end
+  before_action :load_fedora_document, only: [:show, :edit, :teireader, :fa_overview, :fa_series, :transcriptonly]
 
   def fa_overview
     @id = params[:id]
-    load_fedora_document  # should happen via before_action
   end
 
   def fa_series
     @id = params[:id]
     @item_id = params[:item_id]
-    load_fedora_document  # should happen via before_action
   end
 end
