@@ -32,6 +32,10 @@
       <%= render 'shared/back_to_search' %>
       <%= render 'shared/download_options' %>
     </div>
+  <% elsif controller.action_name == 'fa_overview' || controller.action_name == 'fa_series'%>
+    <div class="container">
+      <%= render 'shared/finding_aid_breadcrumbs' %>
+    </div>
   <% else %>
     <div class="navbar-center">
       <% unless(controller_name.in?(['contribute', 'templates', 'records', 'sessions'])) %>

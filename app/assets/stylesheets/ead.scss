@@ -1,18 +1,130 @@
-/* As far as I can tell, the following two styles are only used in EADs - Trav */
+/* As far as we can tell, the following styles are only used for EADs - Trav and Brian */
+
 .smalltext {
   font-size:11px;
 }
-.btn-mini {
+
+/* Changed from .btn-mini (bootstrap 2) to .btn-xs (bootstrap 3) */
+.btn-xs {
   padding: 2px 6px;
   font-size: 11px;
   line-height: 14px;
 }
 
+/* Had to add this to get the background color right */
+.table .title_td {background_color: #666666;}
+/* From the old tdl_bootstrap_overrides.css */
+.table .availableonline_td {width: 120px;}   /* was 110, which no longer works - WTF?! */
+.table .id_td {width: 140px;}
+.table .locator_td{ width: 65px; text-align: right; padding-right:7px;}
+
+/* The following styles are used for EADs but also in other places - from old tdl-bootstrap-overrides.css */
+.table .collapse_td {padding:0; padding-top:3px; width: 10px;}
+.table .thumbnail_td {width: 70px;}
+
+.table_header {
+  font-size: 12px;
+  vertical-align:bottom;
+  color: #666;
+  border-bottom: 1px solid #999999;
+}
+.table_header td { padding: 2px;}
+.table_header a {
+  font-size: 12px;
+  color: #666;
+}
+.table_header .active {
+  color: #4c4d4e;
+}
+
+.table_options {
+  background-color: #eeeeee; /* Old browsers */
+  background-repeat: repeat-x; /* Repeat the gradient */
+  background-image: -moz-linear-gradient(top, #f5f5f5 0%, #eeeeee 100%); /* FF3.6+ */
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f5f5f5), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
+  background-image: -webkit-linear-gradient(top, #f5f5f5 0%,#eeeeee 100%); /* Chrome 10+,Safari 5.1+ */
+  background-image: -ms-linear-gradient(top, #f5f5f5 0%,#eeeeee 100%); /* IE10+ */
+  background-image: -o-linear-gradient(top, #f5f5f5 0%,#eeeeee 100%); /* Opera 11.10+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
+  background-image: linear-gradient(top, #f5f5f5 0%,#eeeeee 100%); /* W3C */
+  font-size: 11px;
+}
+.table_options td {
+  padding: 2px;
+  padding-top: 4px;
+}
+
+.thumbnails {
+  margin-left: -20px;
+  list-style: none;
+  *zoom: 1;
+  margin-bottom: 0;
+}
+.thumbnails li {
+  float: left;
+}
+.thumbnails .nothumbnailmargin {
+  margin-bottom: 0;
+}
+a.thumbnail:hover {
+  border-color: #6699cc;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+  -moz-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+  box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+}
+/*added so that the homepage thumbnails do not expand */
+.thumbnail .home img {
+  width: 204px;
+}
+.thumbnail .caption {
+  padding: 9px;
+  min-height: 40px;
+}
+.thumbnail .caption_oneline {
+  padding: 9px;
+  min-height: 25px;
+}
+.thumbnail .caption h5 {
+  font-size: 14px;
+  color: #0755AC;
+  margin-bottom: 0;
+}
+
+
+/* The following styles are definitely ONLY used for EADs. */
 
 .EAD_TOC {
   position: relative;
   top: 0px;
   left: 0px;
+}
+
+.EAC_TOC > h6 {
+  color: #666666;
+  font-size: 11px;
+  text-transform: uppercase;
+  line-height: 20px;
+  font-weight: 500;
+}
+
+.EAC_TOC > ul {
+  border-bottom: 0;
+  padding: 0;
+}
+
+.EAC_TOC > ul > li {
+  width: 180px;
+  margin-bottom: -1px;
+}
+
+.EAC_TOC > ul > li > a {
+  margin-right: 0;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  padding-left: 12px;
+  padding-right: 14px;
+  display: block;
+  border: 1px solid #ddd;
 }
 
 /* EAD_H5 and EAD_H6 override styles set elsewhere to style the headers as desired for the EAD pages. */

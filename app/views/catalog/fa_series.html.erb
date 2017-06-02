@@ -9,7 +9,7 @@
    # @collection_title and @series_full_title are also used in the _subnav.html.erb partial
    @collection_title = title(@document_ead).first
    @series_full_title = "Series " + series_level + ": " + series_title
-   @page_title = @series_full_title + " - " + application_name
+   provide :page_title, @series_full_title + " - " + application_name
 %>
 <%# javascript_includes << "ead.js" %>
 <%# stylesheet_links << "ead/ead.css" %>
@@ -62,10 +62,10 @@
 
       <div class="col-md-9">
         <div class="row" id="overview_and_tooltip">
-          <div class="col-md-6" id="series_overview">
+          <div class="col-md-8" id="series_overview">
             <p>
               This series is part of
-              <a href="<%= collection_url(@document_fedora) %>"><%= @collection_title %></a>
+              <a href="<%= show_collection_link(params[:id]) %>"><%= @collection_title %></a>
             </p>
 
             <h4 id="series_overview" class="EAD_H4">Series Overview</h4>
@@ -225,25 +225,27 @@
 
           </div>
 
-          <div class="col-md-3 ">
+          <div class="col-md-4">
+            <%
+              unitid = unitid(@document_ead)
+              if collection_has_online_content(unitid)
+            %>
+                <div class="tooltip-demo well">
+                  <h5><a href="/catalog?utf8=✓&search_field=source&q=<%= unitid %>">View Online Materials</a><span class="glyphicon glyphicon-arrow-right glyph-right" aria-hidden="true"></span></h5>
+                  <p>Use <strong>My List</strong> to request materials that are not online.</p>
+                </div>
+            <% end %>
             <% if series_items.empty? %>
                 <div class="tooltip-demo well">
                   <%#= render :partial => 'shared/add_to_list', :locals => {:metadata => metadata, :series_title => series_title, :unitid => unitid, :series_id => params[:item_id]} %>
-                  <p>Contact DCA to request Materials by adding to your list..</p>
+                  <p>Use <strong>My List</strong> to request materials that are not online.</p>
                 </div>
-            <% end %>
-            <% if collection_has_online_content(params[:id]) %>
-            <div class="tooltip-demo well">
-              <a href="/catalog?f[collection_id_sim][]=<%= params[:id] %>">
-                <h5>View Online Materials <span class="glyphicon glyphicon-arrow-right"></span></h5></a>
-
-              <p>Use <strong>My List</strong> to request materials that are not online.</p>
-            </div>
             <% end %>
           </div>
         </div>
 
         <% unless series_items.empty? %>
+
         <h4 id="detailed_contents_list" class="EAD_H4">Detailed Contents List</h4>
         <br>
         <table id="theTable" cellpadding="0" cellspacing="0" class="table" width="679px" style="border:0">
@@ -251,15 +253,15 @@
           <tr class="table_options">
             <td colspan="5">
               <div class="left" style="margin-bottom: 2px">
-                <button class="btn btn-mini" onclick="displayAll(true)" tabindex="0">expand all folders</button>
-                <button class="btn btn-mini" onclick="displayAll(false)" tabindex="1">close all folders</button>
+                <button class="btn btn-xs" onclick="displayAll(true)" tabindex="0">expand all folders</button>
+                <button class="btn btn-xs" onclick="displayAll(false)" tabindex="1">close all folders</button>
               </div>
             </td>
           </tr>
 
           <tr class="table_header">
             <td class="collapse_td">&nbsp;</td>
-            <td class="active" valign="bottom"><b>Title</b></td>
+            <td class="title_td" valign="bottom"><b>Title</b></td>
             <td class="locator_td" valign="bottom">&nbsp;</td>
             <td class="id_td" align="left" valign="bottom">&nbsp;</td>
             <td class="availableonline_td" align="center" valign="bottom"><b>Request Materials</b></td>

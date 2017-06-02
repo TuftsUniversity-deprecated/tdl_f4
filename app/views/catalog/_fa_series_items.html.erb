@@ -62,6 +62,7 @@
 
 %>
         <td class="availableonline_td" align="center">
+          <span class="glyphicon glyphicon-plus-sign glyph-left" aria-hidden="true"></span>
           <a class="list-add" data-pid="<%= j @id %>"
                               data-identifier="<%= j item_id.gsub(/[^0-9a-z ]/i, '') %>"
                               data-itemtitle="<%=stripped_ead_title %>"
@@ -76,20 +77,20 @@
                               data-referencenumber="<%= stripped_eadid %>"
                               data-callnumber="<%= stripped_unitid %>"
                               data-itemvolume="<%= strip_tags(item_id) %>" href="#">
-            <i class="icon-plus-sign"/></i>&nbsp;Add to List</a>
+            Add to List</a>
         </td>
 <%
       else
         if thumbnail.empty?
 %>
-        <td class="availableonline_td" align="center"><i class="icon-ok"></i></td>
+        <td class="availableonline_td" align="center"><span class="glyphicon glyphicon-ok glyph-left" aria-hidden="true"></span></td>
 <%
         else
 %>
         <td class="thumbnail_td" align="center">
           <ul class="thumbnails">
             <li class="nothumbnailmargin">
-              <a href="/catalog/<%= raw(page) %>" class="thumbnail"><img class="thumbnailwidth" src="/file_assets/thumb/<%= raw(thumbnail) %>"></a>
+              <a href="/concern/tufts_images/<%= raw(page) %>" class="thumbnail"><img class="thumbnailwidth" src="/file_assets/thumb/<%= raw(thumbnail) %>"></a>
             </li>
           </ul>
         </td>
