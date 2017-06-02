@@ -99,7 +99,7 @@ a.thumbnail:hover {
   left: 0px;
 }
 
-.EAC_TOC > h6 {
+.EAD_TOC > h6 {
   color: #666666;
   font-size: 11px;
   text-transform: uppercase;
@@ -107,17 +107,17 @@ a.thumbnail:hover {
   font-weight: 500;
 }
 
-.EAC_TOC > ul {
+.EAD_TOC > ul {
   border-bottom: 0;
   padding: 0;
 }
 
-.EAC_TOC > ul > li {
+.EAD_TOC > ul > li {
   width: 180px;
-  margin-bottom: -1px;
+  margin-bottom: -3px;
 }
 
-.EAC_TOC > ul > li > a {
+.EAD_TOC > ul > li > a {
   margin-right: 0;
   padding-top: 9px;
   padding-bottom: 9px;
@@ -125,6 +125,15 @@ a.thumbnail:hover {
   padding-right: 14px;
   display: block;
   border: 1px solid #ddd;
+  border-radius: 0;
+}
+
+.EAD_TOC > ul > li:first-child > a {
+  border-radius: 4px 4px 0 0;
+}
+
+.EAD_TOC > ul > li:last-child > a {
+  border-radius: 0 0 4px 4px;
 }
 
 /* EAD_H5 and EAD_H6 override styles set elsewhere to style the headers as desired for the EAD pages. */
