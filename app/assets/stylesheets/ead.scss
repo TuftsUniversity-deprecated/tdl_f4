@@ -92,10 +92,8 @@ a.thumbnail:hover {
 
 /* The following styles are definitely ONLY used for EADs. */
 
-.EAD_TOC {
-  position: relative;
-  top: 0px;
-  left: 0px;
+.EAD_TOC.affix {
+  top: 135px;  // where EAD_TOC sticks when it sticks
 }
 
 .EAD_TOC > h6 {
