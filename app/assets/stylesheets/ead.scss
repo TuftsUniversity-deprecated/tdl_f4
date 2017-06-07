@@ -16,10 +16,10 @@
 /* From the old tdl_bootstrap_overrides.css */
 .table .availableonline_td {width: 120px;}   /* was 110, which no longer works - WTF?! */
 .table .id_td {width: 140px;}
-.table .locator_td{ width: 65px; text-align: right; padding-right:7px;}
+.table .locator_td{width: 65px; text-align: right; padding-right: 7px;}
 
 /* The following styles are used for EADs but also in other places - from old tdl-bootstrap-overrides.css */
-.table .collapse_td {padding:0; padding-top:3px; width: 10px;}
+.table .collapse_td {padding: 0; padding-top: 3px; width: 10px;}
 .table .thumbnail_td {width: 70px;}
 
 .table_header {
@@ -28,7 +28,7 @@
   color: #666;
   border-bottom: 1px solid #999999;
 }
-.table_header td { padding: 2px;}
+.table_header td {padding: 2px;}
 .table_header a {
   font-size: 12px;
   color: #666;
@@ -89,7 +89,6 @@ a.thumbnail:hover {
   color: #0755AC;
   margin-bottom: 0;
 }
-
 
 /* The following styles are definitely ONLY used for EADs. */
 
