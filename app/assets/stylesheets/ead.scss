@@ -137,6 +137,8 @@ a.thumbnail:hover {
 
 .EAD_H4 {
   font-weight: bold;
+  padding-top: 140px;  /* so that jumping to this section via a TOC link doesn't scroll the section heading underneath the bootstrap navbar-fixed-top */
+  margin-top: -140px;  /* so that the padding-top doesn't create a gap in the content */
 }
 
 .EAD_H5 {
