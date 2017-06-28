@@ -494,7 +494,7 @@ module EadsHelper
       # As of TDLR-667 all series titles will be links.
       # As of TDLR-664 with_link will be false for top-level elements which are leaf-level items.
       unless unittitle.empty?
-        result = (series_level.empty? ? "" : series_level + ". ") + (with_link ? "<a href=\"/finding_aids/" + ead_id + "/" + series_id + "\">" : "") + unittitle + (unitdate.empty? ? "" : ", " + unitdate) + (with_link ? "</a>" : "")
+        result = (series_level.empty? ? "" : series_level + ". ") + (with_link ? "<a data-turbolinks=\"false\" href=\"/finding_aids/" + ead_id + "/" + series_id + "\">" : "") + unittitle + (unitdate.empty? ? "" : ", " + unitdate) + (with_link ? "</a>" : "")
       end
     end
 
@@ -1204,7 +1204,7 @@ module EadsHelper
       item_url = "/finding_aids/" + pid + "/" + item_url_id
     end
 
-    title = (item_url.empty? ? "" : "<a href=\"" + item_url + "\"" + (external_page.empty? ? "" : " target=\"blank\"") + ">") + unittitle + (unitdate.empty? || (unittitle.end_with?(unitdate))? "" : " " + unitdate) + (item_url.empty? ? "" : "</a>")
+    title = (item_url.empty? ? "" : "<a " + (external_page.empty? ? "data-turbolinks=\"false\" " : "") + "href=\"" + item_url + "\"" + (external_page.empty? ? "" : " target=\"blank\"") + ">") + unittitle + (unitdate.empty? || (unittitle.end_with?(unitdate))? "" : " " + unitdate) + (item_url.empty? ? "" : "</a>")
 
     unless physloc.empty?
       labels = "Location:"
