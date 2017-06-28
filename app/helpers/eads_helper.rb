@@ -1126,7 +1126,6 @@ module EadsHelper
 
     # CIDER EADs have a <daogrp> element.
     unless daogrp.nil?
-Rails.logger.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> CIDER EADs have a <daogrp> element;  item_id is " + item_id + ".")
       daogrp.element_children.each do |daogrp_child|
         if daogrp_child.name == "daoloc"
           daoloc_audience = daogrp_child.attribute("audience")
@@ -1134,7 +1133,6 @@ Rails.logger.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> CIDER EADs have a <daogrp>
           daoloc_href = daogrp_child.attribute("href")
 
           if !daoloc_audience.nil? && daoloc_audience.text == "internal"
-Rails.logger.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> it's in the dark archive.")
             # an audience="internal" attribute in a daoloc tag means this item is in the Dark Archive;
             # leave page and thumbnail = "" so that values will not be returned for them
             # and so that the href will not be included in title.  Set physloc to the dark
@@ -1146,10 +1144,8 @@ Rails.logger.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> it's in the dark arch
 
             if daoloc_label_text == "page"
               page = daoloc_href_text
-Rails.logger.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> page from daogrp is " + page + ".")
             elsif daoloc_label_text == "thumbnail"
               thumbnail = daoloc_href_text
-Rails.logger.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> thumbnail from daogrp is " + thumbnail + ".")
             end
           end
         end
@@ -1159,7 +1155,6 @@ Rails.logger.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> thumbnail from daogrp
       unless page.empty?
         available_online, f4_id = ingested?(page)
         if available_online
-Rails.logger.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> available online;  f4_id is " + f4_id + ".")
           page = f4_id
           unless thumbnail.empty?
             thumbnail = f4_id
@@ -1170,23 +1165,19 @@ Rails.logger.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> available online;  f4
 
     # ASpace EADs have a <dao> element.
     unless dao.nil?
-Rails.logger.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ASpace EADs have a <dao> element;  item_id is " + item_id + ".")
       dao_href = dao.attribute("href")
-Rails.logger.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> href is " + (dao_href.nil? ? "nil" : dao_href.text) + ".")
       if !dao_href.nil? && dao_href.text.include?("darkarchive")
         # In an ASpace EAD, an href="https://darkarchive.lib.tufts.edu/" attribute in the <dao> element
         # means that this item is in the Dark Archive;  Set physloc to the DA message.
         # Note that if the URL for DA ever changes, all the EADs would not necessarily have to change
         # since the <dao> href value is never displayed or used as a link in TDL.
         physloc = "Dark Archive; <a href=""/contact"">contact DCA</a>"
-Rails.logger.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> it's in the dark archive.")
       else
         # ASpace EADs lack the <daogrp><daoloc> page and thumbnail attributes, so compute them from item_id thusly:
         legacy_pid = "tufts:" + item_id
         available_online, f4_id = ingested?(page)
 
         if available_online
-Rails.logger.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> it's in the DL with legacy pid " + legacy_pid + " and f4 id " + f4_id + ".")
           page = f4_id
           # if page_doc.datastreams.include?("Thumbnail.png")  How do we know if it has a thumbnail or not???
           #   thumbnail = page_pid
@@ -1198,7 +1189,6 @@ Rails.logger.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> it's in the DL with l
             available_online = true
             dao_title = dao.attribute("title")
             external_page_title = (dao_title.nil? ? unittitle : dao_title.text)
-Rails.logger.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> it's an external content link at " + external_page + ".")
           end
         end
       end
