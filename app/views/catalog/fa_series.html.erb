@@ -8,7 +8,7 @@
      series_items, unitid = get_series_info(series)
    # @collection_title and @series_full_title are also used in the _subnav.html.erb partial
    @collection_title = title(@document_ead).first
-   @series_full_title = "Series " + series_level + ": " + series_title
+   @series_full_title = "Series " + series_level + ": " + title_only
    provide :page_title, @series_full_title + " - " + application_name
 %>
 <%# javascript_includes << "ead.js" %>

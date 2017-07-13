@@ -1,7 +1,7 @@
 <%
    # retrieve items that can not be cached
    title, title_only, inclusive_date, bulk_date = title(@document_ead)
-   provide :page_title,  title + " - " + application_name
+   provide :page_title,  title_only + " - " + application_name
 %>
 <% #javascript_includes << "ead.js" %>
 <% #stylesheet_links << "ead.css" %>

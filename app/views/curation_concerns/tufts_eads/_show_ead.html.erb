@@ -1,5 +1,5 @@
 <% title, title_only, inclusive_date, bulk_date = title(@document_ead)
-   provide :page_title,  title + " - " + application_name
+   provide :page_title,  title_only + " - " + application_name
    provide :page_header do %>
     <h2><%= title %></h2>
 <% end %>
