@@ -13,7 +13,7 @@
 %>
 <%# javascript_includes << "ead.js" %>
 <%# stylesheet_links << "ead/ead.css" %>
-<%# cache (@id + @item_id + @document_fedora.edited_at.to_s).strip do %>
+<% cache (@id + @item_id + @document_fedora.date_modified.to_s).strip do %>
 
 
     <%
@@ -276,4 +276,4 @@
 
     </div> <!-- outermost -->
 
-<%# end %> <!-- cache do -->
+<% end %> <!-- cache do -->

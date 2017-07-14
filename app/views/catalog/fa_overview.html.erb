@@ -5,7 +5,7 @@
 %>
 <% #javascript_includes << "ead.js" %>
 <% #stylesheet_links << "ead.css" %>
-<% #cache (@id + @document_fedora.edited_at.to_s).strip do %>
+<% cache (@id + @document_fedora.date_modified.to_s).strip do %>
 
     <%
        creator = creator(@document_ead)
@@ -364,4 +364,4 @@
 
     </div>  <!-- outermost -->
 
-<%# end %> <!-- cache do -->
+<% end %> <!-- cache do -->
