@@ -13,8 +13,8 @@ Rails.application.routes.draw do
 
   devise_for :users
   mount CurationConcerns::Engine, at: '/'
-#  resources :welcome, only: 'index'
-  root 'catalog#index'
+  resources :welcome, only: 'index'
+  root 'welcome#index'
   curation_concerns_collections
   curation_concerns_basic_routes
   curation_concerns_embargo_management

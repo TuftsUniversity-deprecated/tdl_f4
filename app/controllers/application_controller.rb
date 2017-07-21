@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   include CurationConcerns::ApplicationControllerBehavior
   include CurationConcerns::ThemedLayoutController
 
-  layout 'blacklight'
+  layout 'curation_concerns'
   include CurationConcerns::ThemedLayoutController
 #  before_action :authenticate_user!
 
