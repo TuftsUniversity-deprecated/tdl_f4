@@ -1,0 +1,12 @@
+<%= render "curation_concerns/shared/item_header" %>
+
+<div class="col-md-12 tdl-content tdl-show-image">
+  <div class="row col-md-6">
+    <audio controls="controls" preload="metadata" width="445px" height="34px">
+      <source src="<%= Rails.application.routes.url_helpers.download_path(@presenter.member_presenters[0]) %>" type="audio/mpeg">
+    </audio>
+  </div>
+  <div class="col-md-6">
+    <%= render "curation_concerns/shared/metadata" %>
+  </div>
+</div>

@@ -12,6 +12,10 @@ module ApplicationHelper
       'curation_concerns/tufts_eads/show_ead'
     when "TuftsVotingRecord"
       'curation_concerns/tufts_voting_records/show_voting_record'
+    when "TuftsAudio"
+      'curation_concerns/tufts_audios/show_audio'
+    when "TuftsVideo"
+      'curation_concerns/tufts_videos/show_video'
     else
       'curation_concerns/base/show_curation_concern'
     end
