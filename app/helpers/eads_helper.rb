@@ -99,7 +99,6 @@ module EadsHelper
   end
 
 
-
   def show_collection_link(id)
     "/concern/tufts_eads/" + id
   end
