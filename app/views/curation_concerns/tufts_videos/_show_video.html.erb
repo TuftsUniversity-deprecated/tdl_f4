@@ -1,12 +1,28 @@
 <%= render "curation_concerns/shared/item_header" %>
 
-<div class="col-md-12 tdl-content tdl-show-image">
+<div class="col-md-12 tdl-content">
   <div class="row col-md-6">
     <video controls="controls" preload="metadata" width="445px" height="390px">
       <source src="<%= Rails.application.routes.url_helpers.download_path(@presenter.member_presenters[0]) %>" type="video/mp4">
     </video>
   </div>
-  <div class="col-md-6">
-    <%= render "curation_concerns/shared/metadata" %>
-  </div>
+
+  <div class="col-xs-6">
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" href="#information">Information</a></li>
+      <li><a data-toggle="tab" href="#transcript">Transcript</a></li>
+    </ul>
+
+    <div class="tab-content">
+      <div id="information" class="tab-pane active">
+        <%= render "curation_concerns/shared/metadata" %>
+      </div>
+
+      <div id="transcript" class="tab-pane">
+        <div class="transcript_box">
+          <p>- transcript goes here -</p>
+        </div>
+      </div>
+    </div>
+  </div> <!-- right column -->
 </div>

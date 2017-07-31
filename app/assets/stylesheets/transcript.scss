@@ -1,0 +1,79 @@
+.participant_div {
+  margin-left: 40px;
+}
+
+.participant_table {
+  display: table;
+}
+
+.participant_row {
+  display: table-row;
+}
+
+.participant_id {
+  display: table-cell;
+  width: 20px;
+  font-weight: bold;
+  vertical-align: top;
+  padding-right: 2em;
+  padding-top: .25em;
+  padding-bottom: .25em;
+  font-size: smaller;
+}
+
+.participant_name {
+  display: table-cell;
+  vertical-align: top;
+  padding-right: 2em;
+  padding-top: .25em;
+  padding-bottom: .25em;
+}
+
+.participant_role {
+  font-style: italic;
+}
+
+.transcript_box {
+  width: 100%;
+  height: 400px;
+  overflow: auto;
+}
+
+.transcript_table {
+  display: table;
+}
+
+.transcript_row {
+  display: table-row;
+  width: 100%;
+}
+
+.transcript_chunk {
+}
+
+.transcript_speaker {
+  display: table-cell;
+  width: 20px;
+  font-weight: bold;
+  vertical-align: top;
+  padding-right: 2em;
+  padding-top: .25em;
+  padding-bottom: .25em;
+  font-size: smaller;
+}
+
+.transcript_utterance {
+  display: table-cell;
+  vertical-align: top;
+  padding-right: 2em;
+  padding-top: .25em;
+  padding-bottom: .25em;
+}
+
+.transcript_chunk_link {
+  font-weight: normal;
+}
+
+.transcript_notation {
+  font-style: italic;
+}
