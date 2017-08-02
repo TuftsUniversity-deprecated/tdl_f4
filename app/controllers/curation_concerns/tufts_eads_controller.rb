@@ -11,5 +11,14 @@ module CurationConcerns
 
     before_action :load_fedora_document
   
+    def fa_overview
+      @id = params[:id]
+    end
+
+    def fa_series
+      @id = params[:id]
+      @item_id = params[:item_id]
+    end
+
   end
 end

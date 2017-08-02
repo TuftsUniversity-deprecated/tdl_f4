@@ -99,13 +99,18 @@ module EadsHelper
   end
 
 
-  def show_collection_link(id)
+  def landing_page_path(id)
     "/concern/tufts_eads/" + id
   end
 
 
-  def show_finding_aid_link(id)
-    "/finding_aids/" + id
+  def finding_aid_overview_path(id)
+    "/concern/tufts_eads/" + id + "/fa"
+  end
+
+
+  def finding_aid_series_path(id, item_id)
+    "/concern/tufts_eads/" + id + "/fa/" + item_id
   end
 
 
@@ -166,7 +171,7 @@ module EadsHelper
 
   def physdesc_split(ead)
     result = ""
-    physdescs = ead.find_by_terms(:physdesc)
+    physdescs = ead.find_by_terms_and_value(:physdesc)
 
     unless physdescs.nil?
       physdescs.each do |physdesc|
@@ -190,10 +195,10 @@ module EadsHelper
 
   def abstract(ead)
     result = ""
-    abstract = ead.find_by_terms(:abstract)
+    abstract = ead.find_by_terms_and_value(:abstract)
 
     if abstract.nil? || abstract.empty?
-      bioghistps = ead.find_by_terms(:bioghistp)
+      bioghistps = ead.find_by_terms_and_value(:bioghistp)
       result = bioghistps.first.text unless bioghistps.nil? || bioghistps.empty?
     else
       result = abstract.first.text
@@ -493,7 +498,7 @@ module EadsHelper
       # As of TDLR-667 all series titles will be links.
       # As of TDLR-664 with_link will be false for top-level elements which are leaf-level items.
       unless unittitle.empty?
-        result = (series_level.empty? ? "" : series_level + ". ") + (with_link ? "<a data-turbolinks=\"false\" href=\"/finding_aids/" + ead_id + "/" + series_id + "\">" : "") + unittitle + (unitdate.empty? ? "" : ", " + unitdate) + (with_link ? "</a>" : "")
+        result = (series_level.empty? ? "" : series_level + ". ") + (with_link ? "<a data-turbolinks=\"false\" href=\"" + finding_aid_series_path(ead_id, series_id) + "\">" : "") + unittitle + (unitdate.empty? ? "" : ", " + unitdate) + (with_link ? "</a>" : "")
       end
     end
 
@@ -1200,7 +1205,7 @@ module EadsHelper
         item_url = external_page
       end
     elsif item_type == "subseries"
-      item_url = "/finding_aids/" + pid + "/" + item_url_id
+      item_url = finding_aid_series_path(pid, item_url_id)
     end
 
     title = (item_url.empty? ? "" : "<a " + (external_page.empty? ? "data-turbolinks=\"false\" " : "") + "href=\"" + item_url + "\"" + (external_page.empty? ? "" : " target=\"blank\"") + ">") + unittitle + (unitdate.empty? || (unittitle.end_with?(unitdate))? "" : " " + unitdate) + (item_url.empty? ? "" : "</a>")
