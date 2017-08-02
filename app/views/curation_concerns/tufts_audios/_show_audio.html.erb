@@ -5,9 +5,25 @@
     <audio controls="controls" preload="metadata" width="445px" height="34px">
       <source src="<%= Rails.application.routes.url_helpers.download_path(@presenter.member_presenters[0]) %>" type="audio/mpeg">
     </audio>
+<%
+if @document_tei.present?
+  participants = show_participants(@document_tei)
+
+  if participants.length > 0
+%>
+    <br>
+    <div class="participant_div">
+      <b>Participants</b><br>
+      <%= raw participants %>
+    </div>  <!-- participant_div -->
+<%
+  end
+end
+%>
   </div>
 
   <div class="col-xs-6">
+<% if @document_tei.present? %>
     <ul class="nav nav-tabs">
       <li class="active"><a data-toggle="tab" href="#information">Information</a></li>
       <li><a data-toggle="tab" href="#transcript">Transcript</a></li>
@@ -21,8 +37,11 @@
       <div id="transcript" class="tab-pane">
         <div class="transcript_box">
           <p>- transcript goes here -</p>
-        </div>
+        </div>  <!-- transcript_box -->
       </div>
     </div>
+<% else %>
+  <%= render "curation_concerns/shared/metadata" %>
+<% end %>
   </div> <!-- right column -->
 </div>
