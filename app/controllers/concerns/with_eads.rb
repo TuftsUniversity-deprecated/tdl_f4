@@ -8,8 +8,10 @@ module WithEads
       return unless params[:id].present?
 
       @document_fedora = ActiveFedora::Base.find(params[:id])
+      @document_ead = nil
 
       return unless @document_fedora.class.instance_of?(TuftsEad.class)
+      return if @document_fedora.file_sets.nil? || @document_fedora.file_sets.first.nil? || @document_fedora.file_sets.first.original_file.nil?
 
       @document_ead = Datastreams::Ead.from_xml(@document_fedora.file_sets.first.original_file.content)
       @document_ead.ng_xml.remove_namespaces! unless @document_ead.nil?
