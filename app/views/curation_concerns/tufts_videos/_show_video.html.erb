@@ -7,14 +7,14 @@
     </video>
 <%
 if @document_tei.present?
-  participants = show_participants(@document_tei)
+  transcript_html, participant_html = show_transcript(@document_tei, true, "/concern/tufts_videos/" + params[:id])
 
-  if participants.length > 0
+  unless participant_html.empty?
 %>
     <br>
     <div class="participant_div">
       <b>Participants</b><br>
-      <%= raw participants %>
+      <%= raw participant_html %>
     </div>  <!-- participant_div -->
 <%
   end
@@ -35,10 +35,10 @@ end
       </div>
 
       <div id="transcript" class="tab-pane">
-        <a href="/catalog/transcriptonly/<%= params[:id] %>" class="pull-right"><h6>view transcript only <i class="icon-share"></i></h6></a>
+        <a href="/concern/tufts_videos/<%= params[:id] %>/transcriptonly/" class="pull-right"><h6>view transcript only <i class="icon-share"></i></h6></a>
         <br>
         <div class="transcript_box">
-          <%= raw show_transcript(@document_tei, true) %>
+          <%= raw transcript_html %>
           <script>
               $('.transcript_chunk_link').on("click", function (e) {
                   e.preventDefault()

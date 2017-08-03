@@ -1,24 +1,20 @@
 module TranscriptsHelper
 
 
-  def show_participants(tei)
+  def format_participants(participants)
     result = ""
     participant_number = 0
-    node_sets = tei.find_by_terms_and_value(:participants)
 
-    node_sets.each do |node|
-      node.children.each do |child|
-        unless child.attributes.empty?
-          participant_number += 1
-          id = child.attributes["id"]
-          role = child.attributes["role"]
-          sex = child.attributes["sex"].to_s
-          result << "        <div class=\"participant_row\" id=\"participant" + participant_number.to_s + "\">\n"
-          result << "          <div class=\"participant_id\">" + (id.nil? ? "" : id) + "</div>\n"
-          result << "          <div class=\"participant_name\">" + child.text + "<span class=\"participant_role\">" + (role.nil? ? "" : ", " + role) + (sex.empty? ? "" : " (" + (sex == "f" ? "female" : (sex == "m" ? "male" : sex)) + ")") + "</span></div>\n"
-          result << "        </div> <!-- participant_row -->\n"
-        end
-      end
+    participants.each do |participant|
+      participant_number += 1
+      id = participant.initials
+      role = participant.role
+      sex = participant.gender
+      name = participant.name
+      result << "        <div class=\"participant_row\" id=\"participant" + participant_number.to_s + "\">\n"
+      result << "          <div class=\"participant_id\">" + (id.nil? ? "" : id) + "</div>\n"
+      result << "          <div class=\"participant_name\">" + name + "<span class=\"participant_role\">" + (role.nil? ? "" : ", " + role) + (sex.empty? ? "" : " (" + (sex == "f" ? "female" : (sex == "m" ? "male" : sex)) + ")") + "</span></div>\n"
+      result << "        </div> <!-- participant_row -->\n"
     end
 
     if result.length > 0
@@ -30,11 +26,12 @@ module TranscriptsHelper
 
 
   # convert fedora transcript object to html
-  def show_transcript(tei, active_timestamps)
-    chunks = TranscriptChunk.parse_transcript(tei)
-    html = format_transcript(chunks, active_timestamps, "foobar")
+  def show_transcript(tei, active_timestamps, path)
+    chunks, participants = TranscriptChunk.parse(tei)
+    transcript_html = format_transcript(chunks, active_timestamps, path)
+    participant_html = format_participants(participants)
 
-    return html
+    return transcript_html, participant_html
   end
 
 
@@ -60,7 +57,7 @@ module TranscriptsHelper
 
   # return html string of the transcript
   # iterate over chunks and create appropriate divs with classes, links, etc.
-  def format_transcript(chunks, active_timestamps, pid)
+  def format_transcript(chunks, active_timestamps, path)
     result = "<div class=\"transcript_table\">\n"
     chunks.each do |chunk|
       milliseconds = chunk.start_in_milliseconds
@@ -74,7 +71,7 @@ module TranscriptsHelper
         result << "                    <div class=\"transcript_speaker\">\n"
 
         if (active_timestamps)
-          result << "                      <a class=\"transcript_chunk_link\" data-time=\"" + milliseconds.to_s + "\" href=\"/catalog/"+ pid + "?timestamp/" + string_minutes + ":" + string_just_seconds + "\">" + string_minutes + ":" + string_just_seconds + "</a>\n"
+          result << "                      <a class=\"transcript_chunk_link\" data-time=\"" + milliseconds.to_s + "\" href=\""+ path + "?timestamp=" + string_minutes + ":" + string_just_seconds + "\">" + string_minutes + ":" + string_just_seconds + "</a>\n"
         else
           result << "                      <span class=\"transcript_chunk_link\">" + string_minutes + ":" + string_just_seconds + "</span>\n"
         end
