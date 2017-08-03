@@ -31,8 +31,8 @@ module TranscriptsHelper
 
   # convert fedora transcript object to html
   def show_transcript(tei, active_timestamps)
-    chunks = TranscriptChunk.parse(tei)
-    html = format_transcript(chunks, active_timestamps, tei.pid)
+    chunks = TranscriptChunk.parse_transcript(tei)
+    html = format_transcript(chunks, active_timestamps, "foobar")
 
     return html
   end

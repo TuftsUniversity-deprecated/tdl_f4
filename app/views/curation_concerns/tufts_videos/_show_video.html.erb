@@ -35,8 +35,17 @@ end
       </div>
 
       <div id="transcript" class="tab-pane">
+        <a href="/catalog/transcriptonly/<%= params[:id] %>" class="pull-right"><h6>view transcript only <i class="icon-share"></i></h6></a>
+        <br>
         <div class="transcript_box">
-          <p>- transcript goes here -</p>
+          <%= raw show_transcript(@document_tei, true) %>
+          <script>
+              $('.transcript_chunk_link').on("click", function (e) {
+                  e.preventDefault()
+                  var t = $(e.currentTarget).data('time')
+                  jumpPlayerTo(t);
+              });
+          </script>
         </div>  <!-- transcript_box -->
       </div>
     </div>
