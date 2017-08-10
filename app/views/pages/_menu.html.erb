@@ -1,4 +1,5 @@
 <h6> About </h6>
+<div class="TOC affix-top">
 <ul class="nav nav-tabs nav-stacked">
   <% current_url =  request.env['PATH_INFO'] %>
   <li <%= current_url == "/about/index" ? "class=active_orange" : "" %>><a href="/about/index">About Us</a></li>
@@ -28,5 +29,5 @@
 <ul class="nav nav-tabs nav-stacked">
   <li <%= current_url == "/about/finding_aids" ? "class=active_orange" : "" %>><a href="/about/finding_aids">Learn More About Finding Aids</a></li>
 </ul>
-
+</div>
 
