@@ -6,7 +6,9 @@
   <!-- nested row LEFT -->
   <div class="row-fluid">
     <div class="span3">
-      <%#= render 'search_sidebar' %>
+      <% provide :sidebar do %>
+        <%= render 'catalog/search_sidebar' %>
+      <% end %>
     </div>
     <!-- nested Fluid RIGHT -->
 
@@ -14,10 +16,10 @@
 
       <!-- MAIN CONTENT AREA -->
       <div class="span9 offset3">
-        <%= render :partial => "dca_text/welcome#{dark_suffix}" %>
+        <%= render :partial => "welcome/tdl_welcome" %>
 
         <div class="span9">
-          <%= render :partial => "dca_text/collections#{dark_suffix}" %>
+          <%= render :partial => "welcome/collections" %>
         </div>
         <div class="pull-right">
           <!--

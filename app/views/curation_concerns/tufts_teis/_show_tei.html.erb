@@ -1,0 +1,23 @@
+<% provide :page_title, @presenter.page_title %>
+<% provide :page_header do %>
+    <h2><%= @presenter %> </h2>
+<% end %>
+<% collector = can?(:collect, @presenter.id) %>
+<% editor = can?(:edit, @presenter.id) %>
+<div class="row tdl-content">
+  <div class="col-md-6">
+    <div><%= image_tag('elections/elections.png', alt: 'elections splash image', class: 'election-splash') %></div>
+  </div>
+  <div class="col-md-6">
+    <div class="spacer"></div>
+    <div class="tooltip-demo well "><p>View voting record:</p>
+      <h5><a href="<%= show_elections_link(params[:id]) %>"><%= @presenter.page_title %></a>
+        <span class="glyphicon glyphicon-arrow-right"></span></h5>
+      <strong>A New Nation Votes</strong> is a searchable collection of election returns from the earliest years
+      of American democracy. The data were compiled by Philip Lampi, and are made available online by The
+      American Antiquarian Society and Tufts University Digital Collections and Archives, with funding from the
+      National Endowment for the Humanities. The election records have a dedicated portal which allows you to
+      narrow your search by candidate, office, year, or state.
+    </div>
+  </div>
+</div>
