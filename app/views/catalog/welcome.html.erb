@@ -7,7 +7,7 @@
   <div class="row-fluid">
     <div class="span3">
       <% provide :sidebar do %>
-        <%= render 'catalog/search_sidebar' %>
+        <%= render 'search_sidebar' %>
       <% end %>
     </div>
     <!-- nested Fluid RIGHT -->
@@ -16,10 +16,10 @@
 
       <!-- MAIN CONTENT AREA -->
       <div class="span9 offset3">
-        <%= render :partial => "welcome/tdl_welcome" %>
+        <%= render :partial => "tdl_welcome" %>
 
         <div class="span9">
-          <%= render :partial => "welcome/collections" %>
+          <%= render :partial => "featured_collections" %>
         </div>
         <div class="pull-right">
           <!--
@@ -27,16 +27,7 @@
           -->
         </div>
 
-        <br/>
 
-        <div class="span7">
-
-          <h4>Availability</h4>
-
-          <p>Upgrades to the <%= application_name %> are scheduled for Thursdays 9-9:30 AM. The <%= application_name %> may not be
-            available during this time.</p>
-
-        </div>
       </div>
     </div>
 
