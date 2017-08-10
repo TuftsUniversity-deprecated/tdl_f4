@@ -241,4 +241,19 @@ class CatalogController < ApplicationController
     # mean") suggestion is offered.
     config.spell_max = 5
   end
+
+  before_action :load_fedora_document, only: [:show, :edit, :teireader, :fa_overview, :fa_series, :transcriptonly]
+
+  def welcome
+    index
+  end
+
+  def fa_overview
+    @id = params[:id]
+  end
+
+  def fa_series
+    @id = params[:id]
+    @item_id = params[:item_id]
+  end
 end

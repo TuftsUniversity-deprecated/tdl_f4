@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   devise_for :users
   mount CurationConcerns::Engine, at: '/'
   resources :welcome, only: 'index'
-  root 'welcome#index'
+  root 'catalog#welcome'
   curation_concerns_collections
   curation_concerns_basic_routes
   curation_concerns_embargo_management
@@ -34,6 +34,8 @@ Rails.application.routes.draw do
 
   get 'concern/tufts_eads/:id/fa/:item_id' => 'curation_concerns/tufts_eads#fa_series', :constraints => {:id => /.*/, :item_id => /.*/}, as: :fa_series
   get 'concern/tufts_eads/:id/fa' => 'curation_concerns/tufts_eads#fa_overview', :constraints => {:id => /.*/}, as: :fa_overview
+
+  get "/pages/*id" => 'pages#show', as: :page, format: false
 
 #   get 'products/:id' => 'catalog#view'
 #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
