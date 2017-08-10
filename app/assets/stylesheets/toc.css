@@ -1,0 +1,40 @@
+.TOC.affix {
+    top: 135px;  // where EAD_TOC sticks when it sticks
+}
+
+.TOC > h6 {
+    color: #666666;
+    font-size: 11px;
+    text-transform: uppercase;
+    line-height: 20px;
+    font-weight: 500;
+}
+
+.TOC > ul {
+    border-bottom: 0;
+    padding: 0;
+}
+
+.TOC > ul > li {
+    width: 180px;
+    margin-bottom: -3px;
+}
+
+.TOC > ul > li > a {
+    margin-right: 0;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    padding-left: 12px;
+    padding-right: 14px;
+    display: block;
+    border: 1px solid #ddd;
+    border-radius: 0;
+}
+
+.TOC > ul > li:first-child > a {
+    border-radius: 4px 4px 0 0;
+}
+
+.TOC > ul > li:last-child > a {
+    border-radius: 0 0 4px 4px;
+}
