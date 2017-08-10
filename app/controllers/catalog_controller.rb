@@ -1,6 +1,5 @@
 class CatalogController < ApplicationController
   include CurationConcerns::CatalogController
-  include WithEads
   configure_blacklight do |config|
     # config.search_builder_class = ::SearchBuilder
     ## Default parameters to send to solr for all search-like requests. See also SolrHelper#solr_search_params
@@ -241,16 +240,5 @@ class CatalogController < ApplicationController
     # If there are more than this many search results, no spelling ("did you
     # mean") suggestion is offered.
     config.spell_max = 5
-  end
-
-  before_action :load_fedora_document, only: [:show, :edit, :teireader, :fa_overview, :fa_series, :transcriptonly]
-
-  def fa_overview
-    @id = params[:id]
-  end
-
-  def fa_series
-    @id = params[:id]
-    @item_id = params[:item_id]
   end
 end

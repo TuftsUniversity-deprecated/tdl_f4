@@ -1,9 +1,9 @@
       <div class="pull-left tdl-search-widgets">
         <span class="glyphicon glyphicon-arrow-left glyph-left" aria-hidden="true"></span>
         <% if controller.action_name == 'fa_overview'%>
-          <a href="<%= show_collection_link(params[:id]) %>">Collection Home</a>
+          <a href="<%= landing_page_path(params[:id]) %>">Collection Home</a>
         <% elsif controller.action_name == 'fa_series' %>
-          <a data-turbolinks='false' href="<%= show_finding_aid_link(params[:id]) %>"><%= @collection_title %></a> > <%= @series_full_title %>
+          <a data-turbolinks='false' href="<%= finding_aid_overview_path(params[:id]) %>"><%= @collection_title %></a> > <%= @series_full_title %>
         <% end %>
       </div>
 

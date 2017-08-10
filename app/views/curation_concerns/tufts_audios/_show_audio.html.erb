@@ -1,0 +1,56 @@
+<%= render "curation_concerns/shared/item_header" %>
+
+<div class="col-md-12 tdl-content">
+  <div class="row col-md-6">
+    <audio controls="controls" preload="metadata" width="445px" height="34px">
+      <source src="<%= Rails.application.routes.url_helpers.download_path(@presenter.member_presenters[0]) %>" type="audio/mpeg">
+    </audio>
+<%
+if @document_tei.present?
+  transcript_html, participant_html = show_transcript(@document_tei, true, "/concern/tufts_audios/" + params[:id])
+
+  unless participant_html.empty?
+%>
+    <br>
+    <div class="participant_div">
+      <b>Participants</b><br>
+      <%= raw participant_html %>
+    </div>  <!-- participant_div -->
+<%
+  end
+end
+%>
+  </div>
+
+  <div class="col-xs-6">
+<% if @document_tei.present? %>
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" href="#information">Information</a></li>
+      <li><a data-toggle="tab" href="#transcript">Transcript</a></li>
+    </ul>
+
+    <div class="tab-content">
+      <div id="information" class="tab-pane active">
+        <%= render "curation_concerns/shared/metadata" %>
+      </div>
+
+      <div id="transcript" class="tab-pane">
+        <a href="/concern/tufts_audios/<%= params[:id] %>/transcriptonly/" class="pull-right"><h6>view transcript only <i class="icon-share"></i></h6></a>
+        <br>
+        <div class="transcript_box">
+          <%= raw transcript_html %>
+          <script>
+              $('.transcript_chunk_link').on("click", function (e) {
+                  e.preventDefault()
+                  var t = $(e.currentTarget).data('time')
+                  jumpPlayerTo(t);
+              });
+          </script>
+        </div>  <!-- transcript_box -->
+      </div>
+    </div>
+<% else %>
+  <%= render "curation_concerns/shared/metadata" %>
+<% end %>
+  </div> <!-- right column -->
+</div>
