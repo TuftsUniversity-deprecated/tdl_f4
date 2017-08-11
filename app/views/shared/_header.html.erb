@@ -12,13 +12,13 @@
     <div class="right-nav">
       <div id="main_nav">
         <ul class="tdl-right-nav">
-          <li><a href="">Contact</a></li>
+          <li><%= link_to 'Contact', tufts_models_engine.page_path('contact') %></li>
           <li><%= link_to 'About', tufts_models_engine.page_path('about') %></li>
           <li><a href="">Search</a></li>
         </ul>
       </div>
       <% if(controller.action_name == "show") %>
-        <button type="button" id="comment-button" class="btn">
+        <button type="button" id="comment-button" class="btn" data-toggle="modal" data-target="#commentModal">
           Comments about this page?
           <span class="glyphicon glyphicon-comment glyph-right" aria-hidden="true"></span>
         </button>
