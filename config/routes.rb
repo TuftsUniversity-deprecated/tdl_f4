@@ -34,8 +34,8 @@ Rails.application.routes.draw do
 
   get 'concern/tufts_eads/:id/fa/:item_id' => 'curation_concerns/tufts_eads#fa_series', :constraints => {:id => /.*/, :item_id => /.*/}, as: :fa_series
   get 'concern/tufts_eads/:id/fa' => 'curation_concerns/tufts_eads#fa_overview', :constraints => {:id => /.*/}, as: :fa_overview
-  get 'concern/tufts_audios/:id/transcriptonly', :to => 'curation_concerns/tufts_audios#transcriptonly', :constraints => {:id => /.*/}, :as =>'transcriptonly'
-  get 'concern/tufts_videos/:id/transcriptonly', :to => 'curation_concerns/tufts_videos#transcriptonly', :constraints => {:id => /.*/}, :as =>'transcriptonly'
+  get 'concern/tufts_audios/:id/transcriptonly', :to => 'curation_concerns/tufts_audios#audio_transcriptonly', :constraints => {:id => /.*/}, :as =>'audio_transcriptonly'
+  get 'concern/tufts_videos/:id/transcriptonly', :to => 'curation_concerns/tufts_videos#video_transcriptonly', :constraints => {:id => /.*/}, :as =>'video_transcriptonly'
 
   get "/pages/*id" => 'pages#show', as: :page, format: false
 

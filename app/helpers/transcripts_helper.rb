@@ -16,7 +16,7 @@ module TranscriptsHelper
   end
 
 
-  def dvieo_transcriptonly_path(id)
+  def video_transcriptonly_path(id)
     "/concern/tufts_videos/" + id + "/transcriptonly"
   end
 
