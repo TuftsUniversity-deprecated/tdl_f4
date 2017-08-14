@@ -7,7 +7,7 @@
     </audio>
 <%
 if @document_tei.present?
-  transcript_html, participant_html = show_transcript(@document_tei, true, "/concern/tufts_audios/" + params[:id])
+  transcript_html, participant_html = show_transcript(@document_tei, true, audio_page_path(params[:id]))
 
   unless participant_html.empty?
 %>
@@ -35,7 +35,7 @@ end
       </div>
 
       <div id="transcript" class="tab-pane">
-        <a href="/concern/tufts_audios/<%= params[:id] %>/transcriptonly/" class="pull-right"><h6>view transcript only <i class="icon-share"></i></h6></a>
+        <a href="<%= audio_transcriptonly_path(params[:id]) %>" class="pull-right"><h6>view transcript only <i class="icon-share"></i></h6></a>
         <br>
         <div class="transcript_box">
           <%= raw transcript_html %>

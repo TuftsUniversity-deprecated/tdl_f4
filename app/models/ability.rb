@@ -20,5 +20,6 @@ class Ability
     
     can [:fa_overview], ActiveFedora::Base
     can [:fa_series], ActiveFedora::Base
+    can [:transcriptonly], ActiveFedora::Base
   end
 end

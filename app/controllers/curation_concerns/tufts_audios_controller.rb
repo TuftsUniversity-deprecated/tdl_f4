@@ -11,6 +11,9 @@ module CurationConcerns
     self.curation_concern_type = TuftsAudio
 
     before_action :load_fedora_document
-  
+
+
+    def transcriptonly
+    end
   end
 end

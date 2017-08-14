@@ -1,6 +1,26 @@
 module TranscriptsHelper
 
 
+  def audio_page_path(id)
+    "/concern/tufts_audios/" + id
+  end
+
+
+  def video_page_path(id)
+    "/concern/tufts_videos/" + id
+  end
+
+
+  def audio_transcriptonly_path(id)
+    "/concern/tufts_audios/" + id + "/transcriptonly"
+  end
+
+
+  def dvieo_transcriptonly_path(id)
+    "/concern/tufts_videos/" + id + "/transcriptonly"
+  end
+
+
   def format_participants(participants)
     result = ""
     participant_number = 0

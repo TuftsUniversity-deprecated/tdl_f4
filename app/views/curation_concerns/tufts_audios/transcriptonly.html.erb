@@ -1,0 +1,27 @@
+<%#= render "curation_concerns/shared/item_header" %>
+
+<%
+if @document_tei.present?
+  transcript_html, participant_html = show_transcript(@document_tei, true, audio_page_path(params[:id]))
+
+  unless participant_html.empty?
+%>
+    <div>
+      <b>Participants</b>
+      <br>
+      <br>
+      <%= raw participant_html %>
+    </div>  <!-- participant_div -->
+    <hr/>
+<%
+  end
+
+  unless transcript_html.empty?
+%>
+    <div class="transcript_box">
+      <%= raw transcript_html %>
+    </div>  <!-- transcript_box -->
+<%
+  end
+end
+%>
