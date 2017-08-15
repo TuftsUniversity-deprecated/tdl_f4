@@ -13,7 +13,10 @@ module CurationConcerns
     before_action :load_fedora_document
 
 
-    def transcriptonly
+    def video_transcriptonly
+      respond_to do |wants|
+        wants.html { presenter && parent_presenter }
+      end
     end
   end
 end
