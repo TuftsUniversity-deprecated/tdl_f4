@@ -12,4 +12,26 @@
         <a href="<%= img %>" target="_blank")>Download low-resolution image</a>
       </li>
   </div>
+<% else %>
+  <% if controller.controller_name == 'tufts_audios' %>
+       <div class="pull-right tdl-search-widgets">
+        <span class="glyphicon glyphicon-headphones glyph-left" aria-hidden="true"></span>
+        <a href="<%= audio_download_path(params[:id]) %>">Download Audio File</a>
+        <% if @document_tei.present? %>
+          &nbsp;&nbsp;
+          <span class="glyphicon glyphicon-file glyph-left" aria-hidden="true"></span>
+          <a href="<%= audio_transcript_download_path(params[:id]) %>">Download Transcript</a>
+        <% end %>
+      </div>
+  <% elsif controller.controller_name == 'tufts_videos' %>
+      <div class="pull-right tdl-search-widgets">
+        <span class="glyphicon glyphicon-headphones glyph-left" aria-hidden="true"></span>
+        <a href="<%= video_download_path(params[:id]) %>">Download Video File</a>
+        <% if @document_tei.present? %>
+          &nbsp;&nbsp;
+          <span class="glyphicon glyphicon-file glyph-left" aria-hidden="true"></span>
+          <a href="<%= video_transcript_download_path(params[:id]) %>">Download Transcript</a>
+        <% end %>
+      </div>
+  <% end %>
 <% end %>

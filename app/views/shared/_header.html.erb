@@ -36,6 +36,11 @@
     <div class="container">
       <%= render 'shared/finding_aid_breadcrumbs' %>
     </div>
+  <% elsif controller.action_name == 'audio_transcriptonly' || controller.action_name == 'video_transcriptonly'%>
+    <div class="container">
+      <%= render 'shared/transcriptonly_options' %>
+      <%= render 'shared/download_options' %>
+    </div>
   <% else %>
     <div class="navbar-center">
       <% unless(controller_name.in?(['contribute', 'templates', 'records', 'sessions'])) %>
