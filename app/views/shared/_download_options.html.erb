@@ -23,12 +23,10 @@
             <a href="<%= audio_transcript_download_path(params[:id]) %>">Download Transcript</a>
           </li>
         <% end %>
-        <% unless controller.action_name == "audio_transcriptonly" %>
-          <li>
-            <span class="glyphicon glyphicon-headphones glyph-left" aria-hidden="true"></span>
-            <a href="<%= audio_download_path(params[:id]) %>">Download Audio File</a>
-          </li>
-        <% end %>
+        <li>
+          <span class="glyphicon glyphicon-headphones glyph-left" aria-hidden="true"></span>
+          <a href="<%= audio_download_path(params[:id]) %>">Download Audio File</a>
+        </li>
       </ul>
     </div>
   <% elsif controller.controller_name == 'tufts_videos' %>
@@ -40,12 +38,10 @@
             <a href="<%= video_transcript_download_path(params[:id]) %>">Download Transcript</a>
           </li>
         <% end %>
-        <% unless controller.action_name == "video_transcriptonly" %>
-          <li>
-            <span class="glyphicon glyphicon-film glyph-left" aria-hidden="true"></span>
-            <a href="<%= video_download_path(params[:id]) %>">Download Video File</a>
-          </li>
-        <% end %>
+        <li>
+          <span class="glyphicon glyphicon-film glyph-left" aria-hidden="true"></span>
+          <a href="<%= video_download_path(params[:id]) %>">Download Video File</a>
+        </li>
       </ul>
     </div>
   <% end %>
