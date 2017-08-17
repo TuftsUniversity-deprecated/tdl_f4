@@ -11,27 +11,42 @@
         <span class="glyphicon glyphicon-picture glyph-left" aria-hidden="true"></span>
         <a href="<%= img %>" target="_blank")>Download low-resolution image</a>
       </li>
+    </ul>
   </div>
 <% else %>
   <% if controller.controller_name == 'tufts_audios' %>
-       <div class="pull-right tdl-search-widgets">
-        <span class="glyphicon glyphicon-headphones glyph-left" aria-hidden="true"></span>
-        <a href="<%= audio_download_path(params[:id]) %>">Download Audio File</a>
+    <div class="tdl-search-widgets">
+      <ul class="tdl-right-nav">
         <% if @document_tei.present? %>
-          &nbsp;&nbsp;
-          <span class="glyphicon glyphicon-file glyph-left" aria-hidden="true"></span>
-          <a href="<%= audio_transcript_download_path(params[:id]) %>">Download Transcript</a>
+          <li>
+            <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+            <a href="<%= audio_transcript_download_path(params[:id]) %>">Download Transcript</a>
+          </li>
         <% end %>
-      </div>
+        <% unless controller.action_name == "audio_transcriptonly" %>
+          <li>
+            <span class="glyphicon glyphicon-headphones glyph-left" aria-hidden="true"></span>
+            <a href="<%= audio_download_path(params[:id]) %>">Download Audio File</a>
+          </li>
+        <% end %>
+      </ul>
+    </div>
   <% elsif controller.controller_name == 'tufts_videos' %>
-      <div class="pull-right tdl-search-widgets">
-        <span class="glyphicon glyphicon-headphones glyph-left" aria-hidden="true"></span>
-        <a href="<%= video_download_path(params[:id]) %>">Download Video File</a>
+    <div class="tdl-search-widgets">
+      <ul class="tdl-right-nav">
         <% if @document_tei.present? %>
-          &nbsp;&nbsp;
-          <span class="glyphicon glyphicon-file glyph-left" aria-hidden="true"></span>
-          <a href="<%= video_transcript_download_path(params[:id]) %>">Download Transcript</a>
+          <li>
+            <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+            <a href="<%= video_transcript_download_path(params[:id]) %>">Download Transcript</a>
+          </li>
         <% end %>
-      </div>
+        <% unless controller.action_name == "video_transcriptonly" %>
+          <li>
+            <span class="glyphicon glyphicon-film glyph-left" aria-hidden="true"></span>
+            <a href="<%= video_download_path(params[:id]) %>">Download Video File</a>
+          </li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
 <% end %>
