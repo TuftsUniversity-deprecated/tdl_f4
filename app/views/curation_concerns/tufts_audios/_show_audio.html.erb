@@ -3,7 +3,7 @@
 <div class="col-md-12 tdl-content">
   <div class="row col-md-6">
     <audio controls="controls" preload="metadata" width="445px" height="34px">
-      <source src="<%= @media_download_path %>" type="audio/mpeg">
+      <source src="<%= Rails.application.routes.url_helpers.download_path(@presenter.member_presenters[0]) %>" type="audio/mpeg">
     </audio>
 <%
 if @document_tei.present?
