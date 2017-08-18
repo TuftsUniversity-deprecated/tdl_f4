@@ -3,7 +3,7 @@
 <div class="col-md-12 tdl-content">
   <div class="row col-md-6">
     <video controls="controls" preload="metadata" width="445px" height="390px">
-      <source src="<%= Rails.application.routes.url_helpers.download_path(@presenter.member_presenters[0]) %>" type="video/mp4">
+      <source src="<%= @media_download_path %>" type="video/mp4">
     </video>
 <%
 if @document_tei.present?

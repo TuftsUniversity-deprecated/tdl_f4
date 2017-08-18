@@ -21,26 +21,6 @@ module TranscriptsHelper
   end
 
 
-  def audio_download_path(id)
-    "/concern/tufts_audios/" + id + "/download"
-  end
-
-
-  def video_download_path(id)
-    "/concern/tufts_videos/" + id + "/download"
-  end
-
-
-  def audio_transcript_download_path(id)
-    "/concern/tufts_audios/" + id + "/download_transcript"
-  end
-
-
-  def video_transcript_download_path(id)
-    "/concern/tufts_videos/" + id + "/download_transcript"
-  end
-
-
   def format_participants(participants)
     result = ""
     participant_number = 0

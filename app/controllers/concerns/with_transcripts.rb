@@ -20,9 +20,11 @@ module WithTranscripts
         original_file = file_set.original_file
         unless original_file.nil?
           if original_file.mime_type == "text/xml"
+            @transcript_download_path = main_app.download_path(file_set)
             @document_tei = Datastreams::Tei.from_xml(original_file.content)
             @document_tei.ng_xml.remove_namespaces! unless @document_tei.nil?
-            break;
+          else
+            @media_download_path = main_app.download_path(file_set)
           end
         end
       end

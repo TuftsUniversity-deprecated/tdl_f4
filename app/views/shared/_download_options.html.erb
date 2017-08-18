@@ -20,12 +20,12 @@
         <% if @document_tei.present? %>
           <li>
             <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
-            <a href="<%= audio_transcript_download_path(params[:id]) %>">Download Transcript</a>
+            <a href="<%= @transcript_download_path %>">Download Transcript</a>
           </li>
         <% end %>
         <li>
           <span class="glyphicon glyphicon-headphones glyph-left" aria-hidden="true"></span>
-          <a href="<%= audio_download_path(params[:id]) %>">Download Audio File</a>
+          <a href="<%= @media_download_path %>">Download Audio File</a>
         </li>
       </ul>
     </div>
@@ -35,12 +35,12 @@
         <% if @document_tei.present? %>
           <li>
             <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
-            <a href="<%= video_transcript_download_path(params[:id]) %>">Download Transcript</a>
+            <a href="<%= @transcript_download_path %>">Download Transcript</a>
           </li>
         <% end %>
         <li>
           <span class="glyphicon glyphicon-film glyph-left" aria-hidden="true"></span>
-          <a href="<%= video_download_path(params[:id]) %>">Download Video File</a>
+          <a href="<%= @media_download_path %>">Download Video File</a>
         </li>
       </ul>
     </div>
