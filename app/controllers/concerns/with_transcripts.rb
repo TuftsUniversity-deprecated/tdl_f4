@@ -9,8 +9,11 @@ module WithTranscripts
 
       @document_fedora = ActiveFedora::Base.find(params[:id])
       @document_tei = nil
+      @transcript_download_path = nil
+      @media_play_path = nil
+      @media_download_path = nil
 
-      return unless @document_fedora.class.instance_of?(TuftsAudio.class) ||  @document_fedora.class.instance_of?(TuftsVideo.class)
+      return unless @document_fedora.class.name == "TuftsAudio" ||  @document_fedora.class.name == "TuftsVideo"
 
       file_sets = @document_fedora.file_sets
 
@@ -24,7 +27,15 @@ module WithTranscripts
             @document_tei = Datastreams::Tei.from_xml(original_file.content)
             @document_tei.ng_xml.remove_namespaces! unless @document_tei.nil?
           else
-            @media_download_path = main_app.download_path(file_set)
+            filename_extension = (@document_fedora.class.name == "TuftsAudio" ? "mp3" : "mp4");
+            derivative_paths = CurationConcerns::DerivativePath.derivatives_for_reference(file_set)
+            derivative_paths.each do |derivative_path|
+              if derivative_path.end_with?(filename_extension)
+                @media_play_path = main_app.download_path(file_set)
+                @media_download_path = main_app.download_path(file_set, file: filename_extension) + "&download=true"
+                break
+              end
+            end
           end
         end
       end
