@@ -32,7 +32,7 @@ module WithTranscripts
             derivative_paths.each do |derivative_path|
               if derivative_path.end_with?(filename_extension)
                 @media_play_path = main_app.download_path(file_set)
-                @media_download_path = main_app.download_path(file_set, file: filename_extension) + "&download=true"
+                @media_download_path = main_app.download_path(file_set, file: filename_extension)
                 break
               end
             end
