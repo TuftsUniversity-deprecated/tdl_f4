@@ -56,3 +56,27 @@ end
 <% end %>
   </div> <!-- right column -->
 </div>
+
+
+<script>
+  var videoMediaElement;
+
+  function jumpPlayerTo(time) {
+    videoMediaElement.currentTime = time;
+  }
+
+  $(document).ready(function() {
+    $('video, audio').mediaelementplayer({
+      success: function (mediaElement, originalNode, instance) {
+        mediaElement.addEventListener('timeupdate', function () {
+          // scrollTranscript(mediaElement.currentTime);
+          console.log('timeupdate: ' + mediaElement.currentTime);
+        });
+
+        if (originalNode instanceof HTMLVideoElement) {
+          videoMediaElement = mediaElement;
+        }
+      }
+    });
+  });
+</script>

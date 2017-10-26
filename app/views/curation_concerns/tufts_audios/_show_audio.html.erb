@@ -2,7 +2,7 @@
 
 <div class="col-md-12 tdl-content">
   <div class="row col-md-6">
-    <audio controls="controls" preload="auto" width="445px" height="34px">
+    <audio controls="controls" preload="auto" width="445px" height="40px">
       <source src="<%= @media_play_path %>?file=mp3" type="audio/mpeg">
       <source src="<%= @media_play_path %>?file=ogg" type="audio/ogg">
       Your browser does not support the audio tag.
@@ -56,3 +56,27 @@ end
 <% end %>
   </div> <!-- right column -->
 </div>
+
+
+<script>
+  var audioMediaElement;
+
+  function jumpPlayerTo(time) {
+    audioMediaElement.currentTime = time;
+  }
+
+  $(document).ready(function() {
+    $('video, audio').mediaelementplayer({
+      success: function (mediaElement, originalNode, instance) {
+        mediaElement.addEventListener('timeupdate', function () {
+          // scrollTranscript(mediaElement.currentTime);
+          console.log('timeupdate: ' + mediaElement.currentTime);
+        });
+
+        if (originalNode instanceof HTMLAudioElement) {
+          audioMediaElement = mediaElement;
+        }
+      }
+    });
+  });
+</script>
