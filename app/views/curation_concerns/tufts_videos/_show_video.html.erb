@@ -55,15 +55,15 @@ end
   $(document).ready(function() {
     $('video, audio').mediaelementplayer({
       success: function (mediaElement, originalNode, instance) {
-        myMediaElement = mediaElement;
+        var transcriptScroller = TranscriptScroller(mediaElement);
 
         mediaElement.addEventListener('timeupdate', function () {
-          scrollTranscript(mediaElement.currentTime);
+          transcriptScroller.scrollTranscript(mediaElement.currentTime);
         });
 
         $('.transcript_chunk_link').on("click", function (e) {
           e.preventDefault()
-          jumpPlayerTo($(e.currentTarget).data('time'));
+          transcriptScroller.jumpPlayerTo($(e.currentTarget).data('time') / 1000);
         });
       }
     });
