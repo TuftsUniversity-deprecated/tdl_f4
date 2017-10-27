@@ -1,6 +1,10 @@
+	var myMediaElement = null;
 	var currentlyHighlightedDiv = null;
 	var lastSeconds = -1;
 
+	function jumpPlayerTo(milliseconds) {
+		myMediaElement.currentTime = milliseconds / 1000.0;
+	}
 
 	function scrollTranscript(seconds) {
 		var seconds = Math.floor(seconds);  // round down to nearest second
