@@ -59,23 +59,20 @@ end
 
 
 <script>
-  var videoMediaElement;
+  var myMediaElement;
 
-  function jumpPlayerTo(time) {
-    videoMediaElement.currentTime = time;
+  function jumpPlayerTo(milliseconds) {
+    myMediaElement.currentTime = milliseconds / 1000.0;
   }
 
   $(document).ready(function() {
     $('video, audio').mediaelementplayer({
       success: function (mediaElement, originalNode, instance) {
         mediaElement.addEventListener('timeupdate', function () {
-          // scrollTranscript(mediaElement.currentTime);
-          console.log('timeupdate: ' + mediaElement.currentTime);
+          scrollTranscript(mediaElement.currentTime);
         });
 
-        if (originalNode instanceof HTMLVideoElement) {
-          videoMediaElement = mediaElement;
-        }
+        myMediaElement = mediaElement;
       }
     });
   });
