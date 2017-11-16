@@ -117,6 +117,7 @@ feature 'EAD' do
     click_link "Correspondence 1900 -- 1933", :exact => false
     page.should have_text "Location:"
     page.should have_text "31236554645131"
+    page.should_not have_text "Text ("
 
    visit '/concern/tufts_eads/ks65hc20t'
     click_link "View Finding Aid", :exact => false
@@ -124,6 +125,7 @@ feature 'EAD' do
     click_link "Diaries 1910 -- 1933", :exact => false
     page.should have_text "Location:"
     page.should have_text "3123064475432131"
+    page.should_not have_text "Books ["
   end
 
  scenario 'View MS226 (Rubin Carter papers) landing page' do
