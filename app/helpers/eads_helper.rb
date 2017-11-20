@@ -1029,8 +1029,8 @@ module EadsHelper
   def get_series_item_info(item, pid)
     title = ""
     paragraphs = []
-    labels = ""
-    values = ""
+    labels = []
+    values = []
     next_level_items = []
     did = nil
     dao = nil
@@ -1143,7 +1143,7 @@ module EadsHelper
             # leave page and thumbnail = "" so that values will not be returned for them
             # and so that the href will not be included in title.  Set physloc to the dark
             # archive message.
-            physloc = "Dark Archive; <a href=""/contact"">contact DCA</a>"
+            physloc = "Dark Archive"
           elsif !daoloc_label.nil? && !daoloc_href.nil?
             daoloc_label_text = daoloc_label.text
             daoloc_href_text = daoloc_href.text
@@ -1216,43 +1216,27 @@ module EadsHelper
     title = (item_url.empty? ? "" : "<a " + (external_page.empty? ? "data-turbolinks=\"false\" " : "") + "href=\"" + item_url + "\"" + (external_page.empty? ? "" : " target=\"blank\"") + ">") + unittitle + (unitdate.empty? || (unittitle.end_with?(unitdate))? "" : " " + unitdate) + (item_url.empty? ? "" : "</a>")
 
     unless physloc.empty?
-      labels = "Location:"
-      values = physloc
+      labels << "Location"
+      values << physloc
     end
 
     unless physloc_unprocessed.empty?
-      unless labels.empty?
-        labels << "<br>"
-        values << "<br>"
-      end
-      labels << "Location:"
+      labels << "Location"
       values << physloc_unprocessed
     end
 
     unless item_id.empty?
-      unless labels.empty?
-        labels << "<br>"
-        values << "<br>"
-      end
-      labels << "Item ID:"
+      labels << "Item ID"
       values << item_id
     end
 
     unless item_type.empty?
-      unless labels.empty?
-        labels << "<br>"
-        values << "<br>"
-      end
-      labels << "Type:"
+      labels << "Type"
       values << item_type.capitalize
     end
 
     unless access_restrict.empty?
-      unless labels.empty?
-        labels << "<br>"
-        values << "<br>"
-      end
-      labels << "Access:"
+      labels << "Access"
       values << access_restrict
     end
 

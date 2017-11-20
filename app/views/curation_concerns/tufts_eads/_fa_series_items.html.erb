@@ -52,14 +52,38 @@
 %>
         </span>
         </td>
-        <td class="smalltext locator_td"><%= raw(item_labels) %></td>
-        <td class="smalltext id_td" align="left"><%= raw(item_values) %></td>
-
+        <td class="smalltext locator_td">
+<%
+        item_labels.each_with_index do |label, index|
+          unless index == 0
+%>
+            <br>
+<%
+          end
+%>
+          <%= raw(label) %>:
+<%
+        end
+%>
+        </td>
+        <td class="smalltext id_td">
+<%
+        item_values.each_with_index do |value, index|
+          unless index == 0
+%>
+            <br>
+<%
+          end
+%>
+          <%= raw(value) %>
+<%
+        end
+%>
+        </td>
 <%
       unless available_online
         access_restrict = series_restrict if access_restrict.empty?
         access_restrict = access_restrict.strip unless access_restrict.empty?
-
 %>
         <td class="availableonline_td" align="center">
           <span class="glyphicon glyphicon-plus-sign glyph-left" aria-hidden="true"></span>

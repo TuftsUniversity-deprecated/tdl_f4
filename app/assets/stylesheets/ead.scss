@@ -15,8 +15,8 @@
 .table .title_td {background_color: #666666;}
 /* From the old tdl_bootstrap_overrides.css */
 .table .availableonline_td {width: 120px;}   /* was 110, which no longer works - WTF?! */
-.table .id_td {width: 140px;}
 .table .locator_td{width: 65px; text-align: right; padding-right: 7px;}
+.table .id_td {width: 140px; text-align: left;}
 
 /* The following styles are used for EADs but also in other places - from old tdl-bootstrap-overrides.css */
 .table .collapse_td {padding: 0; padding-top: 3px; width: 10px;}
