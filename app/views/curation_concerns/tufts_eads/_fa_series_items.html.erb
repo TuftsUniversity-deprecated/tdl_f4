@@ -17,8 +17,7 @@
 #     item_title = "-" + indentation_level.to_s + "-" + (@row_count - 1).to_s + "- " + item_title # to show indentation level and row number for debugging
       is_top_level = indentation_level == 0
       is_folder = !next_level_items.empty?
-      # The classes .ead_folder_title and .ead_item_title exist so that styles could be added for them if it becomes necessary in the future.
-      row_class = " class=\"" + (is_folder ? "ead_folder_title" : "ead_item_title") + " ead_indent" + indentation_level.to_s + "\""
+      row_class = " class=\"" + (is_folder ? "folder_title_td" : "item_title_td") + " ead_indent" + indentation_level.to_s + "\""
 
       if is_folder
         next_row = @row_count
@@ -36,50 +35,42 @@
       <tr<%= raw(is_top_level ? " class=\"topLevelRow\"" : "") %>>
         <td class="collapse_td"><%= raw(expand_collapse) %></td>
         <td<%= raw(row_class) %>><%= raw(item_title) %>
-        <span class="smalltext">
-        <br>
+          <span class="smalltext">
+          <br>
 <%
-        item_paragraphs.each do |item_paragraph|
+          item_paragraphs.each do |item_paragraph|
 %>
-          <br><%= raw(item_paragraph) %>
+            <br><%= raw(item_paragraph) %>
 <%
-        end
-        if is_folder
+          end
+          if is_folder
 %>
-          <br>There might be additional items in this folder.
+            <br>There might be additional items in this folder.
 <%
-        end
+          end
 %>
-        </span>
+          </span>
         </td>
-        <td class="smalltext locator_td">
+
+
+
+        <td class="label_value_td">
+        <table class="label_value_table">
 <%
         item_labels.each_with_index do |label, index|
-          unless index == 0
 %>
-            <br>
-<%
-          end
-%>
-          <%= raw(label) %>:
+          <tr class="label_value_table_tr">
+            <td class="smalltext label_td"><%= raw(label) %>:</td>
+            <td class="smalltext value_td"><%= raw(item_values[index]) %></td>
+          </tr>
 <%
         end
 %>
+        </table>
         </td>
-        <td class="smalltext id_td">
-<%
-        item_values.each_with_index do |value, index|
-          unless index == 0
-%>
-            <br>
-<%
-          end
-%>
-          <%= raw(value) %>
-<%
-        end
-%>
-        </td>
+
+
+
 <%
       unless available_online
         access_restrict = series_restrict if access_restrict.empty?
