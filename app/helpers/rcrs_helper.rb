@@ -44,12 +44,7 @@ module RcrsHelper
   end
 
 
-  def abstract(rcr)
-    return rcr.find_by_terms_and_value(:bioghist_abstract).first.text
-  end
-
-
-  def abstract(rcr)
+  def rcr_abstract(rcr)
     return rcr.find_by_terms_and_value(:bioghist_abstract).first.text
   end
 

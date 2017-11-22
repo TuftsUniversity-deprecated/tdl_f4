@@ -8,7 +8,7 @@
 <% editor = can?(:edit, @presenter.id) %>
 <div class="row tdl-content">
   <div class="col-md-6">
-    <p><%= raw abstract(@document_rcr)%></p>
+    <p><%= raw rcr_abstract(@document_rcr)%></p>
     <h4>History of <%= title %></h4>
     <% history(@document_rcr).each do |paragraph| %>
       <p><%= raw paragraph %></p>
