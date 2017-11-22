@@ -17,7 +17,9 @@ module ApplicationHelper
     when "TuftsVideo"
       'curation_concerns/tufts_videos/show_video'
     when 'TuftsTei'
-        'curation_concerns/tufts_teis/show_tei'
+      'curation_concerns/tufts_teis/show_tei'
+    when 'TuftsRcr'
+      'curation_concerns/tufts_rcrs/show_rcr'
     else
       'curation_concerns/base/show_curation_concern'
     end

@@ -1,0 +1,68 @@
+<% title = title(@document_rcr)
+   dates = dates(@document_rcr)
+   provide :page_title,  title + " - " + application_name
+   provide :page_header do %>
+    <h2><%= title %></h2>
+<% end %>
+<% collector = can?(:collect, @presenter.id) %>
+<% editor = can?(:edit, @presenter.id) %>
+<div class="row tdl-content">
+  <div class="col-md-6">
+    <p><%= raw abstract(@document_rcr)%></p>
+    <h4>History of <%= title %></h4>
+    <% history(@document_rcr).each do |paragraph| %>
+      <p><%= raw paragraph %></p>
+    <% end %>
+    <% structure_or_genealogy_p(@document_rcr).each do |paragraph| %>
+      <p><%= raw paragraph %></p>
+    <% end %>
+    <ul>
+      <% structure_or_genealogy_items(@document_rcr).each do |item| %>
+        <li><%= raw item %></li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="col-md-4">
+    <div class="spacer"></div>
+    <div class="tooltip-demo well ">
+
+      <dl>
+        <dd><span class="browntext">Collections</span></dd>
+        <ul>
+          <% collection_array = collections(@document_rcr)
+             collection_array.each do |collection|
+               pid = 'tufts:UA069.001.DO.' + collection[:pid]
+               ingested, f4_id = ingested?(pid)
+               anchor_tag = ingested ? '<a href="/catalog/' + f4_id + '">' : ''
+               anchor_end_tag = ingested ? '</a>' : ''
+          %>
+               <li><%= raw anchor_tag %><%= raw collection[:name] %><%= raw anchor_end_tag %></li>
+          <% end %>
+        </ul>
+      </dl>
+
+
+      <dl>
+        <dd><span class="browntext">Relationships</span></dd>
+        <% relationship_hash = relationships(@document_rcr)
+           roles = relationship_hash.keys
+           roles.each do |role|
+        %>
+             <%= role %>:
+             <ul>
+							 <% relationships = relationship_hash.fetch(role, [])
+									relationships.each do |relationship|
+										pid = 'tufts:' + relationship[:pid]
+										ingested, f4_id = ingested?(pid)
+										anchor_tag = ingested ? '<a href="/catalog/' + f4_id + '">' : ''
+										anchor_end_tag = ingested ? '</a>' : ''
+							 %>
+                    <li><%= raw anchor_tag %><%= raw relationship[:name] %> (<%= relationship[:from_date] %>-<%= raw relationship[:to_date] %>)<%= raw anchor_end_tag %></li>
+               <% end %>
+             </ul>
+        <% end %>
+      </dl>
+
+    </div>
+  </div>
+</div>
