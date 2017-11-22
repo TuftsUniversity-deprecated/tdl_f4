@@ -32,7 +32,7 @@ module RcrsHelper
     return result, f4_id
   end
 
-  def title(rcr)
+  def rcr_title(rcr)
     return rcr.find_by_terms_and_value(:title).first.text
   end
 
