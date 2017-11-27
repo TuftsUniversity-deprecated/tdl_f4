@@ -33,19 +33,32 @@ module RcrsHelper
   end
 
   def rcr_title(rcr)
-    return rcr.find_by_terms_and_value(:title).first.text
+    result = ""
+    title = rcr.find_by_terms_and_value(:title)
+    result = title.first.text unless title.nil? || title.empty?
+
+    return result
   end
 
 
   def dates(rcr)
-    return rcr.find_by_terms_and_value(:fromDate).first.text +
-      "-" +
-      rcr.find_by_terms_and_value(:toDate).first.text
+    result = ""
+    from_date = rcr.find_by_terms_and_value(:fromDate)
+    to_date = rcr.find_by_terms_and_value(:toDate)
+    result = from_date.first.text unless from_date.nil? || from_date.empty?
+    result += "-"
+    result += to_date.first.text unless to_date.nil? || to_date.empty? 
+
+    return result
   end
 
 
   def rcr_abstract(rcr)
-    return rcr.find_by_terms_and_value(:bioghist_abstract).first.text
+    result = ""
+    bioghist_abstract = rcr.find_by_terms_and_value(:bioghist_abstract)
+    result = bioghist_abstract.first.text unless bioghist_abstract.nil? || bioghist_abstract.empty?
+
+    return result
   end
 
 
