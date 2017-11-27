@@ -2,7 +2,7 @@
    dates = dates(@document_rcr)
    provide :page_title,  title + " - " + application_name
    provide :page_header do %>
-    <h2><%= title %></h2>
+    <h2><%= title + ((dates.nil? || dates.empty?) ? "" : (", " + dates)) %></h2>
 <% end %>
 <% collector = can?(:collect, @presenter.id) %>
 <% editor = can?(:edit, @presenter.id) %>
