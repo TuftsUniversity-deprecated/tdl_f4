@@ -1,5 +1,5 @@
-<% title = rcr_title(@document_rcr)
-   dates = dates(@document_rcr)
+<% title = RcrsHelper.title(@document_rcr)
+   dates = RcrsHelper.dates(@document_rcr)
    provide :page_title,  title + " - " + application_name
    provide :page_header do %>
     <h2><%= title + ((dates.nil? || dates.empty?) ? "" : (", " + dates)) %></h2>
@@ -8,16 +8,16 @@
 <% editor = can?(:edit, @presenter.id) %>
 <div class="row tdl-content">
   <div class="col-md-6">
-    <p><%= raw rcr_abstract(@document_rcr)%></p>
+    <p><%= raw RcrsHelper.abstract(@document_rcr)%></p>
     <h4>History of <%= title %></h4>
-    <% history(@document_rcr).each do |paragraph| %>
+    <% RcrsHelper.history(@document_rcr).each do |paragraph| %>
       <p><%= raw paragraph %></p>
     <% end %>
-    <% structure_or_genealogy_p(@document_rcr).each do |paragraph| %>
+    <% RcrsHelper.structure_or_genealogy_p(@document_rcr).each do |paragraph| %>
       <p><%= raw paragraph %></p>
     <% end %>
     <ul>
-      <% structure_or_genealogy_items(@document_rcr).each do |item| %>
+      <% RcrsHelper.structure_or_genealogy_items(@document_rcr).each do |item| %>
         <li><%= raw item %></li>
       <% end %>
     </ul>
@@ -29,10 +29,10 @@
       <dl>
         <dd><span class="browntext">Collections</span></dd>
         <ul>
-          <% collection_array = collections(@document_rcr)
+          <% collection_array = RcrsHelper.collections(@document_rcr)
              collection_array.each do |collection|
                pid = 'tufts:UA069.001.DO.' + collection[:pid]
-               ingested, f4_id = ingested?(pid)
+               ingested, f4_id = RcrsHelper.ingested?(pid)
                anchor_tag = ingested ? '<a href="/catalog/' + f4_id + '">' : ''
                anchor_end_tag = ingested ? '</a>' : ''
           %>
@@ -44,19 +44,19 @@
 
       <dl>
         <dd><span class="browntext">Relationships</span></dd>
-        <% relationship_hash = relationships(@document_rcr)
+        <% relationship_hash = RcrsHelper.relationships(@document_rcr)
            roles = relationship_hash.keys
            roles.each do |role|
         %>
              <%= role %>:
              <ul>
-							 <% relationships = relationship_hash.fetch(role, [])
-									relationships.each do |relationship|
-										pid = 'tufts:' + relationship[:pid]
-										ingested, f4_id = ingested?(pid)
-										anchor_tag = ingested ? '<a href="/catalog/' + f4_id + '">' : ''
-										anchor_end_tag = ingested ? '</a>' : ''
-							 %>
+               <% relationships = relationship_hash.fetch(role, [])
+                  relationships.each do |relationship|
+                    pid = 'tufts:' + relationship[:pid]
+                    ingested, f4_id = RcrsHelper.ingested?(pid)
+                    anchor_tag = ingested ? '<a href="/catalog/' + f4_id + '">' : ''
+                    anchor_end_tag = ingested ? '</a>' : ''
+               %>
                     <li><%= raw anchor_tag %><%= raw relationship[:name] %> (<%= relationship[:from_date] %>-<%= raw relationship[:to_date] %>)<%= raw anchor_end_tag %></li>
                <% end %>
              </ul>

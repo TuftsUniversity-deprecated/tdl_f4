@@ -2,7 +2,7 @@
 
 <%
 if @document_tei.present?
-  transcript_html, participant_html = show_transcript(@document_tei, true, video_page_path(params[:id]))
+  transcript_html, participant_html = TranscriptsHelper.show_transcript(@document_tei, true, TranscriptsHelper.video_page_path(params[:id]))
 
   unless participant_html.empty?
 %>

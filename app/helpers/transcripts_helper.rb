@@ -1,27 +1,27 @@
 module TranscriptsHelper
 
 
-  def audio_page_path(id)
+  def self.audio_page_path(id)
     "/concern/tufts_audios/" + id
   end
 
 
-  def video_page_path(id)
+  def self.video_page_path(id)
     "/concern/tufts_videos/" + id
   end
 
 
-  def audio_transcriptonly_path(id)
+  def self.audio_transcriptonly_path(id)
     "/concern/tufts_audios/" + id + "/transcriptonly"
   end
 
 
-  def video_transcriptonly_path(id)
+  def self.video_transcriptonly_path(id)
     "/concern/tufts_videos/" + id + "/transcriptonly"
   end
 
 
-  def format_participants(participants)
+  def self.format_participants(participants)
     result = ""
     participant_number = 0
 
@@ -46,7 +46,7 @@ module TranscriptsHelper
 
 
   # convert fedora transcript object to html
-  def show_transcript(tei, active_timestamps, path)
+  def self.show_transcript(tei, active_timestamps, path)
     chunks, participants = TranscriptChunk.parse(tei)
     transcript_html = format_transcript(chunks, active_timestamps, path)
     participant_html = format_participants(participants)
@@ -55,7 +55,7 @@ module TranscriptsHelper
   end
 
 
-  def get_time_table(tei)
+  def self.get_time_table(tei)
     chunks = TranscriptChunk.parse(tei)
     table = extract_time_table(chunks)
 
@@ -63,7 +63,7 @@ module TranscriptsHelper
   end
 
 
-  def extract_time_table(chunks)
+  def self.extract_time_table(chunks)
     table = {}
     chunks.each do |chunk|
       milliseconds = chunk.start_in_milliseconds
@@ -77,7 +77,7 @@ module TranscriptsHelper
 
   # return html string of the transcript
   # iterate over chunks and create appropriate divs with classes, links, etc.
-  def format_transcript(chunks, active_timestamps, path)
+  def self.format_transcript(chunks, active_timestamps, path)
     result = "<div class=\"transcript_table\">\n"
     chunks.each do |chunk|
       milliseconds = chunk.start_in_milliseconds
@@ -131,7 +131,7 @@ module TranscriptsHelper
   end
 
 
-  def parse_notations(node)
+  def self.parse_notations(node)
     result = ""
 
     node.children.each do |child|
@@ -158,7 +158,7 @@ module TranscriptsHelper
   private # all methods that follow will be made private: not accessible for outside objects
 
   # convert a transcript time in milliseconds into displayable strings for UI
-  def displayable_time(milliseconds)
+  def self.displayable_time(milliseconds)
     int_total_seconds = milliseconds.to_i / 1000 # truncated to the second
     int_minutes = int_total_seconds / 60
     int_just_seconds = int_total_seconds - (int_minutes * 60) # the seconds for seconds:minutes (0:00) display

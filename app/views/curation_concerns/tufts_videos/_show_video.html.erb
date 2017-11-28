@@ -9,7 +9,7 @@
     </video>
 <%
 if @document_tei.present?
-  transcript_html, participant_html = show_transcript(@document_tei, true, video_page_path(params[:id]))
+  transcript_html, participant_html = TranscriptsHelper.show_transcript(@document_tei, true, TranscriptsHelper.video_page_path(params[:id]))
 
   unless participant_html.empty?
 %>
@@ -37,7 +37,7 @@ end
       </div>
 
       <div id="transcript" class="tab-pane">
-        <a href="<%= video_transcriptonly_path(params[:id]) %>" class="pull-right"><h6>view transcript only <i class="icon-share"></i></h6></a>
+        <a href="<%= TranscriptsHelper.video_transcriptonly_path(params[:id]) %>" class="pull-right"><h6>view transcript only <i class="icon-share"></i></h6></a>
         <br>
         <div class="transcript_box">
           <%= raw transcript_html %>

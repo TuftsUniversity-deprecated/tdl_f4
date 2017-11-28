@@ -1,6 +1,6 @@
 <%
    # retrieve items that can not be cached
-   title, title_only, inclusive_date, bulk_date = title(@document_ead)
+   title, title_only, inclusive_date, bulk_date = EadsHelper.title(@document_ead)
    provide :page_title,  title_only + " - " + application_name
 %>
 <% #javascript_includes << "ead.js" %>
@@ -8,34 +8,34 @@
 <% cache (@id + @document_fedora.date_modified.to_s).strip do %>
 
     <%
-       creator = creator(@document_ead)
-       unitid = unitid(@document_ead)
-       physdesc = physdesc(@document_ead)
-       langmaterial = langmaterial(@document_ead)
-       location = location(@document_ead)
-       eadid, handle = eadid(@document_ead)
-       contents = get_contents(@document_ead)
-       arrangement = get_arrangement(@document_ead)
-       bioghist = get_bioghist(@document_ead)
-       read_more_about = read_more_about(@document_ead)
-       access_restrictions = get_access_restrictions(@document_ead)
-       use_restrictions = get_use_restrictions(@document_ead)
-       phystech = get_phystech(@document_ead)
-       preferred_citation = get_preferred_citation(@document_ead)
-       processing_notes = get_processing_notes(@document_ead)
-       acquisition_info = get_acquisition_info(@document_ead)
-       custodial_history = get_custodial_history(@document_ead)
-       accruals = get_accruals(@document_ead)
-       appraisal = get_appraisal(@document_ead)
-       separated_material = get_separated_material(@document_ead)
-       sponsor = get_sponsor(@document_ead)
-       names_and_subjects = get_names_and_subjects(@document_ead)
-       related_material = get_related_material(@document_ead)
-       altformavail = get_altformavail(@document_ead)
-       originalsloc = get_originalsloc(@document_ead)
-       otherfindaid = get_otherfindaid(@document_ead)
-       serieses = get_serieses(@document_ead)
-       metadata = nil; #get_metadata(@document_fedora)
+       creator = EadsHelper.creator(@document_ead)
+       unitid = EadsHelper.unitid(@document_ead)
+       physdesc = EadsHelper.physdesc(@document_ead)
+       langmaterial = EadsHelper.langmaterial(@document_ead)
+       location = EadsHelper.location(@document_ead)
+       eadid, handle = EadsHelper.eadid(@document_ead)
+       contents = EadsHelper.get_contents(@document_ead)
+       arrangement = EadsHelper.get_arrangement(@document_ead)
+       bioghist = EadsHelper.get_bioghist(@document_ead)
+       read_more_about = EadsHelper.read_more_about(@document_ead)
+       access_restrictions = EadsHelper.get_access_restrictions(@document_ead)
+       use_restrictions = EadsHelper.get_use_restrictions(@document_ead)
+       phystech = EadsHelper.get_phystech(@document_ead)
+       preferred_citation = EadsHelper.get_preferred_citation(@document_ead)
+       processing_notes = EadsHelper.get_processing_notes(@document_ead)
+       acquisition_info = EadsHelper.get_acquisition_info(@document_ead)
+       custodial_history = EadsHelper.get_custodial_history(@document_ead)
+       accruals = EadsHelper.get_accruals(@document_ead)
+       appraisal = EadsHelper.get_appraisal(@document_ead)
+       separated_material = EadsHelper.get_separated_material(@document_ead)
+       sponsor = EadsHelper.get_sponsor(@document_ead)
+       names_and_subjects = EadsHelper.get_names_and_subjects(@document_ead)
+       related_material = EadsHelper.get_related_material(@document_ead)
+       altformavail = EadsHelper.get_altformavail(@document_ead)
+       originalsloc = EadsHelper.get_originalsloc(@document_ead)
+       otherfindaid = EadsHelper.get_otherfindaid(@document_ead)
+       serieses = EadsHelper.get_serieses(@document_ead)
+       metadata = nil; #EadsHelper.get_metadata(@document_fedora)
     %>
 
     <div class="row">
@@ -296,9 +296,9 @@
                  series_index = 0
                  while series_index < series_count
                    series_level = (series_index + 1).to_s
-                   series_id, did, scopecontent, c02s, is_series = get_series_elements(serieses[series_index])
-                   title = get_series_title(did, ead_id, series_id, "", is_series)
-                   paragraphs = get_scopecontent_paragraphs(scopecontent)
+                   series_id, did, scopecontent, c02s, is_series = EadsHelper.get_series_elements(serieses[series_index])
+                   title = EadsHelper.get_series_title(did, ead_id, series_id, "", is_series)
+                   paragraphs = EadsHelper.get_scopecontent_paragraphs(scopecontent)
               %>
                   <li>
                     <h5 class="EAD_H5"><%= raw title %></h5>
@@ -316,9 +316,9 @@
                                subseries_level = (subseries_index + 1).to_s
                                # note: ignore 4th return value from get_series_elements because it will always be empty (c02s don't have sub-c02s).
                                # New ASpace EADs might have <c> elements but this overview page only shows one level deep of subserieses.
-                               subseries_id, did, scopecontent = get_series_elements(c02s[subseries_index])
-                               title = get_series_title(did, ead_id, subseries_id, series_level + "." + subseries_level, true)
-                               paragraphs = get_scopecontent_paragraphs(scopecontent)
+                               subseries_id, did, scopecontent = EadsHelper.get_series_elements(c02s[subseries_index])
+                               title = EadsHelper.get_series_title(did, ead_id, subseries_id, series_level + "." + subseries_level, true)
+                               paragraphs = EadsHelper.get_scopecontent_paragraphs(scopecontent)
                           %>
                               <li>
                                 <h6 class="EAD_H6"><%= raw title %></h6>
@@ -346,8 +346,7 @@
 
       <div class="col-xs-3">
         <%
-          unitid = unitid(@document_ead)
-          if collection_has_online_content(unitid)
+          if EadsHelper.collection_has_online_content(unitid)
         %>
             <div class="tooltip-demo well">
               <h5><a href="/catalog?utf8=✓&search_field=source&q=<%= unitid %>">View Online Materials</a><span class="glyphicon glyphicon-arrow-right glyph-right" aria-hidden="true"></span></h5>

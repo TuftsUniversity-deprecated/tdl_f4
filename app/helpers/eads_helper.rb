@@ -1,7 +1,7 @@
 module EadsHelper
 
 
-  def collection_has_online_content(unitid)
+  def self.collection_has_online_content(unitid)
     solr_connection = ActiveFedora.solr.conn
     fq = 'source_tesim:' + unitid
 
@@ -12,9 +12,8 @@ module EadsHelper
   end
 
 
-# This came from tuftsification_hydra's lib/tufts/pid_methods.rb -- is it used elsewhere???
-# I modified it to find legacy pids.
-  def ingested?(pid)
+  # This is also used in rcrs_helper.rb and should be moved out to a common place.
+  def self.ingested?(pid)
     result = false
     f4_id = ""
 
@@ -44,8 +43,8 @@ module EadsHelper
   end
 
 
-# This came from tuftsification_hydra's lib/tufts/metadata_methods.rb -- is it used elsewhere???
-  def get_metadata(fedora_obj)
+  # This came from tuftsification_hydra's lib/tufts/metadata_methods.rb -- is it used elsewhere???
+  def self.get_metadata(fedora_obj)
     datastream = fedora_obj.datastreams["DCA-META"]
 
     # create the union (ie, without duplicates) of subject, geogname, persname, and corpname
@@ -71,11 +70,11 @@ module EadsHelper
       :subjects => subjects,
       :temporals => datastream.find_by_terms_and_value(:temporal)
     }
-  end 
+  end
 
 
-# This came from tuftsification_hydra's lib/tufts/metadata_methods.rb -- is it used elsewhere???
-  def union(array1, array2)
+  # This came from tuftsification_hydra's lib/tufts/metadata_methods.rb -- is it used elsewhere???
+  def self.union(array1, array2)
     # Params are two arrays of Nokogiri elements.  Add elements of array2 to array1 and return array1.
     # Leave out duplicate elements, where e.g. <dcadesc:geogname>Somerville (Mass.)</dcadesc:geogname> and
     # <dcadesc:subject>Somerville (Mass.)</dcadesc:subject> are defined as duplicate (i.e., their .text is ==).
@@ -99,22 +98,22 @@ module EadsHelper
   end
 
 
-  def landing_page_path(id)
+  def self.landing_page_path(id)
     "/concern/tufts_eads/" + id
   end
 
 
-  def finding_aid_overview_path(id)
+  def self.finding_aid_overview_path(id)
     "/concern/tufts_eads/" + id + "/fa"
   end
 
 
-  def finding_aid_series_path(id, item_id)
+  def self.finding_aid_series_path(id, item_id)
     "/concern/tufts_eads/" + id + "/fa/" + item_id
   end
 
 
-  def eadid(ead)
+  def self.eadid(ead)
     result = ""
     url = ""
     eadid = ead.find_by_terms_and_value(:eadid)
@@ -129,7 +128,7 @@ module EadsHelper
   end
 
 
-  def title(ead, includeDate = true)
+  def self.title(ead, includeDate = true)
     full_title = ""
     raw_title = ""
     date = ""
@@ -149,7 +148,7 @@ module EadsHelper
   end
 
 
-  def physdesc(ead)
+  def self.physdesc(ead)
     result = ""
     physdescs = ead.find_by_terms_and_value(:physdesc)
 
@@ -169,7 +168,7 @@ module EadsHelper
   end
 
 
-  def physdesc_split(ead)
+  def self.physdesc_split(ead)
     result = ""
     physdescs = ead.find_by_terms_and_value(:physdesc)
 
@@ -193,7 +192,7 @@ module EadsHelper
   end
 
 
-  def abstract(ead)
+  def self.abstract(ead)
     result = ""
     abstract = ead.find_by_terms_and_value(:abstract)
 
@@ -208,7 +207,7 @@ module EadsHelper
   end
 
 
-  def get_bioghist(ead)
+  def self.get_bioghist(ead)
     result = []
     bioghistps = ead.find_by_terms_and_value(:bioghistp)
 
@@ -222,7 +221,7 @@ module EadsHelper
   end
 
 
-  def unitdate(ead)
+  def self.unitdate(ead)
     date = ""
     bulk_date = ""
     unitdates = ead.find_by_terms_and_value(:unitdate)
@@ -241,7 +240,7 @@ module EadsHelper
   end
 
 
-  def unitid(ead)
+  def self.unitid(ead)
     result = ""
     unitid = ead.find_by_terms_and_value(:unitid)
 
@@ -253,7 +252,7 @@ module EadsHelper
   end
 
 
-  def author(ead)
+  def self.author(ead)
     result = ""
     persname = ead.find_by_terms_and_value(:persname)
 
@@ -265,7 +264,7 @@ module EadsHelper
   end
 
 
-  def read_more_about(ead)
+  def self.read_more_about(ead)
     # read_more_about ONLY returns <persname>, <corpname> or <famname> that have urls and which have been ingested.
     result = ""
     persname = ead.find_by_terms_and_value(:persname)
@@ -294,7 +293,7 @@ module EadsHelper
   end
 
 
-  def creator(ead)
+  def self.creator(ead)
     # creator returns <persname>, <corpname> or <famname>, with a link for ones that have urls and which have been ingested.
     result = ""
     persname = ead.find_by_terms_and_value(:persname)
@@ -329,7 +328,7 @@ module EadsHelper
   end
 
 
-  def location(ead)
+  def self.location(ead)
     result = []
     publicationstmt = ead.find_by_terms_and_value(:publicationstmt)
     unless publicationstmt.nil?
@@ -367,7 +366,7 @@ module EadsHelper
   end
 
 
-  def langmaterial(ead)
+  def self.langmaterial(ead)
     result = []
     langmaterials = ead.find_by_terms_and_value(:langmaterial)
 
@@ -392,7 +391,7 @@ module EadsHelper
   end
 
 
-  def get_arrangement(ead)
+  def self.get_arrangement(ead)
     result = []
     arrangementps = ead.find_by_terms_and_value(:arrangementp)
 
@@ -406,7 +405,7 @@ module EadsHelper
   end
 
 
-  def get_contents(ead)
+  def self.get_contents(ead)
     result = []
     scopecontentps = ead.find_by_terms_and_value(:scopecontentp)
 
@@ -420,7 +419,7 @@ module EadsHelper
   end
 
 
-  def get_serieses(ead)
+  def self.get_serieses(ead)
     result = []
     serieses = ead.find_by_terms_and_value(:series)
 
@@ -438,7 +437,7 @@ module EadsHelper
   end
 
 
-  def get_series_elements(series)
+  def self.get_series_elements(series)
     series_id = series.attribute("id").text
     did = nil
     scopecontent = nil
@@ -470,7 +469,7 @@ module EadsHelper
   end
 
 
-  def get_series_title(did, ead_id, series_id, series_level, with_link)
+  def self.get_series_title(did, ead_id, series_id, series_level, with_link)
     result = ""
 
     # process the did element
@@ -506,7 +505,7 @@ module EadsHelper
   end
 
 
-  def get_scopecontent_paragraphs(scopecontent)
+  def self.get_scopecontent_paragraphs(scopecontent)
     result = []
 
     # process the scopecontent element
@@ -529,7 +528,7 @@ module EadsHelper
   end
 
 
-  def get_paragraphs(element)
+  def self.get_paragraphs(element)
     result = []
 
     unless element.nil?
@@ -548,7 +547,7 @@ module EadsHelper
   end
 
 
-  def get_other_finding_aids_paragraphs(element)
+  def self.get_other_finding_aids_paragraphs(element)
     result = []
 
     unless element.nil?
@@ -577,7 +576,7 @@ module EadsHelper
   end
 
 
-  def get_names_and_subjects(ead)
+  def self.get_names_and_subjects(ead)
     result = []
     controlaccesses = ead.find_by_terms_and_value(:controlaccess)
 
@@ -608,7 +607,7 @@ module EadsHelper
   end
 
 
-  def get_related_material(ead)
+  def self.get_related_material(ead)
     result = []
     relatedmaterialps = ead.find_by_terms_and_value(:relatedmaterialp)
 
@@ -622,7 +621,7 @@ module EadsHelper
   end
 
 
-  def get_separated_material(ead)
+  def self.get_separated_material(ead)
     result = []
     separatedmaterialps = ead.find_by_terms_and_value(:separatedmaterialp)
 
@@ -636,7 +635,7 @@ module EadsHelper
   end
 
 
-  def get_access_restrictions(ead)
+  def self.get_access_restrictions(ead)
     result = []
     accessrestrictps = ead.find_by_terms_and_value(:accessrestrictp)
     descgrpaccessrestrictps = ead.find_by_terms_and_value(:descgrpaccessrestrictp)
@@ -657,7 +656,7 @@ module EadsHelper
   end
 
 
-  def get_use_restrictions(ead)
+  def self.get_use_restrictions(ead)
     result = []
     userestrictps = ead.find_by_terms_and_value(:userestrictp)
     descgrpuserestrictps = ead.find_by_terms_and_value(:descgrpuserestrictp)
@@ -678,7 +677,7 @@ module EadsHelper
   end
 
 
-  def get_preferred_citation(ead)
+  def self.get_preferred_citation(ead)
     result = []
     preferciteps = ead.find_by_terms_and_value(:prefercitep)
     descgrppreferciteps = ead.find_by_terms_and_value(:descgrpprefercitep)
@@ -700,7 +699,7 @@ module EadsHelper
   end
 
 
-  def get_processing_notes(ead)
+  def self.get_processing_notes(ead)
     result = []
     processinfops = ead.find_by_terms_and_value(:processinfop)
 
@@ -714,7 +713,7 @@ module EadsHelper
   end
 
 
-  def get_acquisition_info(ead)
+  def self.get_acquisition_info(ead)
     result = []
     acqinfops = ead.find_by_terms_and_value(:acqinfop)
 
@@ -728,7 +727,7 @@ module EadsHelper
   end
 
 
-  def get_custodial_history(ead)
+  def self.get_custodial_history(ead)
     result = []
     custodhistps = ead.find_by_terms_and_value(:custodhistp)
 
@@ -742,7 +741,7 @@ module EadsHelper
   end
 
 
-  def get_phystech(ead)
+  def self.get_phystech(ead)
     result = []
     phystechps = ead.find_by_terms_and_value(:phystechp)
     descgrpphystechps = ead.find_by_terms_and_value(:descgrpphystechp)
@@ -763,7 +762,7 @@ module EadsHelper
   end
 
 
-  def get_accruals(ead)
+  def self.get_accruals(ead)
     result = []
     accrualsps = ead.find_by_terms_and_value(:accrualsp)
 
@@ -777,7 +776,7 @@ module EadsHelper
   end
 
 
-  def get_appraisal(ead)
+  def self.get_appraisal(ead)
     result = []
     appraisalps = ead.find_by_terms_and_value(:appraisalp)
 
@@ -791,7 +790,7 @@ module EadsHelper
   end
 
 
-  def get_altformavail(ead)
+  def self.get_altformavail(ead)
     result = []
     altformavailps = ead.find_by_terms_and_value(:altformavailp)
 
@@ -805,7 +804,7 @@ module EadsHelper
   end
 
 
-  def get_originalsloc(ead)
+  def self.get_originalsloc(ead)
     result = []
     originalslocps = ead.find_by_terms_and_value(:originalslocp)
 
@@ -819,7 +818,7 @@ module EadsHelper
   end
 
 
-  def get_otherfindaid(ead)
+  def self.get_otherfindaid(ead)
     result = []
     otherfindaidps = ead.find_by_terms_and_value(:otherfindaidp)
 
@@ -833,7 +832,7 @@ module EadsHelper
   end
 
 
-  def get_sponsor(ead)
+  def self.get_sponsor(ead)
     result = ""
 
     sponsor = ead.find_by_terms_and_value(:sponsor)
@@ -846,7 +845,7 @@ module EadsHelper
   end
 
 
-  def get_series(ead, item_id)
+  def self.get_series(ead, item_id)
     series = nil
     series_level = 0
     subseries_level = 0
@@ -887,7 +886,7 @@ module EadsHelper
   end
 
 
-  def get_series_info(series)
+  def self.get_series_info(series)
     did = nil
     scopecontent = nil
     unittitle = ""
@@ -1026,7 +1025,7 @@ module EadsHelper
   end
 
 
-  def get_series_item_info(item, pid)
+  def self.get_series_item_info(item, pid)
     title = ""
     paragraphs = []
     labels = []
@@ -1246,7 +1245,7 @@ module EadsHelper
   end
 
 
-  def parse_origination(node)
+  def self.parse_origination(node)
     name = ""
     rcr_url = ""
 

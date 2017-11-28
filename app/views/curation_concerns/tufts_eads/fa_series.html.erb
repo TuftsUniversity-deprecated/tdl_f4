@@ -1,13 +1,13 @@
 <%
    # retrieve items that can not be cached
-   series, series_level = get_series(@document_ead, @item_id)
+   series, series_level = EadsHelper.get_series(@document_ead, @item_id)
    series_title, title_only, inclusive_date, bulk_date, creator, series_physdesc, series_langmaterial, series_scopecontents, series_arrangement,
      series_access_restrict, series_use_restrict, series_phystech, series_prefercite,
      series_processinfo, series_acquisition_info, series_custodhist, series_accruals, series_appraisal, series_separated_material, 
      series_names_and_subjects, series_related_material, series_alt_formats, series_originals_loc, series_other_finding_aids,
-     series_items, unitid = get_series_info(series)
+     series_items, unitid = EadsHelper.get_series_info(series)
    # @collection_title and @series_full_title are also used in the _subnav.html.erb partial
-   @collection_title = title(@document_ead).first
+   @collection_title = EadsHelper.title(@document_ead).first
    @series_full_title = "Series " + series_level + ": " + title_only
    provide :page_title, @series_full_title + " - " + application_name
 %>
@@ -19,7 +19,7 @@
     <%
 
        item_default_access_restrict = series_access_restrict.join("  ")  # expecting a string, not an array of paragraphs
-       metadata = nil; # get_metadata(@document_fedora)
+       metadata = nil; # EadsHelper.get_metadata(@document_fedora)
 
     %>
 
@@ -62,7 +62,7 @@
           <div class="col-xs-8">
             <p>
               This series is part of
-              <a data-turbolinks='false' href="<%= landing_page_path(params[:id]) %>"><%= @collection_title %></a>
+              <a data-turbolinks='false' href="<%= EadsHelper.landing_page_path(params[:id]) %>"><%= @collection_title %></a>
             </p>
             <h4 id="series_overview" class="EAD_H4">Series Overview</h4>
             <p>
@@ -223,8 +223,8 @@
 
           <div class="col-xs-4">
             <%
-              unitid = unitid(@document_ead)
-              if collection_has_online_content(unitid)
+              unitid = EadsHelper.unitid(@document_ead)
+              if EadsHelper.collection_has_online_content(unitid)
             %>
                 <div class="tooltip-demo well">
                   <h5><a href="/catalog?utf8=✓&search_field=source&q=<%= unitid %>">View Online Materials</a><span class="glyphicon glyphicon-arrow-right glyph-right" aria-hidden="true"></span></h5>

@@ -1,9 +1,8 @@
 module RcrsHelper
 
 
-# This is also used in eads_helper.rb and should be moved out to a common place.
-# I modified it to find legacy pids.
-  def ingested?(pid)
+  # This is also used in eads_helper.rb and should be moved out to a common place.
+  def self.ingested?(pid)
     result = false
     f4_id = ""
 
@@ -32,7 +31,7 @@ module RcrsHelper
     return result, f4_id
   end
 
-  def rcr_title(rcr)
+  def self.title(rcr)
     result = ""
     title = rcr.find_by_terms_and_value(:title)
     result = title.first.text unless title.nil? || title.empty?
@@ -41,7 +40,7 @@ module RcrsHelper
   end
 
 
-  def dates(rcr)
+  def self.dates(rcr)
     result = ""
     from_date = rcr.find_by_terms_and_value(:fromDate)
     to_date = rcr.find_by_terms_and_value(:toDate)
@@ -53,7 +52,7 @@ module RcrsHelper
   end
 
 
-  def rcr_abstract(rcr)
+  def self.abstract(rcr)
     result = ""
     bioghist_abstract = rcr.find_by_terms_and_value(:bioghist_abstract)
     result = bioghist_abstract.first.text unless bioghist_abstract.nil? || bioghist_abstract.empty?
@@ -62,22 +61,22 @@ module RcrsHelper
   end
 
 
-  def history(rcr)
+  def self.history(rcr)
     return rcr.find_by_terms_and_value(:bioghist_p)
   end
 
 
-  def structure_or_genealogy_p(rcr)
+  def self.structure_or_genealogy_p(rcr)
     return rcr.find_by_terms_and_value(:structure_or_genealogy_p)
   end
 
 
-  def structure_or_genealogy_items(rcr)
+  def self.structure_or_genealogy_items(rcr)
     return rcr.find_by_terms_and_value(:structure_or_genealogy_item)
   end
 
 
-  def relationships(rcr)
+  def self.relationships(rcr)
     relationship_hash = {"isPartOf" => "Part of",
       "reportsTo" => "Reports to",
       "hasReport" => "Has report",
@@ -138,7 +137,7 @@ module RcrsHelper
   end
 
 
-  def collections(rcr)
+  def self.collections(rcr)
     result_array = []
     collections = rcr.find_by_terms_and_value(:resource_relations)
 
