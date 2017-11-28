@@ -88,7 +88,7 @@ module RcrsHelper
 
 
   def self.relationships(rcr)
-    relationship_hash = {"isPartOf" => "Part of",
+    relationship_hash = {
       "reportsTo" => "Reports to",
       "hasReport" => "Has report",
       "isPartOf" => "Part of",
