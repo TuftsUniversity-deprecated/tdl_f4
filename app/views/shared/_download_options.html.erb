@@ -44,5 +44,16 @@
         </li>
       </ul>
     </div>
+  <% elsif controller.controller_name == 'tufts_rcrs' %>
+    <div class="tdl-search-widgets">
+      <ul class="tdl-right-nav">
+        <% if @document_rcr.present? %>
+          <li>
+            <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+            <a href="<%= @rcr_download_path %>">Download EAC</a>
+          </li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
 <% end %>

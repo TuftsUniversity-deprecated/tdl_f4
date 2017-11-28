@@ -9,11 +9,22 @@ module WithRcrs
 
       @document_fedora = ActiveFedora::Base.find(params[:id])
       @document_rcr = nil
+      @rcr_download_path = nil
 
       return unless @document_fedora.class.instance_of?(TuftsRcr.class)
-      return if @document_fedora.file_sets.nil? || @document_fedora.file_sets.first.nil? || @document_fedora.file_sets.first.original_file.nil?
 
-      @document_rcr = Datastreams::Rcr.from_xml(@document_fedora.file_sets.first.original_file.content)
+      file_sets = @document_fedora.file_sets
+      unless file_sets.nil? || file_sets.empty?
+        file_set = file_sets.first
+        original_file = file_set.original_file
+        unless original_file.nil? || original_file.mime_type != "text/xml"
+          original_content = original_file.content
+          unless original_content.nil?
+            @document_rcr = Datastreams::Rcr.from_xml(original_content)
+            @rcr_download_path = main_app.download_path(file_set)
+          end
+        end
+      end
     end
   end
 end
