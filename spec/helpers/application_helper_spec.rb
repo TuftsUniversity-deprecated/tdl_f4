@@ -5,6 +5,7 @@ describe ApplicationHelper do
     models = {
       "Image" => "image",
       "Ead" => "ead",
+      "Rcr" => "rcr",
       "VotingRecord" => "voting_record",
     }
 

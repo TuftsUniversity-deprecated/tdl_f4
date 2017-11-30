@@ -17,7 +17,7 @@ module WithRcrs
       unless file_sets.nil? || file_sets.empty?
         file_set = file_sets.first
         original_file = file_set.original_file
-        unless original_file.nil? || original_file.mime_type != "text/xml"
+        unless original_file.nil?
           original_content = original_file.content
           unless original_content.nil?
             @document_rcr = Datastreams::Rcr.from_xml(original_content)
