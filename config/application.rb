@@ -26,5 +26,9 @@ module TdlNg
     # Used in eads_helper.rb to add a link to <userestrict> elements.
     config.use_restrict_text_match = 'Reproductions and Use'
     config.use_restrict_text_replace = '<a href="https://sites.tufts.edu/dca/about-us/research-help/reproductions-and-use/">Reproductions and Use</a>'
+
+    # Custom directories with classes and modules you want to be autoloadable.
+    # In our case we want lib to be the folder in which to put anything that's to be available everywhere.
+    config.autoload_paths += %W(#{config.root}/lib)
   end
 end

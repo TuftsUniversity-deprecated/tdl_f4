@@ -33,7 +33,7 @@
           <% collection_array = RcrsHelper.collections(@document_rcr)
              collection_array.each do |collection|
                pid = 'tufts:UA069.001.DO.' + collection[:pid]
-               ingested, f4_id = RcrsHelper.ingested?(pid)
+               ingested, f4_id = PidMethods.ingested?(pid)
                anchor_tag = ingested ? '<a href="' + RcrsHelper.collection_page_path(f4_id) + '">' : ''
                anchor_end_tag = ingested ? '</a>' : ''
           %>
@@ -54,7 +54,7 @@
                <% relationships = relationship_hash.fetch(role, [])
                   relationships.each do |relationship|
                     pid = 'tufts:' + relationship[:pid]
-                    ingested, f4_id = RcrsHelper.ingested?(pid)
+                    ingested, f4_id = PidMethods.ingested?(pid)
                     anchor_tag = ingested ? '<a href="' + RcrsHelper.relationship_page_path(f4_id) + '">' : ''
                     anchor_end_tag = ingested ? '</a>' : ''
                %>

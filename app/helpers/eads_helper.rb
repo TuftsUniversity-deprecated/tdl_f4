@@ -12,92 +12,6 @@ module EadsHelper
   end
 
 
-  # This is also used in rcrs_helper.rb and should be moved out to a common place.
-  def self.ingested?(pid)
-    result = false
-    f4_id = ""
-
-    if pid.start_with?("tufts:")
-      solr_connection = ActiveFedora.solr.conn
-      fq = 'legacy_pid_tesim:"' + pid + '"'
-
-      response = solr_connection.get 'select', params: { fq: fq, rows: '1' }
-      collection_length = response['response']['docs'].length
-
-      if collection_length > 0
-        result = true
-        f4_id = response['response']['docs'][0]['id']
-      end
-
-      result = (collection_length > 0)
-    else
-      begin
-        ActiveFedora::Base.load_instance_from_solr(pid)
-        f4_id = pid
-        result = true
-      rescue
-      end
-    end
-
-    return result, f4_id
-  end
-
-
-  # This came from tuftsification_hydra's lib/tufts/metadata_methods.rb -- is it used elsewhere???
-  def self.get_metadata(fedora_obj)
-    datastream = fedora_obj.datastreams["DCA-META"]
-
-    # create the union (ie, without duplicates) of subject, geogname, persname, and corpname
-    subjects = []
-    union(subjects, datastream.find_by_terms_and_value(:subject))
-    union(subjects, datastream.find_by_terms_and_value(:geogname))
-    union(subjects, datastream.find_by_terms_and_value(:persname))
-    union(subjects, datastream.find_by_terms_and_value(:corpname))
-
-    return {
-      :titles => datastream.find_by_terms_and_value(:title),
-      :creators => datastream.find_by_terms_and_value(:creator),
-      :dates => datastream.find_by_terms_and_value(:dateCreated),
-      :descriptions => datastream.find_by_terms_and_value(:description),
-      :sources => datastream.find_by_terms_and_value(:source2),
-      :citable_urls => datastream.find_by_terms_and_value(:identifier),
-      :citations => datastream.find_by_terms_and_value(:bibliographicCitation),
-      :publishers => datastream.find_by_terms_and_value(:publisher),
-      :genres => datastream.find_by_terms_and_value(:genre),
-      :types => datastream.find_by_terms_and_value(:type2),
-      :formats => datastream.find_by_terms_and_value(:format2),
-      :rights => datastream.find_by_terms_and_value(:rights),
-      :subjects => subjects,
-      :temporals => datastream.find_by_terms_and_value(:temporal)
-    }
-  end
-
-
-  # This came from tuftsification_hydra's lib/tufts/metadata_methods.rb -- is it used elsewhere???
-  def self.union(array1, array2)
-    # Params are two arrays of Nokogiri elements.  Add elements of array2 to array1 and return array1.
-    # Leave out duplicate elements, where e.g. <dcadesc:geogname>Somerville (Mass.)</dcadesc:geogname> and
-    # <dcadesc:subject>Somerville (Mass.)</dcadesc:subject> are defined as duplicate (i.e., their .text is ==).
-
-    array2.each do |element2|
-      dup = false
-
-      array1.each do |element1|
-        if element1 == element2
-          dup = true
-          break
-        end
-      end
-
-      if !dup
-        array1 << element2
-      end
-    end
-
-    return array1
-  end
-
-
   def self.landing_page_path(id)
     "/concern/tufts_eads/" + id
   end
@@ -283,7 +197,7 @@ module EadsHelper
 
     if !name.empty? && !rcr_url.empty?
       rcr_url = "tufts:" + rcr_url
-      ingested, f4_id = ingested?(rcr_url)
+      ingested, f4_id = PidMethods.ingested?(rcr_url)
       if ingested
         result = "<a href=\"/concern/tufts_rcrs/" + f4_id + "\">" + name + "</a>"
       end
@@ -314,7 +228,7 @@ module EadsHelper
     unless name.empty?
       unless rcr_url.empty?
         rcr_url = "tufts:" + rcr_url
-        ingested, f4_id = ingested?(rcr_url)
+        ingested, f4_id = PidMethods.ingested?(rcr_url)
       end
 
       if ingested
@@ -594,7 +508,7 @@ module EadsHelper
             unless child_text.empty?
               ingested = false
               unless child_url.empty?
-                ingested, f4_id = ingested?(child_url)
+                ingested, f4_id = PidMethods.ingested?(child_url)
               end
               result << (ingested ? "<a href=\"/concern/tufts_rcrs/" + f4_id + "\">" : "") + child_text + (ingested ? "</a>" : "")
             end
@@ -971,7 +885,7 @@ module EadsHelper
               unless grandchild_text.empty?
                 ingested = false
                 unless grandchild_url.empty?
-                  ingested, f4_id = ingested?(grandchild_url)
+                  ingested, f4_id = PidMethods.ingested?(grandchild_url)
                 end
                 series_names_and_subjects << (ingested ? "<a href=\"/concern/tufts_rcrs/" + f4_id + "\">" : "") + grandchild_text + (ingested ? "</a>" : "")
               end
@@ -1158,7 +1072,7 @@ module EadsHelper
 
       available_online = false
       unless page.empty?
-        available_online, f4_id = ingested?(page)
+        available_online, f4_id = PidMethods.ingested?(page)
         if available_online
           page = f4_id
           unless thumbnail.empty?
@@ -1180,7 +1094,7 @@ module EadsHelper
       else
         # ASpace EADs lack the <daogrp><daoloc> page and thumbnail attributes, so compute them from item_id thusly:
         legacy_pid = "tufts:" + item_id
-        available_online, f4_id = ingested?(page)
+        available_online, f4_id = PidMethods.ingested?(page)
 
         if available_online
           page = f4_id
