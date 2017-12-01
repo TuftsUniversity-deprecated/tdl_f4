@@ -12,21 +12,6 @@ module EadsHelper
   end
 
 
-  def self.landing_page_path(id)
-    "/concern/tufts_eads/" + id
-  end
-
-
-  def self.finding_aid_overview_path(id)
-    "/concern/tufts_eads/" + id + "/fa"
-  end
-
-
-  def self.finding_aid_series_path(id, item_id)
-    "/concern/tufts_eads/" + id + "/fa/" + item_id
-  end
-
-
   def self.eadid(ead)
     result = ""
     url = ""
@@ -199,7 +184,7 @@ module EadsHelper
       rcr_url = "tufts:" + rcr_url
       ingested, f4_id = PidMethods.ingested?(rcr_url)
       if ingested
-        result = "<a href=\"/concern/tufts_rcrs/" + f4_id + "\">" + name + "</a>"
+        result = "<a href=\"" + curation_concerns_tufts_rcr_path(f4_id) + "\">" + name + "</a>"
       end
     end
 
@@ -232,7 +217,7 @@ module EadsHelper
       end
 
       if ingested
-        result = "<a href=\"/concern/tufts_rcrs/" + f4_id + "\">" + name + "</a>"
+        result = "<a href=\"" + curation_concerns_tufts_rcr_path(f4_id) + "\">" + name + "</a>"
       else
         result = name
       end
@@ -411,7 +396,7 @@ module EadsHelper
       # As of TDLR-667 all series titles will be links.
       # As of TDLR-664 with_link will be false for top-level elements which are leaf-level items.
       unless unittitle.empty?
-        result = (series_level.empty? ? "" : series_level + ". ") + (with_link ? "<a data-turbolinks=\"false\" href=\"" + finding_aid_series_path(ead_id, series_id) + "\">" : "") + unittitle + (unitdate.empty? ? "" : ", " + unitdate) + (with_link ? "</a>" : "")
+        result = (series_level.empty? ? "" : series_level + ". ") + (with_link ? "<a data-turbolinks=\"false\" href=\"" + Rails.application.routes.url_helpers.fa_series_path(ead_id, series_id) + "\">" : "") + unittitle + (unitdate.empty? ? "" : ", " + unitdate) + (with_link ? "</a>" : "")
       end
     end
 
@@ -510,7 +495,7 @@ module EadsHelper
               unless child_url.empty?
                 ingested, f4_id = PidMethods.ingested?(child_url)
               end
-              result << (ingested ? "<a href=\"/concern/tufts_rcrs/" + f4_id + "\">" : "") + child_text + (ingested ? "</a>" : "")
+              result << (ingested ? "<a href=\"" + curation_concerns_tufts_rcr_path(f4_id) + "\">" : "") + child_text + (ingested ? "</a>" : "")
             end
           end
         end
@@ -887,7 +872,7 @@ module EadsHelper
                 unless grandchild_url.empty?
                   ingested, f4_id = PidMethods.ingested?(grandchild_url)
                 end
-                series_names_and_subjects << (ingested ? "<a href=\"/concern/tufts_rcrs/" + f4_id + "\">" : "") + grandchild_text + (ingested ? "</a>" : "")
+                series_names_and_subjects << (ingested ? "<a href=\"" + curation_concerns_tufts_rcr_path(f4_id) + "\">" : "") + grandchild_text + (ingested ? "</a>" : "")
               end
             end
           end
@@ -1123,7 +1108,7 @@ module EadsHelper
         item_url = external_page
       end
     elsif item_type == "subseries"
-      item_url = finding_aid_series_path(pid, item_url_id)
+      item_url = Rails.application.routes.url_helpers.fa_series_path(pid, item_url_id)
     end
 
     title = (item_url.empty? ? "" : "<a " + (external_page.empty? ? "data-turbolinks=\"false\" " : "") + "href=\"" + item_url + "\"" + (external_page.empty? ? "" : " target=\"blank\"") + ">") + unittitle + (unitdate.empty? || (unittitle.end_with?(unitdate))? "" : " " + unitdate) + (item_url.empty? ? "" : "</a>")

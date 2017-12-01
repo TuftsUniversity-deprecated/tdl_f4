@@ -1,16 +1,6 @@
 module RcrsHelper
 
 
-  def self.relationship_page_path(id)
-    "/concern/tufts_rcrs/" + id
-  end
-
-
-  def self.collection_page_path(id)
-    "/concern/tufts_eads/" + id
-  end
-
-
   def self.title(rcr)
     result = ""
     title = rcr.find_by_terms_and_value(:title)

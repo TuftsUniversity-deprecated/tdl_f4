@@ -2,7 +2,7 @@
 
 <%
 if @document_tei.present?
-  transcript_html, participant_html = TranscriptsHelper.show_transcript(@document_tei, true, TranscriptsHelper.audio_page_path(params[:id]))
+  transcript_html, participant_html = TranscriptsHelper.show_transcript(@document_tei, true, Rails.application.routes.url_helpers.curation_concerns_tufts_audio_path(params[:id]))
 
   unless participant_html.empty?
 %>

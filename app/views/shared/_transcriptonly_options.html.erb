@@ -1,8 +1,8 @@
       <div class="pull-left tdl-search-widgets">
         <span class="glyphicon glyphicon-arrow-left glyph-left" aria-hidden="true"></span>
         <% if controller.action_name == 'audio_transcriptonly'%>
-          <a href="<%= TranscriptsHelper.audio_page_path(params[:id]) %>">Back to Audio Player</a>
+          <a href="<%=Rails.application.routes.url_helpers.curation_concerns_tufts_audio_path(params[:id]) %>">Back to Audio Player</a>
         <% elsif controller.action_name == 'video_transcriptonly' %>
-          <a href="<%= TranscriptsHelper.video_page_path(params[:id]) %>">Back to Video Player</a>
+          <a href="<%= Rails.application.routes.url_helpers.curation_concerns_tufts_video_path(params[:id]) %>">Back to Video Player</a>
         <% end %>
       </div>

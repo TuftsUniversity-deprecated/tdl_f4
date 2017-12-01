@@ -34,7 +34,7 @@
              collection_array.each do |collection|
                pid = 'tufts:UA069.001.DO.' + collection[:pid]
                ingested, f4_id = PidMethods.ingested?(pid)
-               anchor_tag = ingested ? '<a href="' + RcrsHelper.collection_page_path(f4_id) + '">' : ''
+               anchor_tag = ingested ? '<a href="' + Rails.application.routes.url_helpers.curation_concerns_tufts_ead_path(f4_id) + '">' : ''
                anchor_end_tag = ingested ? '</a>' : ''
           %>
                <li><%= raw anchor_tag %><%= raw collection[:name] %><%= raw anchor_end_tag %></li>
@@ -55,7 +55,7 @@
                   relationships.each do |relationship|
                     pid = 'tufts:' + relationship[:pid]
                     ingested, f4_id = PidMethods.ingested?(pid)
-                    anchor_tag = ingested ? '<a href="' + RcrsHelper.relationship_page_path(f4_id) + '">' : ''
+                    anchor_tag = ingested ? '<a href="' + Rails.application.routes.url_helpers.curation_concerns_tufts_rcr_path(f4_id) + '">' : ''
                     anchor_end_tag = ingested ? '</a>' : ''
                %>
                     <li><%= raw anchor_tag %><%= raw relationship[:name] %> (<%= relationship[:from_date] %>-<%= raw relationship[:to_date] %>)<%= raw anchor_end_tag %></li>
