@@ -1055,7 +1055,6 @@ module EadsHelper
         end
       end
 
-      available_online = false
       unless page.empty?
         available_online, f4_id = PidMethods.ingested?(page)
         if available_online
@@ -1078,7 +1077,6 @@ module EadsHelper
         physloc = "Dark Archive"
       else
         # ASpace EADs lack the <daogrp><daoloc> page and thumbnail attributes, so compute them from item_id thusly:
-        legacy_pid = "tufts:" + item_id
         available_online, f4_id = PidMethods.ingested?(page)
 
         if available_online
