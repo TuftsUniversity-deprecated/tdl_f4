@@ -1,5 +1,7 @@
 <%= render "curation_concerns/shared/item_header" %>
 
+<div class="col-md-8 col-md-offset-2">
+
 <%
 if @document_tei.present?
   transcript_html, participant_html = TranscriptsHelper.show_transcript(@document_tei, true, Rails.application.routes.url_helpers.curation_concerns_tufts_video_path(params[:id]))
@@ -25,3 +27,5 @@ if @document_tei.present?
   end
 end
 %>
+
+</div>
